@@ -22,5 +22,21 @@ public class Modele extends Observable{
 		J2 = new JoueurMachine();
 		bateauFactory= BateauFactory.getInstance(epoque);
 	}
-
+/**
+ * 
+ * @param x coordonne x de l'origine du bateau
+ * @param y coordonne y de l'origine du bateau
+ * @param longueur longueur du bateau
+ * @param xdir coordonne x de la case vers laquelle on oriente le bateau
+ * @param ydir coordonne y de la case vers laquelle on oriente le bateau
+ * @return
+ */
+	public boolean canAddShip(int x, int y, int longueur, int xdir, int ydir){
+		return plateau1.canAddShip(x, y, longueur, xdir, ydir);
+	}
+	public void addShip(int x, int y, int longueur, int xdir, int ydir){
+	 	plateau1.AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));	
+	}
+	
+	
 }
