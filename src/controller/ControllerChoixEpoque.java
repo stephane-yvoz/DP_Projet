@@ -6,9 +6,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControllerChoixEpoque implements ActionListener{
+public class ControllerChoixEpoque implements ActionListener {
+	
     Option opt;
-    public ControllerChoixEpoque(Option option){
+    
+    public ControllerChoixEpoque(Option option) {
         opt = option;
     }
 
@@ -18,4 +20,5 @@ public class ControllerChoixEpoque implements ActionListener{
         String command = button.getActionCommand();
         opt.setEpoque(command);
     }
+    
 }

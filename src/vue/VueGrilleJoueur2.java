@@ -1,18 +1,25 @@
 package vue;
 
 import modele.Modele;
+import modele.Plateau;
 
-import java.util.Observable;
+import java.awt.Graphics;
 
-public class VueGrilleJoueur2 extends VueGrille{
+public class VueGrilleJoueur2 extends VueGrille {
+	
     public VueGrilleJoueur2(Modele modele) {
         super(modele);
         this.setEnabled(false);
     }
 
     @Override
-    public void update(Observable observable, Object o) {
-        ;
+    public Plateau getPlateau() {
+    	return modele.getPlateau2();
     }
-
+    
+    @Override 
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);   
+    }
+    
 }

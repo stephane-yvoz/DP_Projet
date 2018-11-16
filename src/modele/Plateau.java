@@ -1,18 +1,24 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Plateau {
+	
 	private int[][] grilleJoueur;    //
 	private int[][] grilleEnnemie; //liste des coups portés 
 	private ArrayList<Bateau> bateaux;
 	
-	public Plateau(int taille){  // on considére tous les plateaux carrés
+	public Plateau(int taille) {  // on considére tous les plateaux carrés
 		grilleJoueur = new int[taille][taille];
 		grilleEnnemie = new int[taille][taille];
 		bateaux = new ArrayList<Bateau>();
 	}
  
+	public Iterator<Bateau> boatCollection() {
+		return bateaux.iterator();
+	}
+	
 	/**
 	 * 
 	 * @param x coordonne x de l'origine du bateau
@@ -41,9 +47,9 @@ public class Plateau {
 		}else{
 			accept=false;
 		}
-		return accept;
-		
+		return accept;	
 	}
+	
 	/**
 	 * Ne pas utiliser sans avoir testé auparavant avec canAddShip
 	 * @param x
@@ -65,8 +71,7 @@ public class Plateau {
 			o=Orientation.NORTH;
 		}
 		
-		bateau.setPosition(x, y, o);
-		
-		
+		bateau.setPosition(x, y, o);	
 	}
+	
 }

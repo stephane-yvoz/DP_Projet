@@ -7,10 +7,15 @@ import vue.VueOption;
 import javax.swing.*;
 
 public class BatailleNavale {
+
+    public final static int GRID_WIDTH = 500;
+    public final static int GRID_HEIGHT = 500;
+    
     public static int NUMBER = 2;
+  
     JFrame[] windows;
 
-    private void makeGame(Modele modele){
+    private void makeGame(Modele modele) {
         windows = new JFrame[NUMBER];
         String s;
         for (int i = 0; i != NUMBER; i++){
@@ -20,7 +25,7 @@ public class BatailleNavale {
                 s = "Plateau de tir";
             windows[i] = new JFrame(s);
             windows[i].setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            windows[i].setSize(500, 500);
+            windows[i].setSize(GRID_WIDTH, GRID_HEIGHT);
             windows[i].setVisible(true);
         }
         windows[1].setVisible(false);
@@ -48,4 +53,5 @@ public class BatailleNavale {
     public static void main(String[] args) {
         BatailleNavale bn = new BatailleNavale();
     }
+    
 }
