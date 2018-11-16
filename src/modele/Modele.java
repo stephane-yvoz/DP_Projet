@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Iterator;
 import java.util.Observable;
 
 import bateauFactories.BateauFactory;
@@ -12,8 +13,10 @@ public class Modele extends Observable {
 	
 	private Plateau plateau1;
 	private Plateau plateau2;
+	
 	private Joueur J1;
 	private Joueur J2;
+	
 	private BateauFactory bateauFactory;
 
 	public Modele(int taille, String epoque) {
@@ -32,6 +35,16 @@ public class Modele extends Observable {
 		return plateau2;
 	}
 
+	public int[][] getShots(Plateau plateau) {
+		assert plateau == plateau1 || plateau == plateau2;
+		return plateau.getShots();
+	}
+	
+	public Iterator<Bateau> shipCollection(Plateau plateau) {
+		assert plateau == plateau1 || plateau == plateau2;
+		return plateau.shipCollection();
+	}
+	
     /**
      * 
      * @param x coordonne x de l'origine du bateau

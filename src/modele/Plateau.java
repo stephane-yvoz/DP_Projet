@@ -1,21 +1,27 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class Plateau {
 	
-	private int[][] grilleJoueur;    //
-	private int[][] grilleEnnemie; //liste des coups portés 
+	private int[][] grilleJoueur; //
+	private int[][] grilleEnnemie; // liste des coups portés 
+	
 	private ArrayList<Bateau> bateaux;
 	
-	public Plateau(int taille) {  // on considére tous les plateaux carrés
+	public Plateau(int taille) {  // on considère tous les plateaux carrés
 		grilleJoueur = new int[taille][taille];
 		grilleEnnemie = new int[taille][taille];
 		bateaux = new ArrayList<Bateau>();
 	}
  
-	public Iterator<Bateau> boatCollection() {
+	public int[][] getShots() {
+		return grilleEnnemie;
+	}
+	
+	public Iterator<Bateau> shipCollection() {
 		return bateaux.iterator();
 	}
 	

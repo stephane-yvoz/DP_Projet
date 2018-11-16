@@ -1,5 +1,6 @@
 package vue;
 
+import modele.Bateau;
 import modele.Modele;
 import modele.Plateau;
 
@@ -8,7 +9,8 @@ import javax.swing.*;
 import bateauFactories.TextureFactory;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,9 +21,9 @@ public abstract class VueGrille extends JPanel implements Observer {
        		
     protected Modele modele;
     
-    protected VueGrille(Modele modele) {
+    protected VueGrille(Modele m) {
         super();
-        this.modele = modele;
+        modele = m;
         modele.addObserver(this);
     }
     
@@ -31,6 +33,8 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @return
      */
     protected int realX(int virtualX) {
+    	assert virtualX >= 0;
+    	assert virtualX <= TextureFactory.getInstance().getGridWidth();
     	return virtualX * getWidth() / TextureFactory.getInstance().getGridWidth(); 
     }
     
@@ -40,6 +44,8 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @return
      */
     protected int realY(int virtualY) {
+    	assert virtualY >= 0;
+    	assert virtualY <= TextureFactory.getInstance().getGridHeight();
     	return virtualY * getHeight() / TextureFactory.getInstance().getGridHeight(); 
     }
     
@@ -48,6 +54,14 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @return 
      */
     abstract protected Plateau getPlateau();
+    
+    /**
+     * Récupérer un itérateur sur les bateaux du plateau
+     * @return
+     */
+    protected Iterator<Bateau> shipCollection() {
+    	return modele.shipCollection(getPlateau());
+    }
     
     /**
      * Dessin de la grille
@@ -63,8 +77,45 @@ public abstract class VueGrille extends JPanel implements Observer {
     			    0, 
     			    TextureFactory.getInstance().getGridWidth(), 
     			    TextureFactory.getInstance().getGridHeight(), 
-    			    null);
+    			    null
+        );
     }
+    
+    /**
+     * Dessin d'un bateau
+     * @param g
+     * @param bateau
+     */
+    public void drawShip(Graphics g, Bateau bateau) {}
+    
+    /**
+     * Dessin des bateaux
+     * @param g
+     */
+    public void drawShips(Graphics g) {
+    	Iterator<Bateau> shipCollection = shipCollection();
+    	
+    	while (shipCollection.hasNext()) {
+    		try {
+    			drawShip(g, shipCollection.next());
+    		}
+    		catch (NoSuchElementException noMoreElements) {}
+    	}
+    }
+    
+    /**
+     * Dessin d'un tir
+     * @param g
+     * @param x
+     * @param y
+     */
+    public void drawShot(Graphics g, int x, int y) {}
+    
+    /**
+     * Dessin des tirs
+     * @param g
+     */
+    public void drawShots(Graphics g) {}
     
     /**
      * Dessin du fond

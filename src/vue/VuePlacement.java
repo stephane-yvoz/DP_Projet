@@ -1,7 +1,5 @@
 package vue;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
@@ -15,7 +13,6 @@ import bateauFactories.TextureFactory;
 import modele.Modele;
 
 public class VuePlacement extends JPanel implements Observer{
-
 	
 	private Modele modele;
 	
@@ -34,18 +31,17 @@ public class VuePlacement extends JPanel implements Observer{
 	class LocalListener implements MouseListener {
 		
 		private static final int tailleFenetreX = 500;
-		private static final int tailleFenetreY =500;
+		private static final int tailleFenetreY = 500;
 		
-		private int longueur =2;  // Creer un menu permettant de selectionner unr longueur
+		private int longueur = 2;  // Creer un menu permettant de selectionner unr longueur
 		
 		private Modele modele;
 		private int xCaseClic1 = -1;
 		private int yCaseClic1 = -1;
 		
-		public LocalListener(Modele m){
+		public LocalListener(Modele m) {
 			modele = m;
 		}
-
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -64,35 +60,18 @@ public class VuePlacement extends JPanel implements Observer{
 				}
 			}
 		}
-		
-		
+	
+		@Override
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
-		
+		public void mouseExited(MouseEvent e) {}
 	}
 	
 }

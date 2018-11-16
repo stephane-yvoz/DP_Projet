@@ -9,25 +9,24 @@ public class Bateau {
 	private int posOriginY;
 	private int puissance;
 	
-	public Bateau(int vie,int lon , int pu){
+	public Bateau(int vie, int lon, int pu) {
 		PV= vie;
 		longueur = lon;
 		puissance = pu;
 	}
 
-	public void setPosition(int posX ,int posY ,Orientation o ){
+	public void setPosition(int posX ,int posY ,Orientation o) {
 		orientation = o;
-		posOriginX=posX;
+		posOriginX = posX;
 		posOriginY = posY;
 	}
 	
-	public void takehit(int puissance){
-		PV = PV -puissance;
+	public void takehit(int puissance) {
+		PV = PV - puissance;
 	}
 	
-	public boolean isDestroyed(){
+	public boolean isDestroyed() {
 		return PV <= 0;
 	}
-	
 	
 }
