@@ -1,17 +1,20 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class Plateau {
 	
-	private int[][] grilleJoueur; //
-	private int[][] grilleEnnemie; // liste des coups portés 
+	private int[][] grilleJoueur; 
+	private int[][] grilleEnnemie; // liste des coups portés (pas de coup, coup dans le vide, coup au but)
 	
 	private ArrayList<Bateau> bateaux;
 	
-	public Plateau(int taille) {  // on considère tous les plateaux carrés
+	/**
+	 * On considère qu'un plateau est carré
+	 * @param taille
+	 */
+	public Plateau(int taille) {  
 		grilleJoueur = new int[taille][taille];
 		grilleEnnemie = new int[taille][taille];
 		bateaux = new ArrayList<Bateau>();
