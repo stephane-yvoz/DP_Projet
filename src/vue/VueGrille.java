@@ -14,6 +14,14 @@ import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * On distingue 3 repères pour nos transformations d'images:
+ * Un repère 'modèle' pour les indices des bateaux dans la grille (compris entre 0 et 10)
+ * Un repère 'virtuel' pour les coordonnées qui s'appuient sur la taille des textures
+ * Un repère 'écran' pour les coordonnées réelles (affichées) des objets 
+ * 
+ * @author genard1u
+ */
 public abstract class VueGrille extends JPanel implements Observer {
 	
     public final static int WIDTH = 10;
@@ -28,25 +36,69 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Conversion du repère 'virtuel' vers le repère écran
-     * @param virtualX
+     * Conversion du repère 'modèle' vers le repère 'écran'
+     * @param modelX : indice de la grille
      * @return
      */
-    protected int realX(int virtualX) {
-    	assert virtualX >= 0;
-    	assert virtualX <= TextureFactory.getInstance().getGridWidth();
-    	return virtualX * getWidth() / TextureFactory.getInstance().getGridWidth(); 
+    protected int modelToRealX(int modelX) {
+    	assert modelX >= 0;
+    	assert modelX < WIDTH;
+    	return (modelX + 1) * virtualToRealX(TextureFactory.getInstance().getArea());
     }
     
     /**
-     * Conversion du repère 'virtuel' vers le repère écran
-     * @param coordY
+     * Conversion du repère 'modèle' vers le repère 'écran'
+     * @param modelY : indice de la grille
      * @return
      */
-    protected int realY(int virtualY) {
+    protected int modelToRealY(int modelY) {
+    	assert modelY >= 0;
+    	assert modelY < HEIGHT;
+    	return (modelY + 1) * virtualToRealY(TextureFactory.getInstance().getArea());
+    }
+    
+    /**
+     * Conversion du repère 'écran' vers le repère 'virtuel'
+     * @param realX : coordonnée réelle
+     * @return
+     */
+    protected int realToVirtualX(int realX) {
+    	assert realX >= 0;
+    	assert realX < getWidth();
+    	return realX / getWidth() * TextureFactory.getInstance().getGridWidth();
+    }
+    
+    /**
+     * Conversion du repère 'écran' vers le repère 'virtuel'
+     * @param realY : coordonnée réelle
+     * @return
+     */
+    protected int realToVirtualY(int realY) {
+    	assert realY >= 0;
+    	assert realY < getHeight();
+    	return realY / getHeight() * TextureFactory.getInstance().getGridHeight();
+    }
+    
+    /**
+     * Conversion du repère 'virtuel' vers le repère 'écran'
+     * @param virtualX : coordonnée du monde 'virtuel'
+     * @return
+     */
+    protected int virtualToRealX(int virtualX) {
+    	assert virtualX >= 0;
+    	assert virtualX <= TextureFactory.getInstance().getGridWidth();
+    	return virtualX / TextureFactory.getInstance().getGridWidth() * getWidth(); 
+    }
+    
+    /**
+     * Conversion du repère 'virtuel' vers le repère 'écran'
+     * @param virtualY : coordonnée du monde 'virtuel'
+     * @return
+     */
+    protected int virtualToRealY(int virtualY) {
     	assert virtualY >= 0;
     	assert virtualY <= TextureFactory.getInstance().getGridHeight();
-    	return virtualY * getHeight() / TextureFactory.getInstance().getGridHeight(); 
+    	return virtualY / TextureFactory.getInstance().getGridHeight() * getHeight(); 
     }
     
     /**
@@ -71,8 +123,8 @@ public abstract class VueGrille extends JPanel implements Observer {
     	g.drawImage(TextureFactory.getInstance().getTexGrille(), 
     			    0, 
     			    0, 
-    			    realX(TextureFactory.getInstance().getGridWidth()), 
-    			    realY(TextureFactory.getInstance().getGridHeight()), 
+    			    virtualToRealX(TextureFactory.getInstance().getGridWidth()), 
+    			    virtualToRealY(TextureFactory.getInstance().getGridHeight()), 
     			    0, 
     			    0, 
     			    TextureFactory.getInstance().getGridWidth(), 
@@ -86,7 +138,19 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param g
      * @param bateau
      */
-    public void drawShip(Graphics g, Bateau bateau) {}
+    public void drawShip(Graphics g, Bateau bateau) {
+    	g.drawImage(TextureFactory.getInstance().getShipTexture(),
+    			0,
+                0,
+                0,
+			    0, 
+			    0, 
+			    0, 
+			    TextureFactory.getInstance().getGridWidth(), 
+			    TextureFactory.getInstance().getGridHeight(),
+			    null
+        );
+    }
     
     /**
      * Dessin des bateaux
