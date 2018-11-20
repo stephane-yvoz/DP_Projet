@@ -24,10 +24,13 @@ import java.util.Observer;
  */
 public abstract class VueGrille extends JPanel implements Observer {
 	
-    public final static int WIDTH = 10;
-    public final static int HEIGHT = 10;
+	/**
+	 * Borne supérieure des indices des grilles du modèle
+	 */
+    public final static int SUP = 10;
        		
     protected Modele modele;
+    
     
     protected VueGrille(Modele m) {
         super();
@@ -42,7 +45,7 @@ public abstract class VueGrille extends JPanel implements Observer {
      */
     protected int modelToRealX(int modelX) {
     	assert modelX >= 0;
-    	assert modelX < WIDTH;
+    	assert modelX < SUP;
     	return (modelX + 1) * virtualToRealX(TextureFactory.getInstance().getArea());
     }
     
@@ -53,7 +56,7 @@ public abstract class VueGrille extends JPanel implements Observer {
      */
     protected int modelToRealY(int modelY) {
     	assert modelY >= 0;
-    	assert modelY < HEIGHT;
+    	assert modelY < SUP;
     	return (modelY + 1) * virtualToRealY(TextureFactory.getInstance().getArea());
     }
     
@@ -173,7 +176,19 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param x
      * @param y
      */
-    public void drawShot(Graphics g, int x, int y) {}
+    public void drawShot(Graphics g, int x, int y) {
+    	g.drawImage(TextureFactory.getInstance().getShotTexture(),
+    			0,
+                0,
+                0,
+			    0, 
+			    0, 
+			    0, 
+			    TextureFactory.getInstance().getGridWidth(), 
+			    TextureFactory.getInstance().getGridHeight(),
+			    null
+        );
+    }
     
     /**
      * Dessin des tirs

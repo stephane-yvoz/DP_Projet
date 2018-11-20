@@ -35,7 +35,7 @@ public class BatailleNavale {
         windows[1].add(vj2);
     }
 
-    public BatailleNavale(){
+    public BatailleNavale() {
         Option option = new Option();
         makeFrameOption(option);
         //Modele modele = new Modele();
@@ -51,7 +51,12 @@ public class BatailleNavale {
     }
 
     public static void main(String[] args) {
-        BatailleNavale bn = new BatailleNavale();
+    	javax.swing.SwingUtilities.invokeLater(new Runnable() {
+    		@Override
+    		public void run() {
+    			new BatailleNavale();
+    		}
+    	});
     }
     
 }
