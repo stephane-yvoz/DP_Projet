@@ -16,7 +16,6 @@ public class ControllerChoixTailleBateauPlacement implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		vue.setLongueur(taille);
-		
 	}
 	
 }
