@@ -14,24 +14,29 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import bateauFactories.TextureFactory;
-
+import controller.ControllerChoixTailleBateauPlacement;
+import modele.Bateau;
 import modele.Modele;
+import modele.Orientation;
 import modele.Plateau;
 
 public class VuePlacement extends VueGrille implements Observer{
 	
 	private Modele modele;
 	private JMenuBar menu;
+	private LocalListener listener;
+	private int longueur = 2;  
 	
 	public VuePlacement(Modele m){
 		super(m);
-		this.addMouseListener(new VuePlacement.LocalListener(modele));
+		listener = new VuePlacement.LocalListener(modele);
+		this.addMouseListener(listener);
 		menu = new JMenuBar();
 		JMenu menuTaille = new JMenu("taille du prochain bateau");
 		JMenuItem jItem;
 		for (int i = 1;i<5;i++){
 			jItem = new JMenuItem(" "+i);
-			jItem.addActionListener(null);  //actionListener qui va set la taille du prochain bateau, si stocks pas épuisé(grisé sinon)
+			jItem.addActionListener(new ControllerChoixTailleBateauPlacement(this,i));  //actionListener qui va set la taille du prochain bateau, si stocks pas épuisé(grisé sinon)
 			menuTaille.add(jItem);
 		}
 	}
@@ -39,12 +44,11 @@ public class VuePlacement extends VueGrille implements Observer{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponents(g);
-		this.paintTempShip(g);
+		Bateau b =new Bateau(1, longueur, 1);
+		b.setPosition(listener.getXCaseClic1(), listener.getYCaseClic1(), Orientation.SOUTH);//recuperer position souris
+		super.drawShip(g, b);
 	}
 	
-	public void paintTempShip(Graphics g){
-		
-	}
 	
 	public Plateau getPlateau(){
 		return null;
@@ -57,7 +61,7 @@ public class VuePlacement extends VueGrille implements Observer{
 		private static final int tailleFenetreX = 500;
 		private static final int tailleFenetreY = 500;
 		
-		private int longueur = 2;  // Creer un menu permettant de selectionner une longueur pour le bateau à placer
+		
 		
 		private Modele modele;
 		private int xCaseClic1 = -1;
@@ -66,6 +70,13 @@ public class VuePlacement extends VueGrille implements Observer{
 		public LocalListener(Modele m) {
 			modele = m;
 		}
+		public int getXCaseClic1() {
+			return xCaseClic1;
+		}
+		public int getYCaseClic1() {
+			return yCaseClic1;
+		}
+		
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -99,5 +110,13 @@ public class VuePlacement extends VueGrille implements Observer{
 		@Override
 		public void mouseExited(MouseEvent e) {}
 	}
-	
+
+
+
+	public void setLongueur(int l) {
+		longueur = l;
+	}
+	public int getLongueur() {
+		return longueur;
+	}
 }
