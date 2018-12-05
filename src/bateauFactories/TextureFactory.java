@@ -1,5 +1,7 @@
 package bateauFactories;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,25 +12,45 @@ public class TextureFactory {
 	
 	public final static String LOADING_ERROR = "Impossible de charger la texture: ";
 	
-	public final static String GRID_PATH = "grille.png";
+	public final static String GRID_PATH = "grid.png";
 	public final static String EXPLOSION_PATH = "explosion.png";
+	public final static String FUEL_PATH = "fuel.png";
 	public final static String SPLASH_PATH = "splash.png";
 	
-	private static BufferedImage grille;
+	private static BufferedImage grid;
+	private static BufferedImage ship;
 	private static BufferedImage explosion;
-	private static BufferedImage splash;
+	private static BufferedImage fuel;
+	private static BufferedImage splash;	
 	
 	private static TextureFactory instance = null;
 	 
 	
 	private TextureFactory() {
-		grille = loadTexture(GRID_PATH);
+		grid = loadTexture(GRID_PATH);
 		explosion = loadTexture(EXPLOSION_PATH);
+		fuel = loadTexture(FUEL_PATH);
 		splash = loadTexture(SPLASH_PATH);
 		
-		assert grille != null;
+		buildShipTexture();
+		
+		assert grid != null;
 		assert explosion != null;
+		assert fuel != null;
 		assert splash != null;
+	}
+	
+	private void buildShipTexture() {
+		ship = new BufferedImage(getAreaSide(), 
+                                 getAreaSide(), 
+                                 BufferedImage.TYPE_INT_ARGB
+        );
+		
+		Graphics2D g2d = ship.createGraphics();
+		
+		g2d.setColor(new Color(255, 255, 255, 128));
+	    g2d.fillRect(0, 0, getAreaSide(), getAreaSide());
+	    g2d.dispose();
 	}
 	
 	public static TextureFactory getInstance() {
@@ -53,45 +75,46 @@ public class TextureFactory {
 	}
 	
 	public BufferedImage getShipTexture() {
-		return new BufferedImage(getArea(), 
-				                 getArea(), 
-				                 BufferedImage.TYPE_INT_ARGB
-		);
+		return ship;
 	}
 	
 	public BufferedImage getShotTexture() {
-		return new BufferedImage(getArea(), 
-                                 getArea(), 
+		return new BufferedImage(getAreaSide(), 
+				                 getAreaSide(), 
                                  BufferedImage.TYPE_INT_ARGB
         ); 
 	}
 	
 	public BufferedImage getExplosionTexture() {
-		return null;
+		return explosion;
 	}
 	
 	public BufferedImage getSplashTexture() {
-		return null;
+		return splash;
 	}
 	
-	public BufferedImage getTexGrille() {
-		return grille;
+	public BufferedImage getSunkTexture() {
+		return fuel;
+	}
+	
+	public BufferedImage getGridTexture() {
+		return grid;
 	}
 
 	/**
 	 * Côté d'une case de la texture grille (repère 'virtuel')
 	 * @return
 	 */
-	public int getArea() {
-		return grille.getWidth() / 11;
+	public int getAreaSide() {
+		return grid.getWidth() / 11;
 	}
 
 	public int getShipArea() {
-		return getArea();
+		return getAreaSide();
 	}
 	
 	public int getShotArea() {
-		return getArea();
+		return getAreaSide();
 	}
 	
 	/**
@@ -99,7 +122,7 @@ public class TextureFactory {
 	 * @return
 	 */
 	public int getGridWidth() {
-		return grille.getWidth();
+		return grid.getWidth();
 	}
 	
 	/**
@@ -107,7 +130,7 @@ public class TextureFactory {
 	 * @return
 	 */
 	public int getGridHeight() {
-		return grille.getHeight();
+		return grid.getHeight();
 	}
 	
 }

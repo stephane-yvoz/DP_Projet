@@ -15,17 +15,17 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * On distingue 3 repères pour nos transformations d'images:
- * Un repère 'modèle' pour les indices des bateaux dans la grille (compris entre 0 et 10)
- * Un repère 'virtuel' pour les coordonnées qui s'appuient sur la taille des textures
- * Un repère 'écran' pour les coordonnées réelles (affichées) des objets 
+ * On distingue 3 repères pour nos transformations d'images :
+ * Un repère 'modèle' pour les indices des bateaux dans la grille (compris entre 0 et 10).
+ * Un repère 'virtuel' pour les coordonnées qui s'appuient sur la taille des textures.
+ * Un repère 'écran' pour les coordonnées réelles (affichées) des objets .
  * 
  * @author genard1u
  */
 public abstract class VueGrille extends JPanel implements Observer {
 	
 	/**
-	 * Borne supérieure des indices des grilles du modèle
+	 * Borne supérieure des indices des grilles du modèle.
 	 */
     public final static int SUP = 10;
        		
@@ -39,31 +39,33 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Conversion du repère 'modèle' vers le repère 'écran'
-     * @param modelX : indice de la grille
-     * @return
+     * Conversion du repère 'modèle' vers le repère 'écran'.
+     * Seulement pour les éléments à dessiner dans une case de la grille.
+     * @param modelX : indice case
+     * @return realX
      */
     protected int modelToRealX(int modelX) {
     	assert modelX >= 0;
     	assert modelX < SUP;
-    	return (modelX + 1) * virtualToRealX(TextureFactory.getInstance().getArea());
+    	return (modelX + 1) * virtualToRealX(TextureFactory.getInstance().getAreaSide());
     }
     
     /**
-     * Conversion du repère 'modèle' vers le repère 'écran'
-     * @param modelY : indice de la grille
-     * @return
+     * Conversion du repère 'modèle' vers le repère 'écran'.
+     * Seulement pour les éléments à dessiner dans une case de la grille.
+     * @param modelY : indice case
+     * @return realY
      */
     protected int modelToRealY(int modelY) {
     	assert modelY >= 0;
     	assert modelY < SUP;
-    	return (modelY + 1) * virtualToRealY(TextureFactory.getInstance().getArea());
+    	return (modelY + 1) * virtualToRealY(TextureFactory.getInstance().getAreaSide());
     }
     
     /**
-     * Conversion du repère 'écran' vers le repère 'virtuel'
+     * Conversion du repère 'écran' vers le repère 'virtuel'.
      * @param realX : coordonnée réelle
-     * @return
+     * @return virtualX
      */
     protected int realToVirtualX(int realX) {
     	assert realX >= 0;
@@ -72,9 +74,9 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Conversion du repère 'écran' vers le repère 'virtuel'
+     * Conversion du repère 'écran' vers le repère 'virtuel'.
      * @param realY : coordonnée réelle
-     * @return
+     * @return virtualY
      */
     protected int realToVirtualY(int realY) {
     	assert realY >= 0;
@@ -83,9 +85,9 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Conversion du repère 'virtuel' vers le repère 'écran'
+     * Conversion du repère 'virtuel' vers le repère 'écran'.
      * @param virtualX : coordonnée du monde 'virtuel'
-     * @return
+     * @return realX
      */
     protected int virtualToRealX(int virtualX) {
     	assert virtualX >= 0;
@@ -94,9 +96,9 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Conversion du repère 'virtuel' vers le repère 'écran'
+     * Conversion du repère 'virtuel' vers le repère 'écran'.
      * @param virtualY : coordonnée du monde 'virtuel'
-     * @return
+     * @return realY
      */
     protected int virtualToRealY(int virtualY) {
     	assert virtualY >= 0;
@@ -105,13 +107,13 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Récupérer le plateau associé à la bonne vue
+     * Récupérer le plateau associé à la bonne vue.
      * @return 
      */
     abstract protected Plateau getPlateau();
     
     /**
-     * Récupérer un itérateur sur les bateaux du plateau
+     * Récupérer un itérateur sur les bateaux du plateau.
      * @return
      */
     protected Iterator<Bateau> shipCollection() {
@@ -119,11 +121,11 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Dessin de la grille
+     * Dessin de la grille.
      * @param g
      */
     public void drawGrid(Graphics g) {
-    	g.drawImage(TextureFactory.getInstance().getTexGrille(), 
+    	g.drawImage(TextureFactory.getInstance().getGridTexture(), 
     			    0, 
     			    0, 
     			    virtualToRealX(TextureFactory.getInstance().getGridWidth()), 
@@ -137,26 +139,26 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Dessin d'un bateau
+     * Dessin d'un bateau.
      * @param g
      * @param bateau
      */
     public void drawShip(Graphics g, Bateau bateau) {
     	g.drawImage(TextureFactory.getInstance().getShipTexture(),
-    			0,
-                0,
-                0,
-			    0, 
-			    0, 
-			    0, 
-			    TextureFactory.getInstance().getGridWidth(), 
-			    TextureFactory.getInstance().getGridHeight(),
-			    null
+    			    0,
+                    0,
+                    0,
+			        0, 
+			        0, 
+			        0, 
+			        TextureFactory.getInstance().getGridWidth(), 
+			        TextureFactory.getInstance().getGridHeight(),
+			        null
         );
     }
     
     /**
-     * Dessin des bateaux
+     * Dessin des bateaux.
      * @param g
      */
     public void drawShips(Graphics g) {
@@ -171,35 +173,23 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Dessin d'un tir
+     * Dessin d'un tir.
      * @param g
      * @param x
      * @param y
      */
-    public void drawShot(Graphics g, int x, int y) {
-    	g.drawImage(TextureFactory.getInstance().getShotTexture(),
-    			0,
-                0,
-                0,
-			    0, 
-			    0, 
-			    0, 
-			    TextureFactory.getInstance().getGridWidth(), 
-			    TextureFactory.getInstance().getGridHeight(),
-			    null
-        );
-    }
+    public void drawShot(Graphics g, int x, int y) {}
     
     /**
-     * Dessin des tirs
+     * Dessin des tirs.
      * @param g
      */
     public void drawShots(Graphics g) {}
     
     /**
-     * Dessin du fond
+     * Dessin du fond.
      * @param g
-     * @Override
+     * @override
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);   

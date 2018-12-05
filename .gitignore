@@ -1,4 +1,6 @@
-bin/
 .settings/
+bin/
+notes/
+
 .classpath
 .project
