@@ -9,6 +9,7 @@ import javax.swing.*;
 import bateauFactories.TextureFactory;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Observable;
@@ -18,9 +19,7 @@ import java.util.Observer;
  * On distingue 3 repères pour nos transformations d'images :
  * Un repère 'modèle' pour les indices des bateaux dans la grille (compris entre 0 et 10).
  * Un repère 'virtuel' pour les coordonnées qui s'appuient sur la taille des textures.
- * Un repère 'écran' pour les coordonnées réelles (affichées) des objets .
- * 
- * @author genard1u
+ * Un repère 'écran' pour les coordonnées réelles (affichées) des objets.
  */
 public abstract class VueGrille extends JPanel implements Observer {
 	
@@ -144,16 +143,44 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param bateau
      */
     public void drawShip(Graphics g, Bateau bateau) {
-    	g.drawImage(TextureFactory.getInstance().getShipTexture(),
-    			    0,
-                    0,
-                    0,
-			        0, 
-			        0, 
-			        0, 
-			        TextureFactory.getInstance().getGridWidth(), 
-			        TextureFactory.getInstance().getGridHeight(),
-			        null
+    	BufferedImage texture = null;
+    	
+    	if (bateau.isDestroyed()) {
+    		texture = TextureFactory.getInstance().getSunkTexture();
+    	}
+    	else {
+    		texture = TextureFactory.getInstance().getShipTexture();
+    	}
+    	
+    	assert texture != null;
+    	
+    	int posOX = bateau.getOriginX();
+    	int posOY = bateau.getOriginY();
+    	
+    	/* TO COMPLETE */
+    	for (int i = 0; i < bateau.getLongueur(); i ++) {
+    		drawShipSection(g, texture, posOX, posOY);
+    	}  	
+    }
+    
+    /**
+     * Dessin d'une section de bateau (pour une seule case).
+     * @param g
+     * @param texture
+     * @param x
+     * @param y
+     */
+    private void drawShipSection(Graphics g, BufferedImage texture, int x, int y) {
+    	g.drawImage(texture,
+			        modelToRealX(x),
+			        modelToRealY(y),
+			        modelToRealX(x + 1),
+			        modelToRealY(y + 1), 
+		            0, 
+		            0, 
+		            TextureFactory.getInstance().getAreaSide(), 
+		            TextureFactory.getInstance().getAreaSide(),
+		            null
         );
     }
     
