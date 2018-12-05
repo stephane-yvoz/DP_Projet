@@ -49,6 +49,14 @@ public class Bateau {
 		return posTailY;
 	}
 	
+	public int getMinX() {
+		return Math.min(posOriginX, posTailX);
+	}
+	
+	public int getMinY() {
+		return Math.min(posOriginY, posTailY);
+	}
+	
 	public int getLongueur() {
 		return longueur;
 	}
@@ -87,10 +95,10 @@ public class Bateau {
 	
 	private void updateLength() {
 		if (isHorizontal()) {
-			longueur = Math.abs(posOriginX - posTailX);
+			longueur = Math.abs(posOriginX - posTailX) + 1;
 		}
 		else if (isVertical()) {
-			longueur = Math.abs(posOriginY - posTailY);
+			longueur = Math.abs(posOriginY - posTailY) + 1;
 		}
 	}
 	

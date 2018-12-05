@@ -154,12 +154,16 @@ public abstract class VueGrille extends JPanel implements Observer {
     	
     	assert texture != null;
     	
-    	int posOX = bateau.getOriginX();
-    	int posOY = bateau.getOriginY();
+    	int minX = bateau.getMinX();
+    	int minY = bateau.getMinY();
     	
-    	/* TO COMPLETE */
     	for (int i = 0; i < bateau.getLongueur(); i ++) {
-    		drawShipSection(g, texture, posOX, posOY);
+    		if (bateau.isVertical()) {
+    			drawShipSection(g, texture, minX, minY + i);
+    		}
+    		else if (bateau.isHorizontal()) {
+    			drawShipSection(g, texture, minX + i, minY);
+    		}
     	}  	
     }
     
