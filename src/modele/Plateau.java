@@ -39,19 +39,32 @@ public class Plateau {
 	 */
 	public boolean canAddShip(int x, int y, int longueur, int xdir, int ydir){
 		boolean accept = true;
-		int directionX = (x-xdir)/Math.abs(x-xdir); 
-		int directionY = (y-ydir)/Math.abs(y-ydir); 
-		if(xdir!=x){ // bateau en position horizontale
-			for(int i = 0; Math.abs(i)<longueur;i+=directionX){ 
-				if(grilleJoueur[x+i][y]!=0){ // si la case n'est pas libre
+		int directionX = -1; 
+		int directionY = -1; 
+		
+		if(xdir!=x && ydir==y){ // bateau en position horizontale
+			directionX = (xdir-x)/Math.abs(xdir-x);  // 
+			int i=0;
+			while(Math.abs(i)<longueur && x+i<grilleJoueur.length && accept){
+				System.out.println(directionX);
+				if( x+i>grilleJoueur.length ||x+i<0 ){ //on sort du terrain
+					accept=false;
+				}else if(grilleJoueur[x+i][y]!=0){ // si la case n'est pas libre
 					accept=false;
 				}
+				i+=directionX;
 			}
-		}else if (ydir!=y){// bateau en position verticale
-			for(int i = 0; i<longueur;i+=directionY){
-				if(grilleJoueur[x][y+i]!=0){ // si la case n'est pas libre
+		}else if (ydir!=y && xdir==x){// bateau en position verticale
+			directionY = (ydir-y)/Math.abs(ydir-y);
+			int i=0;
+			while(Math.abs(i)<longueur && y+i<grilleJoueur.length  && accept){
+				System.out.println(directionY);
+				if( y+i>grilleJoueur.length ||y+i<0 ){ //on sort du terrain
+					accept=false;
+				}else if(grilleJoueur[x][y+1]!=0){ // si la case n'est pas libre
 					accept=false;
 				}
+				i+=directionY;
 			}
 		}else{
 			accept=false;
@@ -79,8 +92,9 @@ public class Plateau {
 		}else if(x==xdir && y>ydir){
 			o=Orientation.NORTH;
 		}
-		
-		bateau.setPosition(x, y, o);	
+		if(o !=null) {
+			bateau.setPosition(x, y, o);
+		}
 	}
 	
 }

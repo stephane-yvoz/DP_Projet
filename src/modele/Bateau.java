@@ -72,6 +72,8 @@ public class Bateau {
 		orientation = o;
 		posOriginX = posX;
 		posOriginY = posY;
+		posTailX = calcPosTailX(posOriginX,o);
+		posTailY = calcPosTailY(posOriginY,o);
 	}
 	
 	/**
@@ -134,6 +136,31 @@ public class Bateau {
 	
 	public boolean isVertical() {
 		return posOriginX == posTailX;
+	}
+	
+	private int calcPosTailX(int originX,Orientation o){
+		int posT = originX;
+		switch(o){
+		case EAST:
+			posT = originX+this.getLongueur();
+			break;
+		case WEST:
+			posT = originX-this.getLongueur();
+			break;
+		}
+		return posT;
+	}
+	private int calcPosTailY(int originY,Orientation o){
+		int posT = originY;
+		switch(o){
+		case SOUTH:
+			posT = originY+this.getLongueur();
+			break;
+		case NORTH:
+			posT = originY-this.getLongueur();
+			break;
+		}
+		return posT;
 	}
 	
 }

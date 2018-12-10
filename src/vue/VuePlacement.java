@@ -20,14 +20,17 @@ import modele.Plateau;
 public class VuePlacement extends VueGrille implements Observer{
 	
 	private static final long serialVersionUID = 1L;
-	private Modele modele;
+	//private Modele modele;
 	private JMenuBar menu;
 	private LocalListener listener;
-	private int longueur = 2;
+	private int longueur = 3;
 	private int[] bateauxDisponible;
 	
 	public VuePlacement(Modele m){
 		super(m);
+		
+		
+		
 		listener = new VuePlacement.LocalListener(modele);
 		this.addMouseListener(listener);
 		menu = new JMenuBar();
@@ -39,6 +42,7 @@ public class VuePlacement extends VueGrille implements Observer{
 			menuTaille.add(jItem);
 		}
 		bateauxDisponible = new int[] { 4 ,3 ,2 ,1}; 
+		this.add(menu);
 	}
 	
 
@@ -112,7 +116,7 @@ public class VuePlacement extends VueGrille implements Observer{
 			return yCaseClic1;
 		}
 		public boolean isOriginSet(){
-			return xCaseClic1<0;
+			return xCaseClic1>=0;
 		}
 		
 
@@ -122,19 +126,24 @@ public class VuePlacement extends VueGrille implements Observer{
 				int x = e.getX();
 				int y = e.getY();
 				if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
-					if(isOriginSet()){ // si on a pas encore cliqué
-						xCaseClic1 = x/(tailleFenetreX/11);  
-						yCaseClic1 = y/(tailleFenetreY/11);
+					if(!isOriginSet()){ // si on a pas encore cliqué
+						xCaseClic1 = x/(tailleFenetreX/11)-1;  
+						yCaseClic1 = y/(tailleFenetreY/11)-1;
+						System.out.println("Case1 :"+xCaseClic1+"  "+yCaseClic1 );
 					}else{
-						int xCaseClic2= x/(tailleFenetreX/11);
-						int yCaseClic2 = y/(tailleFenetreY/11);
+						int xCaseClic2= x/(tailleFenetreX/11)-1;
+						int yCaseClic2 = y/(tailleFenetreY/11)-1;
+						System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 						if(xCaseClic1 != xCaseClic2 || yCaseClic1 != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
-							if(modele.canAddShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2) && bateauxDisponible[longueur-1]<0){
+							if(modele.canAddShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2) && bateauxDisponible[longueur-1]>0){
+								System.out.println("ajout");
 								modele.addShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2);
 								xCaseClic1 = -1;
 								yCaseClic1 = -1;
 								bateauxDisponible[longueur-1]--;
 							}
+							xCaseClic1 = -1;
+							yCaseClic1 = -1;
 						}
 					}
 				}
