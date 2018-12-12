@@ -45,9 +45,8 @@ public class Plateau {
 		if(xdir!=x && ydir==y){ // bateau en position horizontale
 			directionX = (xdir-x)/Math.abs(xdir-x);  // 
 			int i=0;
-			while(Math.abs(i)<longueur && x+i<grilleJoueur.length && accept){
-				System.out.println(directionX);
-				if( x+i>grilleJoueur.length ||x+i<0 ){ //on sort du terrain
+			while(Math.abs(i)<longueur && accept){
+				if( x+i>=grilleJoueur.length ||x+i<0 ){ //on sort du terrain
 					accept=false;
 				}else if(grilleJoueur[x+i][y]!=0){ // si la case n'est pas libre
 					accept=false;
@@ -57,9 +56,8 @@ public class Plateau {
 		}else if (ydir!=y && xdir==x){// bateau en position verticale
 			directionY = (ydir-y)/Math.abs(ydir-y);
 			int i=0;
-			while(Math.abs(i)<longueur && y+i<grilleJoueur.length  && accept){
-				System.out.println(directionY);
-				if( y+i>grilleJoueur.length ||y+i<0 ){ //on sort du terrain
+			while(Math.abs(i)<longueur  && accept){
+				if( y+i>=grilleJoueur.length ||y+i<0 ){ //on sort du terrain
 					accept=false;
 				}else if(grilleJoueur[x][y+i]!=0){ // si la case n'est pas libre
 					accept=false;
@@ -99,14 +97,14 @@ public class Plateau {
 			if(xdir!=x && ydir==y){ // bateau en position horizontale
 				directionX = (xdir-x)/Math.abs(xdir-x);  // 
 				int i=0;
-				while(Math.abs(i)<longueur && x+i<grilleJoueur.length ){
+				while(Math.abs(i)<longueur  ){
 					grilleJoueur[x+i][y] = 1 ;//TODO changer avec Enumeration
 					i+=directionX;
 				}
 			}else if (ydir!=y && xdir==x){// bateau en position verticale
 				directionY = (ydir-y)/Math.abs(ydir-y);
 				int i=0;
-				while(Math.abs(i)<longueur && y+i<grilleJoueur.length ){
+				while(Math.abs(i)<longueur ){
 					grilleJoueur[x][y+i]=1;//TODO changer avec Enumeration
 					i+=directionY;
 				}
