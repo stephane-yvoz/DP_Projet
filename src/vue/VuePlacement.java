@@ -50,7 +50,7 @@ public class VuePlacement extends VueGrille implements Observer{
 		if(bateauxDisponible[l-1]>0){
 			longueur = l;
 		}else{
-			JOptionPane.showMessageDialog(this, "Vou n'avez plus de bateaux de taille "+l+" disponibles");
+			JOptionPane.showMessageDialog(this, "Vous n'avez plus de bateaux de taille "+l+" disponibles");
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class VuePlacement extends VueGrille implements Observer{
 						int yCaseClic2 = y/(tailleFenetreY/11)-1;
 						System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 						if(xCaseClic1 != xCaseClic2 || yCaseClic1 != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
-							if(modele.canAddShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2) && bateauxDisponible[longueur-1]>0){
+							if(bateauxDisponible[longueur-1]>0 && modele.canAddShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2) ){
 								System.out.println("ajout");
 								modele.addShip(xCaseClic1, yCaseClic1, longueur, xCaseClic2, yCaseClic2);
 								xCaseClic1 = -1;

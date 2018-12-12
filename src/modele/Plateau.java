@@ -61,7 +61,7 @@ public class Plateau {
 				System.out.println(directionY);
 				if( y+i>grilleJoueur.length ||y+i<0 ){ //on sort du terrain
 					accept=false;
-				}else if(grilleJoueur[x][y+1]!=0){ // si la case n'est pas libre
+				}else if(grilleJoueur[x][y+i]!=0){ // si la case n'est pas libre
 					accept=false;
 				}
 				i+=directionY;
@@ -94,6 +94,23 @@ public class Plateau {
 		}
 		if(o !=null) {
 			bateau.setPosition(x, y, o);
+			int directionX;
+			int directionY;
+			if(xdir!=x && ydir==y){ // bateau en position horizontale
+				directionX = (xdir-x)/Math.abs(xdir-x);  // 
+				int i=0;
+				while(Math.abs(i)<longueur && x+i<grilleJoueur.length ){
+					grilleJoueur[x+i][y] = 1 ;//TODO changer avec Enumeration
+					i+=directionX;
+				}
+			}else if (ydir!=y && xdir==x){// bateau en position verticale
+				directionY = (ydir-y)/Math.abs(ydir-y);
+				int i=0;
+				while(Math.abs(i)<longueur && y+i<grilleJoueur.length ){
+					grilleJoueur[x][y+i]=1;//TODO changer avec Enumeration
+					i+=directionY;
+				}
+			}
 		}
 	}
 	

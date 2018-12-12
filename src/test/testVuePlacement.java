@@ -21,6 +21,7 @@ public class testVuePlacement {
 		j.add(v);
 		j.setVisible(true);
 		j.setSize(500,500);
+		v.repaint();
 		
 	}
 }

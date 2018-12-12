@@ -59,7 +59,9 @@ public class Modele extends Observable {
 	}
 	
 	public void addShip(int x, int y, int longueur, int xdir, int ydir){
-	 	plateau1.AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));	
+	 	plateau1.AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));
+	 	setChanged();
+	 	notifyObservers();
 	}
 	
 }
