@@ -17,14 +17,14 @@ import modele.Modele;
 import modele.Orientation;
 import modele.Plateau;
 
-public class VuePlacement extends VueGrille implements Observer{
+public class VuePlacement /*extends VueGrille implements Observer*/{
 	
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 	//private Modele modele;
 	private JMenuBar menu;
 	private LocalListener listener;
 	private int longueur = 3;
-	private int[] bateauxDisponible;
+	
 	
 	public VuePlacement(Modele m){
 		super(m);
@@ -40,7 +40,7 @@ public class VuePlacement extends VueGrille implements Observer{
 			jItem.addActionListener(new ControllerChoixTailleBateauPlacement(this,i));  //actionListener qui va set la taille du prochain bateau, si stocks pas épuisé(grisé sinon)
 			menuTaille.add(jItem);
 		}
-		bateauxDisponible = new int[] { 4 ,3 ,2 ,1}; 
+
 		this.add(menu);
 	}
 	
@@ -80,14 +80,14 @@ public class VuePlacement extends VueGrille implements Observer{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		/*if(listener.isOriginSet()){
+		if(listener.isOriginSet()){
 			Bateau b =new Bateau(1, longueur, 1);
 			b.setPosition(listener.getXCaseClic1(), listener.getYCaseClic1(),  // affichage du bateau en cours de positionnement
 					CalculOrientation(listener.getXCaseClic1(),listener.getYCaseClic1(),calculPosSourisX(),calculPosSourisY()));
 			
 			//TODO ? : affichage rouge si modele.canAddShip(b) == false ?
 			super.drawShip(g, b);
-		}*/
+		}
 	}
 	
 	
@@ -167,6 +167,6 @@ public class VuePlacement extends VueGrille implements Observer{
 		public void mouseExited(MouseEvent e) {}
 	}
 
-
+*/
 
 }
