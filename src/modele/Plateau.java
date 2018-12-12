@@ -92,21 +92,21 @@ public class Plateau {
 		}
 		if(o !=null) {
 			bateau.setPosition(x, y, o);
-			int directionX;
-			int directionY;
+			bateaux.add(bateau);
+			int direction = 0;
 			if(xdir!=x && ydir==y){ // bateau en position horizontale
-				directionX = (xdir-x)/Math.abs(xdir-x);  // 
+				direction = (xdir-x)/Math.abs(xdir-x);  // 
 				int i=0;
 				while(Math.abs(i)<longueur  ){
 					grilleJoueur[x+i][y] = 1 ;//TODO changer avec Enumeration
-					i+=directionX;
+					i+=direction;
 				}
 			}else if (ydir!=y && xdir==x){// bateau en position verticale
-				directionY = (ydir-y)/Math.abs(ydir-y);
+				direction = (ydir-y)/Math.abs(ydir-y);
 				int i=0;
 				while(Math.abs(i)<longueur ){
 					grilleJoueur[x][y+i]=1;//TODO changer avec Enumeration
-					i+=directionY;
+					i+=direction;
 				}
 			}
 		}
