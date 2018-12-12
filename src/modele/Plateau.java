@@ -111,5 +111,25 @@ public class Plateau {
 			}
 		}
 	}
+
+	public String toString(){
+		StringBuilder sb = new StringBuilder("");
+		sb.append("Plateau joueur : \n");
+		for (int i = 0; i != grilleJoueur.length; i++){
+			sb.append("[ ");
+			for (int j = 0; j != grilleJoueur[i].length; j++){
+				sb.append(grilleJoueur[i][j]).append(" ");
+			}
+			sb.append("]\n");
+		}
+		return sb.toString();
+	}
+
+	public boolean isTouched(int x, int y){
+		if (grilleEnnemie[x][y] >= 0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

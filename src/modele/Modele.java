@@ -13,18 +13,17 @@ public class Modele extends Observable {
 	
 	private Plateau plateau1;
 	private Plateau plateau2;
-	
-	private Joueur J1;
-	private Joueur J2;
-	
+	private int currentPlayer;
+	private Joueur[] joueurs;
 	private BateauFactory bateauFactory;
 
 	public Modele(Option option) {
-		plateau1 = new Plateau(option.getSize());
-		plateau2 = new Plateau(option.getSize());
-		J1 = new JoueurHumain();
-		J2 = new JoueurMachine();
+		currentPlayer = 0;
+		joueurs = new Joueur[2];
+		joueurs[0] = new JoueurHumain(option);
+		joueurs[1] = new JoueurMachine(option);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
+
 	}
 	
 	public Plateau getPlateau1() {
@@ -60,8 +59,22 @@ public class Modele extends Observable {
 	
 	public void addShip(int x, int y, int longueur, int xdir, int ydir){
 	 	plateau1.AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));
-	 	setChanged();
-	 	notifyObservers();
+	 	update();
 	}
-	
+
+	public void shoot(Joueur cible, int x, int y){
+		boolean touched = cible.gotTouched(x, y);
+		if (touched){
+			;
+		}
+		else{
+			;
+		}
+		update();
+	}
+
+	private void update() {
+		setChanged();
+		notifyObservers();
+	}
 }

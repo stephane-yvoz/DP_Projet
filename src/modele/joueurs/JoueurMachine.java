@@ -1,10 +1,14 @@
 package modele.joueurs;
 
+import modele.Option;
+import modele.Plateau;
+
 public class JoueurMachine extends Joueur{
 
 	private Strategie strategie;
 	
-	public JoueurMachine(){
+	public JoueurMachine(Option o){
+		plateau = new Plateau(o.getSize());
 	}
 	
 	@Override
