@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 
+import modele.Option;
 import vue.VuePlacement;
 import modele.Modele;
 
@@ -14,7 +15,8 @@ public class testVuePlacement {
 	
 
 	public static void main(String[] args){
-		Modele m = new Modele(10,"III");
+		Option o = new Option();
+		Modele m = new Modele(o);
 		
 		JFrame j = new JFrame();
 		VuePlacement v = new VuePlacement(m);

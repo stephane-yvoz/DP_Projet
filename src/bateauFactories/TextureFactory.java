@@ -63,10 +63,9 @@ public class TextureFactory {
 	
 	public BufferedImage loadTexture(String path) {
 		BufferedImage texture = null;
-		
+		ClassLoader classLoader = getClass().getClassLoader();
 		try {
 			//texture = ImageIO.read(new File(path));
-			 ClassLoader classLoader = getClass().getClassLoader();
 	         texture = ImageIO.read(new File(classLoader.getResource(path).getFile()));
 		} 
 		catch (IllegalArgumentException | IOException loadingError) {

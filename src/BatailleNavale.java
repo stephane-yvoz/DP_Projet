@@ -28,7 +28,7 @@ public class BatailleNavale {
             windows[i].setSize(GRID_WIDTH, GRID_HEIGHT);
             windows[i].setVisible(true);
         }
-        windows[1].setVisible(false);
+        windows[1].setVisible(true);
         VueGrilleJoueur1 vj1 = new VueGrilleJoueur1(modele);
         VueGrilleJoueur2 vj2 = new VueGrilleJoueur2(modele);
         windows[0].add(vj1);
@@ -37,9 +37,9 @@ public class BatailleNavale {
 
     public BatailleNavale() {
         Option option = new Option();
-        makeFrameOption(option);
-        //Modele modele = new Modele();
-        //makeGame();
+        //makeFrameOption(option);
+        Modele modele = new Modele(option);
+        makeGame(modele);
     }
 
     private void makeFrameOption(Option option) {

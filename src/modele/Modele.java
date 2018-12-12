@@ -19,12 +19,12 @@ public class Modele extends Observable {
 	
 	private BateauFactory bateauFactory;
 
-	public Modele(int taille, String epoque) {
-		plateau1 = new Plateau(taille);
-		plateau2 = new Plateau(taille);
+	public Modele(Option option) {
+		plateau1 = new Plateau(option.getSize());
+		plateau2 = new Plateau(option.getSize());
 		J1 = new JoueurHumain();
 		J2 = new JoueurMachine();
-		bateauFactory = BateauFactory.getInstance(epoque);
+		bateauFactory = BateauFactory.getInstance(option.getEpoque());
 	}
 	
 	public Plateau getPlateau1() {
