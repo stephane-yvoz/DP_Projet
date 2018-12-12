@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
 public class TextureFactory {
 	
 	public final static String LOADING_ERROR = "Impossible de charger la texture: ";
@@ -64,7 +65,9 @@ public class TextureFactory {
 		BufferedImage texture = null;
 		
 		try {
-			texture = ImageIO.read(new File(path));
+			//texture = ImageIO.read(new File(path));
+			 ClassLoader classLoader = getClass().getClassLoader();
+	         texture = ImageIO.read(new File(classLoader.getResource(path).getFile()));
 		} 
 		catch (IllegalArgumentException | IOException loadingError) {
 			System.err.println(LOADING_ERROR + path);

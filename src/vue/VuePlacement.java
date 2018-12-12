@@ -30,8 +30,7 @@ public class VuePlacement extends VueGrille implements Observer{
 		super(m);
 		
 		
-		
-		listener = new VuePlacement.LocalListener(modele);
+		listener = new VuePlacement.LocalListener(modele,this);
 		this.addMouseListener(listener);
 		menu = new JMenuBar();
 		JMenu menuTaille = new JMenu("taille du prochain bateau");
@@ -80,15 +79,15 @@ public class VuePlacement extends VueGrille implements Observer{
 
 	
 	public void paintComponent(Graphics g){
-		super.paintComponents(g);
-		if(listener.isOriginSet()){
+		super.paintComponent(g);
+		/*if(listener.isOriginSet()){
 			Bateau b =new Bateau(1, longueur, 1);
 			b.setPosition(listener.getXCaseClic1(), listener.getYCaseClic1(),  // affichage du bateau en cours de positionnement
 					CalculOrientation(listener.getXCaseClic1(),listener.getYCaseClic1(),calculPosSourisX(),calculPosSourisY()));
 			
 			//TODO ? : affichage rouge si modele.canAddShip(b) == false ?
 			super.drawShip(g, b);
-		}
+		}*/
 	}
 	
 	
@@ -100,14 +99,14 @@ public class VuePlacement extends VueGrille implements Observer{
 	
 	class LocalListener implements MouseListener {
 		
-		private static final int tailleFenetreX = 500;
-		private static final int tailleFenetreY = 500;
 		private Modele modele;
+		private VuePlacement vue;
 		private int xCaseClic1 = -1;
 		private int yCaseClic1 = -1;
 		
-		public LocalListener(Modele m) {
+		public LocalListener(Modele m,VuePlacement v) {
 			modele = m;
+			vue = v;
 		}
 		public int getXCaseClic1() {
 			return xCaseClic1;
@@ -122,6 +121,8 @@ public class VuePlacement extends VueGrille implements Observer{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			int tailleFenetreX = vue.getWidth();
+		    int tailleFenetreY = vue.getHeight();
 			if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 				int x = e.getX();
 				int y = e.getY();
