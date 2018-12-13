@@ -26,7 +26,7 @@ public abstract class VueGrille extends JPanel implements Observer {
 	/**
 	 * Borne supérieure des indices des grilles du modèle.
 	 */
-    public final static int SUP = 10;
+    protected final static int SUP = 10;
        		
     protected Modele modele;
     
