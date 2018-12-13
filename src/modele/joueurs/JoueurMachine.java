@@ -8,7 +8,7 @@ public class JoueurMachine extends Joueur{
 	private Strategie strategie;
 	
 	public JoueurMachine(Option o){
-		plateau = new Plateau(o.getSize());
+		super(o);
 	}
 	
 	@Override

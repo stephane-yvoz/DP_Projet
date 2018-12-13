@@ -128,5 +128,13 @@ public class Plateau {
 	public boolean isTouched(int x, int y){
 		return grilleEnnemie[x][y] == Square.HIT;
 	}
+
+	public void hit(int x, int y) {
+		grilleJoueur[x][y] = Square.HIT;
+	}
+
+	public void setShot(int x, int y, int value) {
+		// grilleEnnemie[x][y] = value;
+	}
 	
 }

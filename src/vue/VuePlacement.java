@@ -11,7 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import controller.ControllerChoixTailleBateauPlacement;
 import modele.Bateau;
 import modele.Modele;
 import modele.Orientation;
