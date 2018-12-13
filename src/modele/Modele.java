@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Observable;
 
@@ -23,7 +24,6 @@ public class Modele extends Observable {
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
-
 	}
 	
 	public Plateau getPlateau1() {
@@ -42,6 +42,14 @@ public class Modele extends Observable {
 	public Iterator<Bateau> shipCollection(Plateau plateau) {
 		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.shipCollection();
+	}
+	
+	/**
+	 * Récupère la texture du bateau associée à l'époque choisie.
+	 * @return texture
+	 */
+	public BufferedImage getShipTexture() {
+		return bateauFactory.getShipTexture();
 	}
 	
     /**

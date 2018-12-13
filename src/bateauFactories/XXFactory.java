@@ -4,6 +4,10 @@ import modele.Bateau;
 
 public class XXFactory extends BateauFactory {
 
+	public XXFactory() {
+		ship = TextureFactory.getInstance().getShipTexture();
+	}
+	
 	@Override
 	public Bateau creerBateau(int taille) {
 		switch (taille) {

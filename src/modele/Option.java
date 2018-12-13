@@ -3,6 +3,7 @@ package modele;
 import java.util.Observable;
 
 public class Option extends Observable {
+	
     private int size;
     private String epoque;
 
@@ -24,4 +25,5 @@ public class Option extends Observable {
         setChanged();
         notifyObservers();
     }
+    
 }
