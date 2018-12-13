@@ -126,7 +126,7 @@ public class Plateau {
 	}
 
 	public boolean isTouched(int x, int y){
-		if (grilleEnnemie[x][y] >= 0) {
+		if (grilleJoueur[x][y] >= 0) {
 			return true;
 		}
 		return false;

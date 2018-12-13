@@ -6,7 +6,7 @@ import modele.Plateau;
 public class JoueurHumain extends Joueur {
 
 	public JoueurHumain(Option o){
-		plateau = new Plateau(o.getSize());
+		super(o);
 	}
 
 	@Override

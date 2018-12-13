@@ -16,6 +16,7 @@ public class Modele extends Observable {
 	private int currentPlayer;
 	private Joueur[] joueurs;
 	private BateauFactory bateauFactory;
+	private EtatPartie etatPartie;
 
 	public Modele(Option option) {
 		currentPlayer = 0;
@@ -23,7 +24,11 @@ public class Modele extends Observable {
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
-
+		etatPartie = EtatPartie.Running;
+	}
+	
+	public EtatPartie getEtat(){
+		return etatPartie;
 	}
 	
 	public Plateau getPlateau1() {
@@ -71,6 +76,10 @@ public class Modele extends Observable {
 			;
 		}
 		update();
+	}
+	
+	public Joueur getCurrentPlayer(){
+		return joueurs[currentPlayer];
 	}
 
 	private void update() {

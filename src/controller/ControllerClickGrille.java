@@ -42,12 +42,12 @@ public class ControllerClickGrille implements MouseListener{
 		tailleFenetreX = vue.getWidth();
 	    tailleFenetreY = vue.getHeight();
 		switch(modele.getEtat()){
-		case Placement :
+		case Positioning :
 			if(typeVue == "Main"){
 				placerBateau(e);
 			}
 			break;
-		case Game :
+		case Running :
 			jouer(e);
 			break;
 		}
@@ -83,12 +83,12 @@ public class ControllerClickGrille implements MouseListener{
 					yCaseClic2 = y/(tailleFenetreY/11)-1;
 					System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
-						if(bateauxDisponible[longueur-1]>0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, xCaseClic2, yCaseClic2) ){
+						if(modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, xCaseClic2, yCaseClic2) ){
 							System.out.println("ajout");
 							modele.addShip(xCaseClic, yCaseClic, longueur, xCaseClic2, yCaseClic2);
 							xCaseClic = -1;
 							yCaseClic = -1;
-							bateauxDisponible[longueur-1]--;
+							//bateauxDisponible[longueur-1]--;
 						}
 						xCaseClic = -1;
 						yCaseClic = -1;
