@@ -44,6 +44,14 @@ public class Modele extends Observable {
 		return plateau2;
 	}
 
+	public Square[][] getPlayerGrid() {
+		return plateau1.getGrilleJoueur();
+	}
+	
+	public Square[][] getEnemyGrid() {
+		return plateau1.getGrilleEnnemie();
+	}
+	
 	public Square[][] getShots(Plateau plateau) {
 		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.getShots();
