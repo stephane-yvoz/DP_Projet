@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import modele.Modele;
+import modele.joueurs.Joueur;
 import vue.VueGrille;
 
 public class ControllerClickGrille implements MouseListener{
@@ -54,6 +55,9 @@ public class ControllerClickGrille implements MouseListener{
 		
 	}
 	public void jouer(MouseEvent e){
+		Joueur j = modele.getJoueurs(0);
+		if (j == null || !j.isPlayerTurn())
+			return ;
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();

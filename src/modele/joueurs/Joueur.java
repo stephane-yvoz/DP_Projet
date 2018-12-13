@@ -5,11 +5,14 @@ import modele.Plateau;
 
 public abstract class Joueur {
 	Plateau plateau;
+	private boolean isPlayerTurn;
+
 	int[] bateauxDisponibles;
 	
 	public Joueur(Option o){
 		plateau = new Plateau(o.getSize());
 		bateauxDisponibles = o.getBateauxDisponibles();
+		isPlayerTurn = false;
 	}
 
 	public abstract void play();
@@ -30,5 +33,13 @@ public abstract class Joueur {
 
 	public void shotEnemie(int x, int y, int value) {
 		plateau.setShot(x, y, value);
+	}
+
+	public void setPlayerTurn(boolean b){
+		isPlayerTurn = b;
+	}
+
+	public boolean isPlayerTurn() {
+		return isPlayerTurn;
 	}
 }
