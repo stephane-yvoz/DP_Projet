@@ -42,6 +42,10 @@ public class TextureFactory {
 	}
 	
 	private void buildShipTexture() {
+		buildShipTexture(new Color(255, 255, 255, 128));
+	}
+	
+	public void buildShipTexture(Color shipColor) {
 		ship = new BufferedImage(getAreaSide(), 
                                  getAreaSide(), 
                                  BufferedImage.TYPE_INT_ARGB
@@ -49,7 +53,7 @@ public class TextureFactory {
 		
 		Graphics2D g2d = ship.createGraphics();
 		
-		g2d.setColor(new Color(255, 255, 255, 128));
+		g2d.setColor(shipColor);
 	    g2d.fillRect(0, 0, getAreaSide(), getAreaSide());
 	    g2d.dispose();
 	}
@@ -64,8 +68,8 @@ public class TextureFactory {
 	public BufferedImage loadTexture(String path) {
 		BufferedImage texture = null;
 		ClassLoader classLoader = getClass().getClassLoader();
+		
 		try {
-			//texture = ImageIO.read(new File(path));
 	         texture = ImageIO.read(new File(classLoader.getResource(path).getFile()));
 		} 
 		catch (IllegalArgumentException | IOException loadingError) {

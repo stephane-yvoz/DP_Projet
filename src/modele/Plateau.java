@@ -5,8 +5,8 @@ import java.util.Iterator;
 
 public class Plateau {
 	
-	private int[][] grilleJoueur; 
-	private int[][] grilleEnnemie; // liste des coups portés (pas de coup, coup dans le vide, coup au but)
+	private Square[][] grilleJoueur; 
+	private Square[][] grilleEnnemie; 
 	
 	private ArrayList<Bateau> bateaux;
 	
@@ -15,12 +15,12 @@ public class Plateau {
 	 * @param taille
 	 */
 	public Plateau(int taille) {  
-		grilleJoueur = new int[taille][taille];
-		grilleEnnemie = new int[taille][taille];
+		grilleJoueur = new Square[taille][taille];
+		grilleEnnemie = new Square[taille][taille];
 		bateaux = new ArrayList<Bateau>();
 	}
  
-	public int[][] getShots() {
+	public Square[][] getShots() {
 		return grilleEnnemie;
 	}
 	
@@ -48,7 +48,7 @@ public class Plateau {
 			while(Math.abs(i)<longueur && accept){
 				if( x+i>=grilleJoueur.length ||x+i<0 ){ //on sort du terrain
 					accept=false;
-				}else if(grilleJoueur[x+i][y]!=0){ // si la case n'est pas libre
+				}else if(grilleJoueur[x+i][y]!= Square.SEA){ // si la case n'est pas libre
 					accept=false;
 				}
 				i+=directionX;
@@ -59,7 +59,7 @@ public class Plateau {
 			while(Math.abs(i)<longueur  && accept){
 				if( y+i>=grilleJoueur.length ||y+i<0 ){ //on sort du terrain
 					accept=false;
-				}else if(grilleJoueur[x][y+i]!=0){ // si la case n'est pas libre
+				}else if(grilleJoueur[x][y+i]!= Square.SEA){ // si la case n'est pas libre
 					accept=false;
 				}
 				i+=directionY;
@@ -98,14 +98,14 @@ public class Plateau {
 				direction = (xdir-x)/Math.abs(xdir-x);  // 
 				int i=0;
 				while(Math.abs(i)<longueur  ){
-					grilleJoueur[x+i][y] = 1 ;//TODO changer avec Enumeration
+					grilleJoueur[x+i][y] = Square.SHIP;
 					i+=direction;
 				}
 			}else if (ydir!=y && xdir==x){// bateau en position verticale
 				direction = (ydir-y)/Math.abs(ydir-y);
 				int i=0;
 				while(Math.abs(i)<longueur ){
-					grilleJoueur[x][y+i]=1;//TODO changer avec Enumeration
+					grilleJoueur[x][y+i] = Square.SHIP;
 					i+=direction;
 				}
 			}
@@ -126,10 +126,15 @@ public class Plateau {
 	}
 
 	public boolean isTouched(int x, int y){
-		if (grilleJoueur[x][y] >= 0) {
-			return true;
-		}
-		return false;
+		return grilleEnnemie[x][y] == Square.HIT;
+	}
+
+	public void hit(int x, int y) {
+		grilleJoueur[x][y] = Square.HIT;
+	}
+
+	public void setShot(int x, int y, int value) {
+		// grilleEnnemie[x][y] = value;
 	}
 	
 }
