@@ -1,8 +1,8 @@
 import modele.Modele;
 import modele.Option;
+import runnable.RunnableOption;
 import vue.VueGrilleJoueur;
 import vue.VueGrilleEnemie;
-import vue.VueOption;
 
 import javax.swing.*;
 
@@ -39,22 +39,10 @@ public class BatailleNavale {
         makeGame(modele);
     }
 
-    private static void makeFrameOption(Option option) {
-        JFrame frame = new JFrame("Option");
-        frame.add(new VueOption(option));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setSize(400, 200);
-    }
-
     public static void main(String[] args) {
         Option option = new Option();
-        Thread t = new Thread(){
-            public void run(){
-                makeFrameOption(option);
-            }
-        };
-        t.start();
+        Runnable frameOption = new RunnableOption(option);
+        new Thread(frameOption).start();
         while (option.isDisplayOption()){
             try {
                 Thread.sleep(300);
@@ -62,10 +50,12 @@ public class BatailleNavale {
                 e.printStackTrace();
             }
         }
+        final Option batailleOption = option;
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new BatailleNavale(option);
+                System.out.println(batailleOption);
+                new BatailleNavale(batailleOption);
             }
         });
     }
