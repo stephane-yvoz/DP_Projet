@@ -1,5 +1,6 @@
 package modele.joueurs;
 
+import modele.Modele;
 import modele.Option;
 import modele.Plateau;
 
@@ -10,7 +11,7 @@ public class JoueurHumain extends Joueur {
 	}
 
 	@Override
-	public void play() {
+	public void play(Modele m) {
 		// TODO Auto-generated method stub
 
 	}

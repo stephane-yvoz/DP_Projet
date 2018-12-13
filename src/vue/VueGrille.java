@@ -26,7 +26,7 @@ public abstract class VueGrille extends JPanel implements Observer {
 	/**
 	 * Borne supérieure des indices des grilles du modèle.
 	 */
-    public final static int SUP = 10;
+    protected final static int SUP = 10;
        		
     protected Modele modele;
     
@@ -138,44 +138,20 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Dessin d'un bateau.
+     * Dessin de toutes les cases de la grille.
      * @param g
-     * @param bateau
      */
-    public void drawShip(Graphics g, Bateau bateau) {
-    	BufferedImage texture = null;
-    	
-    	if (bateau.isDestroyed()) {
-    		texture = TextureFactory.getInstance().getSunkTexture();
-    	}
-    	else {
-    		texture = TextureFactory.getInstance().getShipTexture();
-    	}
-    	
-    	assert texture != null;
-    	
-    	int minX = bateau.getMinX();
-    	int minY = bateau.getMinY();
-    	
-    	for (int i = 0; i < bateau.getLongueur(); i ++) {
-    		if (bateau.isVertical()) {
-    			drawShipSection(g, texture, minX, minY + i);
-    		}
-    		else if (bateau.isHorizontal()) {
-    			drawShipSection(g, texture, minX + i, minY);
-    		}
-    	}  	
-    }
+    public abstract void drawSquares(Graphics g);
     
     /**
-     * Dessin d'une section de bateau (pour une seule case).
+     * Dessin d'une case.
      * @param g
      * @param texture
      * @param x
      * @param y
      */
-    private void drawShipSection(Graphics g, BufferedImage texture, int x, int y) {
-    	g.drawImage(texture,
+    protected void drawSquare(Graphics g, BufferedImage squareTexture, int x, int y) {
+    	g.drawImage(squareTexture,
 			        modelToRealX(x),
 			        modelToRealY(y),
 			        modelToRealX(x + 1),
@@ -189,38 +165,8 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     /**
-     * Dessin des bateaux.
-     * @param g
-     */
-    public void drawShips(Graphics g) {
-    	Iterator<Bateau> shipCollection = shipCollection();
-    	
-    	while (shipCollection.hasNext()) {
-    		try {
-    			drawShip(g, shipCollection.next());
-    		}
-    		catch (NoSuchElementException noMoreElements) {}
-    	}
-    }
-    
-    /**
-     * Dessin d'un tir.
-     * @param g
-     * @param x
-     * @param y
-     */
-    public void drawShot(Graphics g, int x, int y) {}
-    
-    /**
-     * Dessin des tirs.
-     * @param g
-     */
-    public void drawShots(Graphics g) {}
-    
-    /**
      * Dessin du fond.
      * @param g
-     * @override
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);   

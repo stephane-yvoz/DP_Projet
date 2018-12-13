@@ -64,8 +64,7 @@ public class ControllerClickGrille implements MouseListener{
 			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
 				xCaseClic = x/(tailleFenetreX/11)-1;  
 				yCaseClic = y/(tailleFenetreY/11)-1;
-				System.out.println("Case :"+xCaseClic+"  "+yCaseClic );
-				
+				modele.shoot(modele.getJoueurs(1), xCaseClic, yCaseClic);
 			}
 		}else{ // si pas bouton gauche on annule
 			xCaseClic = -1;

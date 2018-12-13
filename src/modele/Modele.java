@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Observable;
@@ -43,6 +44,14 @@ public class Modele extends Observable {
 		return plateau2;
 	}
 
+	public Square[][] getPlayerGrid() {
+		return plateau1.getGrilleJoueur();
+	}
+	
+	public Square[][] getEnemyGrid() {
+		return plateau1.getGrilleEnnemie();
+	}
+	
 	public Square[][] getShots(Plateau plateau) {
 		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.getShots();
@@ -89,6 +98,7 @@ public class Modele extends Observable {
 		}
 		
 		getCurrentPlayer().shotEnemie(x, y, value);
+		nextPlayer();
 		update();
 	}
 	
@@ -114,7 +124,11 @@ public class Modele extends Observable {
 		if (currentPlayer == nombrePlayer) {
 			currentPlayer = 0;
 		}
-		getCurrentPlayer().setPlayerTurn(true);
+		Joueur p = getCurrentPlayer();
+		p.setPlayerTurn(true);
+		if (!p.isHuman()) {
+			p.play(this);
+		}
 	}
 	
 }

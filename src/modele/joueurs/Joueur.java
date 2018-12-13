@@ -1,12 +1,15 @@
 package modele.joueurs;
 
+import modele.Modele;
 import modele.Option;
 import modele.Plateau;
 import modele.Square;
 
 public abstract class Joueur {
+
 	Plateau plateau;
 	private boolean isPlayerTurn;
+	protected boolean human;
 
 	int[] bateauxDisponibles;
 	
@@ -14,9 +17,10 @@ public abstract class Joueur {
 		plateau = new Plateau(o.getSize());
 		bateauxDisponibles = o.getBateauxDisponibles();
 		isPlayerTurn = false;
+		human = true;
 	}
 
-	public abstract void play();
+	public abstract void play(Modele m);
 
 	public Plateau getPlateau(){
 		return plateau;
@@ -42,5 +46,9 @@ public abstract class Joueur {
 
 	public boolean isPlayerTurn() {
 		return isPlayerTurn;
+	}
+
+	public boolean isHuman() {
+		return human;
 	}
 }
