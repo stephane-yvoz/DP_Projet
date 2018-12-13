@@ -2,6 +2,7 @@ package modele.joueurs;
 
 import modele.Option;
 import modele.Plateau;
+import modele.Square;
 
 public abstract class Joueur {
 	Plateau plateau;
@@ -31,7 +32,7 @@ public abstract class Joueur {
 
 	public void hit(int x, int y){ plateau.hit(x, y); };
 
-	public void shotEnemie(int x, int y, int value) {
+	public void shotEnemie(int x, int y, Square value) {
 		plateau.setShot(x, y, value);
 	}
 

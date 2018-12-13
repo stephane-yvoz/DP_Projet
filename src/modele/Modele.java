@@ -81,11 +81,11 @@ public class Modele extends Observable {
 
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
-		int value = -2; // valeur pour dire toucher ou pas toucher
+		Square value = Square.MISSED;
 		
 		if (touched) {
 			cible.hit(x, y);
-			value = -1; // -1 pour toucher un bateau, -2 pour miss
+			value = Square.HIT;
 		}
 		
 		getCurrentPlayer().shotEnemie(x, y, value);
