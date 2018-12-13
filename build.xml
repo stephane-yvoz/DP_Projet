@@ -27,9 +27,6 @@
 
   <!-- Définition du classpath du projet -->
   <path id="classpath">
-    <!-- <fileset dir="${lib.dir}">
-      <include name="*.jar"/>
-    </fileset> -->
     <pathelement location="${class.dir}"/>
   </path>
   
@@ -54,6 +51,11 @@
     <javac includeantruntime="false" srcdir="${src.dir}" destdir="${class.dir}">
       <classpath refid="classpath"/>
     </javac>
+    <copy todir="${class.dir}">
+      <fileset dir="${res.dir}">
+        <include name="*.png"/>
+      </fileset>
+    </copy>
   </target>
 
   <target name="doc" depends="clean-doc">
