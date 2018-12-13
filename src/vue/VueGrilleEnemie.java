@@ -7,11 +7,11 @@ import java.awt.Graphics;
 
 import controller.ControllerClickGrille;
 
-public class VueGrilleJoueur2 extends VueGrille {
+public class VueGrilleEnemie extends VueGrille {
 	
 	private ControllerClickGrille listener;
 	
-    public VueGrilleJoueur2(Modele modele) {
+    public VueGrilleEnemie(Modele modele) {
         super(modele);
         this.setEnabled(false);
         listener = new ControllerClickGrille(modele,this,"ViewShots");

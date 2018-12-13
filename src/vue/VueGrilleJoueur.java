@@ -10,11 +10,11 @@ import controller.ControllerClickGrille;
 import modele.Modele;
 import modele.Plateau;
 
-public class VueGrilleJoueur1 extends VueGrille {
+public class VueGrilleJoueur extends VueGrille {
 
 	private ControllerClickGrille listener;
 	
-    public VueGrilleJoueur1(Modele modele) {
+    public VueGrilleJoueur(Modele modele) {
         super(modele);
         listener = new ControllerClickGrille(modele,this,"Main");
 		this.addMouseListener(listener);

@@ -1,7 +1,7 @@
 import modele.Modele;
 import modele.Option;
-import vue.VueGrilleJoueur1;
-import vue.VueGrilleJoueur2;
+import vue.VueGrilleJoueur;
+import vue.VueGrilleEnemie;
 import vue.VueOption;
 
 import javax.swing.*;
@@ -28,21 +28,18 @@ public class BatailleNavale {
             windows[i].setSize(GRID_WIDTH, GRID_HEIGHT);
             windows[i].setVisible(true);
         }
-        windows[1].setVisible(true);
-        VueGrilleJoueur1 vj1 = new VueGrilleJoueur1(modele);
-        VueGrilleJoueur2 vj2 = new VueGrilleJoueur2(modele);
+        VueGrilleJoueur vj1 = new VueGrilleJoueur(modele);
+        VueGrilleEnemie vj2 = new VueGrilleEnemie(modele);
         windows[0].add(vj1);
         windows[1].add(vj2);
     }
 
-    public BatailleNavale() {
-        Option option = new Option();
-        //makeFrameOption(option);
+    public BatailleNavale(Option option) {
         Modele modele = new Modele(option);
         makeGame(modele);
     }
 
-    private void makeFrameOption(Option option) {
+    private static void makeFrameOption(Option option) {
         JFrame frame = new JFrame("Option");
         frame.add(new VueOption(option));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,12 +48,26 @@ public class BatailleNavale {
     }
 
     public static void main(String[] args) {
-    	javax.swing.SwingUtilities.invokeLater(new Runnable() {
-    		@Override
-    		public void run() {
-    			new BatailleNavale();
-    		}
-    	});
+        Option option = new Option();
+        Thread t = new Thread(){
+            public void run(){
+                makeFrameOption(option);
+            }
+        };
+        t.start();
+        while (option.isDisplayOption()){
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new BatailleNavale(option);
+            }
+        });
     }
     
 }
