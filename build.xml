@@ -60,9 +60,9 @@
 
   <target name="doc" depends="clean-doc">
     <mkdir dir="${doc.dir}"/>
-    <javadoc sourcepath="${src.dir}" destdir="${doc.dir}" >
+    <javadoc destdir="${doc.dir}">
       <fileset dir="${src.dir}" defaultexcludes="yes">
-        <include name="**/*.java" />
+        <include name="**/*.java"/>
       </fileset>
     </javadoc>
   </target>
