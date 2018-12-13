@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,6 +18,12 @@ public class Plateau {
 	public Plateau(int taille) {  
 		grilleJoueur = new Square[taille][taille];
 		grilleEnnemie = new Square[taille][taille];
+		for(int i =0;i <taille;i++){
+			for(int j =0;j <taille;j++){
+				grilleJoueur[i][j] = Square.SEA;
+				grilleEnnemie[i][j] = Square.SEA;
+			}
+		}
 		bateaux = new ArrayList<Bateau>();
 	}
  
@@ -93,22 +100,10 @@ public class Plateau {
 		if(o !=null) {
 			bateau.setPosition(x, y, o);
 			bateaux.add(bateau);
-			int direction = 0;
-			if(xdir!=x && ydir==y){ // bateau en position horizontale
-				direction = (xdir-x)/Math.abs(xdir-x);  // 
-				int i=0;
-				while(Math.abs(i)<longueur  ){
-					grilleJoueur[x+i][y] = Square.SHIP;
-					i+=direction;
-				}
-			}else if (ydir!=y && xdir==x){// bateau en position verticale
-				direction = (ydir-y)/Math.abs(ydir-y);
-				int i=0;
-				while(Math.abs(i)<longueur ){
-					grilleJoueur[x][y+i] = Square.SHIP;
-					i+=direction;
-				}
+			for(Point p : bateau.getOccupiedPositions()){
+				grilleJoueur[p.x][p.y]=Square.SHIP;
 			}
+			
 		}
 	}
 
@@ -119,6 +114,14 @@ public class Plateau {
 			sb.append("[ ");
 			for (int j = 0; j != grilleJoueur[i].length; j++){
 				sb.append(grilleJoueur[i][j]).append(" ");
+			}
+			sb.append("]\n");
+		}
+		sb.append("Plateau ennemie : \n");
+		for (int i = 0; i != grilleEnnemie.length; i++){
+			sb.append("[ ");
+			for (int j = 0; j != grilleEnnemie[i].length; j++){
+				sb.append(grilleEnnemie[i][j]).append(" ");
 			}
 			sb.append("]\n");
 		}
@@ -143,5 +146,20 @@ public class Plateau {
 
 	public Square[][] getGrilleJoueur() {
 		return grilleJoueur;
+	}
+	
+	public void receiveShot(int x, int y, int puissance){
+		for(Bateau b : bateaux){
+			for(Point p : b.getOccupiedPositions()){
+				if(p.x==x && p.y==y){
+					b.takeHit(puissance);
+				}
+			}
+			if(b.isDestroyed()){
+				for(Point p : b.getOccupiedPositions()){
+					grilleJoueur[p.x][p.y]=Square.SUNK;
+				}
+			}
+		}
 	}
 }
