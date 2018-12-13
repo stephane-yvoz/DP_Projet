@@ -1,5 +1,7 @@
 package modele;
 
+import java.awt.Point;
+
 /**
  * La position d'un bateau correspond aux indices sur la grille.
  * Les indices de la grille sont dans l'ensemble {0,..,9}.
@@ -162,5 +164,22 @@ public class Bateau {
 		}
 		return posT;
 	}
-	
+	/*
+	 * Calcule toutes les positions (entières) des cases sur lesquelles le bateau est positionné
+	 * et les renvoie sous forme d'un tableau de Point
+	 */
+	public Point[] getOccupiedPositions(){
+		Point[] positions = new Point[longueur];
+		int directionX = 0;
+		int directionY = 0;
+		if(posOriginX!=posTailX ){ // bateau en position horizontale
+			directionX = (posTailX-posOriginX)/Math.abs(posTailX-posOriginX);  
+		}else if (posOriginY!=posTailY ){// bateau en position verticale	
+			directionY = (posTailY-posOriginY)/Math.abs(posTailY-posOriginY);  
+		}
+		for(int i=0;i<longueur;i++){
+			positions[i] = new Point(posOriginX+i*directionX,posOriginY+i*directionY);
+		}
+		return positions;
+	}
 }

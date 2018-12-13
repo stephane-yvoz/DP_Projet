@@ -25,6 +25,7 @@ public class Modele extends Observable {
 		joueurs = new Joueur[2];
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
+		joueurs[0].setPlayerTurn(true);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
 		etatPartie = EtatPartie.Running;
 		nombrePlayer = option.getNombrePlayer();
@@ -80,11 +81,11 @@ public class Modele extends Observable {
 
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
-		int value = -2; // valeur pour dire toucher ou pas toucher
+		Square value = Square.MISSED;
 		
 		if (touched) {
 			cible.hit(x, y);
-			value = -1; // -1 pour toucher un bateau, -2 pour miss
+			value = Square.HIT;
 		}
 		
 		getCurrentPlayer().shotEnemie(x, y, value);
@@ -99,13 +100,21 @@ public class Modele extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
+	public Joueur getJoueurs(int i) {
+		if (i < nombrePlayer)
+			return joueurs[i];
+		return null;
+	}
+
 	public void nextPlayer(){
+		getCurrentPlayer().setPlayerTurn(false);
 		currentPlayer += 1;
 		
 		if (currentPlayer == nombrePlayer) {
 			currentPlayer = 0;
 		}
+		getCurrentPlayer().setPlayerTurn(true);
 	}
 	
 }

@@ -3,6 +3,7 @@ bin/
 doc/
 jar/
 notes/
+out/
 report/
 
 .classpath

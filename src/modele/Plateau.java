@@ -133,8 +133,15 @@ public class Plateau {
 		grilleJoueur[x][y] = Square.HIT;
 	}
 
-	public void setShot(int x, int y, int value) {
-		// grilleEnnemie[x][y] = value;
+	public void setShot(int x, int y, Square value) {
+		grilleEnnemie[x][y] = value;
 	}
-	
+
+	public Square[][] getGrilleEnnemie() {
+		return grilleEnnemie;
+	}
+
+	public Square[][] getGrilleJoueur() {
+		return grilleJoueur;
+	}
 }
