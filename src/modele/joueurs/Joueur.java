@@ -25,4 +25,10 @@ public abstract class Joueur {
 	public int[] getBateauxDisponibles(){
 		return bateauxDisponibles;
 	}
+
+	public void hit(int x, int y){ plateau.hit(x, y); };
+
+	public void shotEnemie(int x, int y, int value) {
+		plateau.setShot(x, y, value);
+	}
 }

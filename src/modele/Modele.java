@@ -14,6 +14,7 @@ public class Modele extends Observable {
 	private Plateau plateau1;
 	private Plateau plateau2;
 	private int currentPlayer;
+	private final int nombrePlayer;
 	private Joueur[] joueurs;
 	private BateauFactory bateauFactory;
 	private EtatPartie etatPartie;
@@ -25,6 +26,7 @@ public class Modele extends Observable {
 		joueurs[1] = new JoueurMachine(option);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
 		etatPartie = EtatPartie.Running;
+		nombrePlayer = option.getNombrePlayer();
 	}
 	
 	public EtatPartie getEtat(){
@@ -69,12 +71,12 @@ public class Modele extends Observable {
 
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
+		int value = -2; // valeur pour dire toucher ou pas toucher
 		if (touched){
-			;
+			cible.hit(x, y);
+			value = -1; // -1 pour toucher un bateau, -2 pour miss
 		}
-		else{
-			;
-		}
+		getCurrentPlayer().shotEnemie(x, y, value);
 		update();
 	}
 	
@@ -85,5 +87,12 @@ public class Modele extends Observable {
 	private void update() {
 		setChanged();
 		notifyObservers();
+	}
+	
+	public void nextPlayer(){
+		currentPlayer += 1;
+		if (currentPlayer == nombrePlayer){
+			currentPlayer = 0;
+		}
 	}
 }

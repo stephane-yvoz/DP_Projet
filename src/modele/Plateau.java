@@ -131,5 +131,12 @@ public class Plateau {
 		}
 		return false;
 	}
-	
+
+	public void hit(int x, int y) {
+		grilleJoueur[x][y] = -1;
+	}
+
+	public void setShot(int x, int y, int value) {
+		grilleEnnemie[x][y] = value;
+	}
 }
