@@ -3,6 +3,7 @@ package modele;
 import java.util.Observable;
 
 public class Option extends Observable {
+	
     private int size;
     private int nombrePlayer;
     private String epoque;
@@ -42,4 +43,5 @@ public class Option extends Observable {
     public int getNombrePlayer() {
         return nombrePlayer;
     }
+    
 }

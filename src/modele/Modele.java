@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Observable;
 
@@ -30,7 +31,7 @@ public class Modele extends Observable {
 		nombrePlayer = option.getNombrePlayer();
 	}
 	
-	public EtatPartie getEtat(){
+	public EtatPartie getEtat() {
 		return etatPartie;
 	}
 	
@@ -42,7 +43,7 @@ public class Modele extends Observable {
 		return plateau2;
 	}
 
-	public int[][] getShots(Plateau plateau) {
+	public Square[][] getShots(Plateau plateau) {
 		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.getShots();
 	}
@@ -50,6 +51,14 @@ public class Modele extends Observable {
 	public Iterator<Bateau> shipCollection(Plateau plateau) {
 		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.shipCollection();
+	}
+	
+	/**
+	 * Récupère la texture du bateau associée à l'époque choisie.
+	 * @return texture
+	 */
+	public BufferedImage getShipTexture() {
+		return bateauFactory.getShipTexture();
 	}
 	
     /**
@@ -73,10 +82,12 @@ public class Modele extends Observable {
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
 		int value = -2; // valeur pour dire toucher ou pas toucher
-		if (touched){
+		
+		if (touched) {
 			cible.hit(x, y);
 			value = -1; // -1 pour toucher un bateau, -2 pour miss
 		}
+		
 		getCurrentPlayer().shotEnemie(x, y, value);
 		update();
 	}
@@ -99,9 +110,11 @@ public class Modele extends Observable {
 	public void nextPlayer(){
 		getCurrentPlayer().setPlayerTurn(false);
 		currentPlayer += 1;
-		if (currentPlayer == nombrePlayer){
+		
+		if (currentPlayer == nombrePlayer) {
 			currentPlayer = 0;
 		}
 		getCurrentPlayer().setPlayerTurn(true);
 	}
+	
 }
