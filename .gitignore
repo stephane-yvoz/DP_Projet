@@ -1,6 +1,9 @@
 .settings/
 bin/
+doc/
+jar/
 notes/
+report/
 
 .classpath
 .project
