@@ -70,7 +70,7 @@ public class TextureFactory {
 		ClassLoader classLoader = getClass().getClassLoader();
 		
 		try {
-	         texture = ImageIO.read(new File(classLoader.getResource(path).getFile()));
+	         texture = ImageIO.read(classLoader.getResource(path));
 		} 
 		catch (IllegalArgumentException | IOException loadingError) {
 			System.err.println(LOADING_ERROR + path);

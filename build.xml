@@ -1,0 +1,99 @@
+<project name="bataille" basedir="." default="run">
+  
+  <!-- Répertoire où est situé le code source du projet -->
+  <property name="src.dir" value="src"/>
+
+  <!-- Répertoire où sont rangées les classes compilées -->
+  <property name="class.dir" value="bin"/>
+
+  <!-- Répertoire où sera rangée une éventuelle documentation générée -->
+  <property name="doc.dir" value="doc"/>
+  
+  <!-- Répertoire où sont rangées les librairies externes -->
+  <property name="lib.dir" value="lib"/>
+
+  <!-- Répertoire où sera rangée une éventuelle archive JAR créée -->
+  <property name="jar.dir" value="jar"/>
+
+  <!-- Point de lancement de l'archive JAR -->
+  <property name="main-class" value="BatailleNavale"/>
+
+  <!-- Répertoire où seront rangés d'éventuels rapports de test -->
+  <property name="report.dir" value="report"/>
+  
+  <!-- Répertoire où sont rangées les textures -->
+  <property name="res.dir" value="rsc"/>
+
+
+  <!-- Définition du classpath du projet -->
+  <path id="classpath">
+    <pathelement location="${class.dir}"/>
+  </path>
+  
+  <target name="clean">
+    <delete dir="${class.dir}"/>
+  </target>
+
+  <target name="clean-doc">
+    <delete dir="${doc.dir}"/>
+  </target>
+
+  <target name="clean-jar">
+    <delete dir="${jar.dir}"/>
+  </target>
+
+  <target name="clean-report">
+    <delete dir="${report.dir}"/>
+  </target>
+  
+  <target name="compile" depends="clean">
+    <mkdir dir="${class.dir}"/>
+    <javac includeantruntime="false" srcdir="${src.dir}" destdir="${class.dir}">
+      <classpath refid="classpath"/>
+    </javac>
+    <copy todir="${class.dir}">
+      <fileset dir="${res.dir}">
+        <include name="*.png"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="doc" depends="clean-doc">
+    <mkdir dir="${doc.dir}"/>
+    <javadoc destdir="${doc.dir}">
+      <fileset dir="${src.dir}" defaultexcludes="yes">
+        <include name="**/*.java"/>
+      </fileset>
+    </javadoc>
+  </target>
+  
+  <target name="jar" depends="clean-jar, compile">
+    <mkdir dir="${jar.dir}"/>
+    <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${class.dir}">
+      <manifest>
+	<attribute name="Main-Class" value="${main-class}"/>
+      </manifest>
+    </jar>
+  </target>
+  
+  <target name="run" depends="jar">
+    <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+  </target>
+
+  <target name="test" depends="clean-report, compile">
+    <mkdir dir="${report.dir}"/>
+    <junit fork="yes" haltonerror="false" haltonfailure="off" printsummary="on">
+      
+      <batchtest fork="yes" todir="${report.dir}">
+        <fileset dir="${src.dir}">
+          <include name="**/*Test.java"/>
+        </fileset>
+      </batchtest>
+      
+      <classpath refid="classpath"/>
+      <formatter type="plain"/>
+      
+    </junit>
+  </target>
+  
+</project>

@@ -1,7 +1,10 @@
 .settings/
 bin/
-out/
+doc/
+jar/
 notes/
+out/
+report/
 
 .classpath
 .project
