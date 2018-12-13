@@ -12,7 +12,7 @@ public class ControllerClickGrille implements MouseListener{
 	private VueGrille vue;
 	int tailleFenetreX = 400;
     int tailleFenetreY = 400;
-	private int longueur = 0;
+	private int longueur = 3;
 	private int xCaseClic = -1;
 	private int yCaseClic = -1;
 	int xCaseClic2;
@@ -64,7 +64,7 @@ public class ControllerClickGrille implements MouseListener{
 			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
 				xCaseClic = x/(tailleFenetreX/11)-1;  
 				yCaseClic = y/(tailleFenetreY/11)-1;
-				modele.shoot(modele.getJoueurs(1), xCaseClic, yCaseClic);
+				modele.shoot(modele.getJoueurs(1), yCaseClic, xCaseClic);
 			}
 		}else{ // si pas bouton gauche on annule
 			xCaseClic = -1;

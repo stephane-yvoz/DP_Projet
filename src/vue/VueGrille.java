@@ -29,12 +29,13 @@ public abstract class VueGrille extends JPanel implements Observer {
     protected final static int SUP = 10;
        		
     protected Modele modele;
-    
+    protected Plateau plateau;
     
     protected VueGrille(Modele m) {
         super();
         modele = m;
         modele.addObserver(this);
+        plateau = m.getJoueurs(0).getPlateau();
     }
     
     /**
@@ -104,19 +105,14 @@ public abstract class VueGrille extends JPanel implements Observer {
     	assert virtualY <= TextureFactory.getInstance().getGridHeight();
     	return virtualY / TextureFactory.getInstance().getGridHeight() * getHeight(); 
     }
-    
-    /**
-     * Récupérer le plateau associé à la bonne vue.
-     * @return 
-     */
-    abstract protected Plateau getPlateau();
+
     
     /**
      * Récupérer un itérateur sur les bateaux du plateau.
      * @return
      */
     protected Iterator<Bateau> shipCollection() {
-    	return modele.shipCollection(getPlateau());
+    	return modele.shipCollection(plateau);
     }
     
     /**
@@ -146,12 +142,12 @@ public abstract class VueGrille extends JPanel implements Observer {
     /**
      * Dessin d'une case.
      * @param g
-     * @param texture
+     * @param squareTexture
      * @param x
      * @param y
      */
     protected void drawSquare(Graphics g, BufferedImage squareTexture, int x, int y) {
-    	g.drawImage(squareTexture,
+        g.drawImage(squareTexture,
 			        modelToRealX(x),
 			        modelToRealY(y),
 			        modelToRealX(x + 1),
@@ -174,8 +170,6 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
     
     @Override
-    public void update(Observable observable, Object o) {
-        repaint();
-    }
+    public abstract void update(Observable observable, Object o);
     
 }

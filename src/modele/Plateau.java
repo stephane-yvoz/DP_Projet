@@ -125,6 +125,7 @@ public class Plateau {
 			}
 			sb.append("]\n");
 		}
+		sb.append("\n");
 		return sb.toString();
 	}
 

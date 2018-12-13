@@ -6,12 +6,13 @@ import modele.Square;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Observable;
 
 import bateauFactories.TextureFactory;
 
 import controller.ControllerClickGrille;
 
-public class VueGrilleEnemie extends VueGrille {
+public class VueGrilleEnemie extends  VueGrille {
 	
 	private ControllerClickGrille listener;
 	
@@ -21,18 +22,12 @@ public class VueGrilleEnemie extends VueGrille {
         listener = new ControllerClickGrille(modele,this,"ViewShots");
 		this.addMouseListener(listener);
     }
-
-    @Override
-    public Plateau getPlateau() {
-    	return modele.getPlateau2();
-    }
     
     @Override
 	public void drawSquares(Graphics g) {
-		Square[][] squares = modele.getEnemyGrid();
-		
+		Square[][] squares = plateau.getGrilleEnnemie();
 		for (int x = 0; x < SUP; x ++) {
-			for (int y = 0; y < SUP; y ++) {				
+			for (int y = 0; y < SUP; y ++) {
 				switch (squares[x][y]) {
 				    case HIT: 
 				    	drawSquare(g, TextureFactory.getInstance().getShotTexture(), x, y);
@@ -52,7 +47,12 @@ public class VueGrilleEnemie extends VueGrille {
     
     @Override 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);   
+        super.paintComponent(g);
+        drawSquares(g);
     }
-    
+
+	@Override
+	public void update(Observable observable, Object o) {
+		repaint();
+	}
 }

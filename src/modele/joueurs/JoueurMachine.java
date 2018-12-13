@@ -16,6 +16,7 @@ public class JoueurMachine extends Joueur{
 	@Override
 	public void play(Modele m) {
 		// TODO Auto-generated method stub
+		//System.out.println(m.getJoueurs(0).getPlateau());
 		m.nextPlayer();
 		return ;
 	}

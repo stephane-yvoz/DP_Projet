@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Graphics;
+import java.util.Observable;
 
 import bateauFactories.TextureFactory;
 
@@ -19,16 +20,10 @@ public class VueGrilleJoueur extends VueGrille {
         listener = new ControllerClickGrille(modele,this,"Main");
 		this.addMouseListener(listener);
     }
-     
-    @Override
-	public Plateau getPlateau() {
-		return modele.getPlateau1();
-	}
     
     @Override
 	public void drawSquares(Graphics g) {
-		Square[][] squares = modele.getPlayerGrid();
-		
+		Square[][] squares = plateau.getGrilleJoueur();
 		for (int x = 0; x < SUP; x ++) {
 			for (int y = 0; y < SUP; y ++) {				
 				switch (squares[x][y]) {
@@ -51,10 +46,17 @@ public class VueGrilleJoueur extends VueGrille {
 			}
 		}
 	}
+
     
     @Override 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);   
+        super.paintComponent(g);
+		drawSquares(g);
     }
+
+	@Override
+	public void update(Observable observable, Object o) {
+    	repaint();
+	}
 
 }

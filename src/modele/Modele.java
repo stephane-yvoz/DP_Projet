@@ -12,9 +12,7 @@ import modele.joueurs.JoueurHumain;
 import modele.joueurs.JoueurMachine;
 
 public class Modele extends Observable {
-	
-	private Plateau plateau1;
-	private Plateau plateau2;
+
 	private int currentPlayer;
 	private final int nombrePlayer;
 	private Joueur[] joueurs;
@@ -36,29 +34,11 @@ public class Modele extends Observable {
 		return etatPartie;
 	}
 	
-	public Plateau getPlateau1() {
-		return plateau1;
-	}
-	
-	public Plateau getPlateau2() {
-		return plateau2;
-	}
-
-	public Square[][] getPlayerGrid() {
-		return plateau1.getGrilleJoueur();
-	}
-	
-	public Square[][] getEnemyGrid() {
-		return plateau1.getGrilleEnnemie();
-	}
-	
 	public Square[][] getShots(Plateau plateau) {
-		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.getShots();
 	}
 	
 	public Iterator<Bateau> shipCollection(Plateau plateau) {
-		assert plateau == plateau1 || plateau == plateau2;
 		return plateau.shipCollection();
 	}
 	
@@ -80,18 +60,18 @@ public class Modele extends Observable {
      * @return
      */
 	public boolean canAddShip(int x, int y, int longueur, int xdir, int ydir){
-		return plateau1.canAddShip(x, y, longueur, xdir, ydir);
+		return getCurrentPlayer().getPlateau().canAddShip(x, y, longueur, xdir, ydir);
 	}
 	
-	public void addShip(int x, int y, int longueur, int xdir, int ydir){
-	 	plateau1.AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));
+	public void addShip(int y, int x, int longueur, int ydir, int xdir){
+		getCurrentPlayer().getPlateau().AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));
 	 	update();
+	 	System.out.println(getCurrentPlayer().getPlateau());
 	}
 
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
 		Square value = Square.MISSED;
-		
 		if (touched) {
 			cible.hit(x, y);
 			value = Square.HIT;

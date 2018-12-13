@@ -54,7 +54,6 @@ public class BatailleNavale {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println(batailleOption);
                 new BatailleNavale(batailleOption);
             }
         });
