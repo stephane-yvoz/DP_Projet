@@ -1,8 +1,11 @@
+import java.awt.BorderLayout;
+
 import modele.Modele;
 import modele.Option;
 import runnable.RunnableOption;
 import vue.VueGrilleJoueur;
 import vue.VueGrilleEnemie;
+import vue.VueTailleBateau;
 
 import javax.swing.*;
 
@@ -30,7 +33,9 @@ public class BatailleNavale {
         }
         VueGrilleJoueur vj1 = new VueGrilleJoueur(modele);
         VueGrilleEnemie vj2 = new VueGrilleEnemie(modele);
+        windows[0].add(new VueTailleBateau(modele),BorderLayout.NORTH);
         windows[0].add(vj1);
+        
         windows[1].add(vj2);
     }
 

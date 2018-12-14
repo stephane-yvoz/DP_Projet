@@ -14,7 +14,7 @@ public class ControllerClickGrille implements MouseListener{
 	private VueGrille vue;
 	int tailleFenetreX = 400;
     int tailleFenetreY = 400;
-	private int longueur = 3;
+	//private int longueur = 3;
 	private int xCaseClic = -1;
 	private int yCaseClic = -1;
 	int xCaseClic2;
@@ -35,32 +35,34 @@ public class ControllerClickGrille implements MouseListener{
 	public boolean isCaseSet(){
 		return xCaseClic>=0;
 	}
-	public void setLongueur(int l){
+	/*public void setLongueur(int l){
 		longueur = l;
-	}
+	}*/
 	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		tailleFenetreX = vue.getWidth();
 	    tailleFenetreY = vue.getHeight();
-		switch(modele.getEtat()){
-		case Positioning :
-			if(typeVue == "Main"){
-				placerBateau(e);
+	    if(modele.getCurrentPlayer().isHuman()){
+			switch(modele.getEtat()){
+			case Positioning :
+				if(typeVue == "Main"){
+					placerBateau(e);
+				}
+				break;
+			case ShipSelection :
+				if(typeVue == "ViewShots"){
+					selection(e);
+				}
+				break;
+			case ShipShoot :
+				if(typeVue == "ViewShots"){
+					tirer(e);
+				}
+				break;
 			}
-			break;
-		case ShipSelection :
-			if(typeVue == "ViewShots"){
-				selection(e);
-			}
-			break;
-		case ShipShoot :
-			if(typeVue == "ViewShots"){
-				tirer(e);
-			}
-			break;
-		}
+	    }
 		
 	}
 	private void selection(MouseEvent e) {
@@ -100,6 +102,7 @@ public class ControllerClickGrille implements MouseListener{
 	}
 	
 	public void placerBateau(MouseEvent e){
+		int longueur = modele.getCurrentPlayer().getTailleBateauActuel();
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();
@@ -113,17 +116,9 @@ public class ControllerClickGrille implements MouseListener{
 					yCaseClic2 = getNumCase(y);
 					System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
-						Orientation o =null;
-						if(xCaseClic<xCaseClic2 && yCaseClic==yCaseClic2){
-							o=Orientation.EAST;
-						}else if(xCaseClic>xCaseClic2 && yCaseClic==yCaseClic2){
-							o=Orientation.WEST;
-						}else if(xCaseClic==xCaseClic2 && yCaseClic<yCaseClic2){
-							o=Orientation.SOUTH;
-						}else if(xCaseClic==xCaseClic2 && yCaseClic>yCaseClic2){
-							o=Orientation.NORTH;
-						}
-						if(modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
+						Orientation o =getOrientation(xCaseClic,yCaseClic,xCaseClic2,yCaseClic2);
+						System.out.println(o);
+						if(o!=null && modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>=0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
 							System.out.println("ajout");
 							modele.addShip(xCaseClic, yCaseClic, longueur, o);
 							xCaseClic = -1;
@@ -140,9 +135,21 @@ public class ControllerClickGrille implements MouseListener{
 			yCaseClic = -1;
 		}
 	}
+	private Orientation getOrientation(int x,int y,int x2,int y2){
+		if(x<x2 && y==y2){
+			return Orientation.EAST;
+		}else if(x>x2 && y==y2){
+			return Orientation.WEST;
+		}else if(x==x2 && y<y2){
+			return Orientation.SOUTH;
+		}else if(x==x2 && y>y2){
+			return Orientation.NORTH;
+		}
+		return null;
+	}
 	
 	private int getNumCase(int x){
-		int temp = Math.min(x/(tailleFenetreX/11)-1,10);
+		int temp = Math.min(x/(tailleFenetreX/11)-1,9);
 		return temp;
 	}
 

@@ -19,6 +19,7 @@ public class VueTailleBateau extends JPanel implements Observer{
 	public VueTailleBateau(Modele m){
 		modele = m;
 		modele.addObserver(this);
+		boutonsTaille = new JButton[5];
 		for(int i=1;i<=5;i++){
 			boutonsTaille[i-1] = new JButton(Integer.toString(i));
 			boutonsTaille[i-1].addActionListener(new ListenerTailleBateau(modele,i));
