@@ -16,6 +16,5 @@ public class ControllerDefault implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         opt.setDefault();
-        opt.stopDisplayOption();
     }
 }
