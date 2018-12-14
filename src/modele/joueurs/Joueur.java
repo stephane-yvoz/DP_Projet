@@ -10,7 +10,6 @@ public abstract class Joueur {
 	Plateau plateau;
 	private boolean isPlayerTurn;
 	protected boolean human;
-
 	int[] bateauxDisponibles;
 	
 	public Joueur(Option o){
@@ -50,5 +49,13 @@ public abstract class Joueur {
 
 	public boolean isHuman() {
 		return human;
+	}
+
+	public boolean hasShip(int xCaseClic, int yCaseClic) {
+		return plateau.hasShip(xCaseClic, yCaseClic);
+	}
+
+	public void setSelectedShip(int xCaseClic, int yCaseClic) {
+		
 	}
 }

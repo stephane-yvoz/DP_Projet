@@ -1,6 +1,6 @@
 package modele;
 
 public enum EtatPartie {
-	Positioning,Running,End;
+	Positioning,ShipSelection,ShipShoot,End;
 
 }

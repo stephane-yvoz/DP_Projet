@@ -10,6 +10,7 @@ public class Plateau {
 	private Square[][] grilleEnnemie; 
 	
 	private ArrayList<Bateau> bateaux;
+	private Bateau selected;
 	
 	/**
 	 * On considère qu'un plateau est carré
@@ -25,6 +26,7 @@ public class Plateau {
 			}
 		}
 		bateaux = new ArrayList<Bateau>();
+		selected = null;
 	}
  
 	public Square[][] getShots() {
@@ -162,5 +164,28 @@ public class Plateau {
 				}
 			}
 		}
+	}
+	public boolean hasShip(int x, int y){
+		boolean has = false;
+		for(Bateau b : bateaux){
+			for(Point p : b.getOccupiedPositions()){
+				if(p.x==x && p.y==y){
+					has = true;
+				}
+			}
+		}
+		return has;
+	}
+	public void setSelectedShip(int x, int y){
+		for(Bateau b : bateaux){
+			for(Point p : b.getOccupiedPositions()){
+				if(p.x==x && p.y==y){
+					selected = b;
+				}
+			}
+		}
+	}
+	public Bateau getSelectedShip(){
+		return selected;
 	}
 }

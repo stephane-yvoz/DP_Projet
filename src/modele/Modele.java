@@ -26,12 +26,16 @@ public class Modele extends Observable {
 		joueurs[1] = new JoueurMachine(option);
 		joueurs[0].setPlayerTurn(true);
 		bateauFactory = BateauFactory.getInstance(option.getEpoque());
-		etatPartie = EtatPartie.Running;
+		etatPartie = EtatPartie.ShipShoot;
 		nombrePlayer = option.getNombrePlayer();
 	}
 	
 	public EtatPartie getEtat() {
 		return etatPartie;
+	}
+	
+	public void setEtat(EtatPartie e){
+		etatPartie = e;
 	}
 	
 	public Square[][] getShots(Plateau plateau) {
