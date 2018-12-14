@@ -2,7 +2,7 @@ package modele.joueurs;
 
 import modele.Modele;
 import modele.Option;
-import modele.Plateau;
+import modele.ordinateur.Strategie;
 
 public class JoueurMachine extends Joueur{
 
@@ -11,6 +11,7 @@ public class JoueurMachine extends Joueur{
 	public JoueurMachine(Option o){
 		super(o);
 		human = false;
+		strategie = o.getStrategie();
 	}
 	
 	@Override

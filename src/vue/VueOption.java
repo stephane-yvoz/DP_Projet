@@ -1,6 +1,7 @@
 package vue;
 
 import controller.controllerOption.ControllerChoixEpoque;
+import controller.controllerOption.ControllerChoixStrategie;
 import controller.controllerOption.ControllerDefault;
 import controller.controllerOption.ControllerValidate;
 import modele.Option;
@@ -16,7 +17,9 @@ public class VueOption extends JPanel implements Observer {
     private JButton valider;
     private JButton defaultConf;
     JButton[] epoques;
+    JButton[] strategie;
     private final int NB = 2;
+    private final int NB_STRAT = 2;
 
     private void makeEpoque(){
         epoques = new JButton[NB];
@@ -37,9 +40,28 @@ public class VueOption extends JPanel implements Observer {
         this.epoque = new JPanel();
         this.setLayout(new BorderLayout());
         makeEpoque();
+        makeStrategie();
         makeValider();
         this.add(epoque, BorderLayout.NORTH);
         option.addObserver(this);
+        update(null, null);
+    }
+
+    private void makeStrategie() {
+        JPanel cadreStrat = new JPanel();
+        JLabel label = new JLabel("Strategie ordinateur : ");
+        cadreStrat.add(label);
+        strategie = new JButton[NB_STRAT];
+        for (int i = 0; i != NB_STRAT; i++){
+            strategie[i] = new JButton();
+            strategie[i].addActionListener(new ControllerChoixStrategie(option));
+            strategie[i].setFocusPainted(false);
+            cadreStrat.add(strategie[i]);
+
+        }
+        strategie[0].setText("aléatoire");
+        strategie[1].setText("croix");
+        this.add(cadreStrat);
     }
 
     private void makeValider() {
@@ -47,6 +69,7 @@ public class VueOption extends JPanel implements Observer {
         valider = new JButton("Validate");
         valider.addActionListener(new ControllerValidate(option));
         defaultConf = new JButton("Defaut");
+        defaultConf.setFocusPainted(false);
         defaultConf.addActionListener(new ControllerDefault(option));
         cadreValidation.add(valider);
         cadreValidation.add(defaultConf);
@@ -61,12 +84,17 @@ public class VueOption extends JPanel implements Observer {
             topFrame.dispose();
         }
         for (int i = 0; i != NB; i++) {
-            if (epoques[i].getText().equals(option.getEpoque())){
+            if (epoques[i].getText().equals(option.getEpoque()))
                 epoques[i].setEnabled(false);
-            }
-            else {
+            else
                epoques[i].setEnabled(true);
-            }
+        }
+
+        for (int i = 0; i != NB_STRAT; i++){
+            if (strategie[i].getText().equals(option.getLabelStrategie()))
+                strategie[i].setEnabled(false);
+            else
+                strategie[i].setEnabled(true);
         }
     }
 }

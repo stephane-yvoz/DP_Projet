@@ -6,7 +6,7 @@ import java.util.*;
 import modele.Square;
 import modele.joueurs.Joueur;
 
-public class IARandom implements IAPlayer {
+public class IARandom implements Strategie {
 
 	@Override
 	public Point jouer(Joueur player) {
@@ -24,6 +24,11 @@ public class IARandom implements IAPlayer {
 
 		
 		return casesLibres.get((int)Math.random()*casesLibres.size());
+	}
+
+	@Override
+	public void placerBateau(Square[][] grilleJoueur) {
+		;
 	}
 
 }

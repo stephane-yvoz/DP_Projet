@@ -1,5 +1,9 @@
 package modele;
 
+import modele.ordinateur.IACross;
+import modele.ordinateur.IARandom;
+import modele.ordinateur.Strategie;
+
 import java.util.Observable;
 
 public class Option extends Observable {
@@ -7,8 +11,12 @@ public class Option extends Observable {
     private int size;
     private int nombrePlayer;
     private String epoque;
+    private String labelStrategie;
     private int[] bateauxDisponibles;
     private boolean displayOption;
+    private Strategie strategie;
+    private Strategie croix;
+    private Strategie aleatoire;
 
     public Option(){
         setDefault();
@@ -17,6 +25,8 @@ public class Option extends Observable {
 
     public void setEpoque(String epoque) {
         this.epoque = epoque;
+        croix = new IACross();
+        aleatoire = new IARandom();
         setChanged();
         notifyObservers();
     }
@@ -57,6 +67,9 @@ public class Option extends Observable {
         epoque = "III";
         bateauxDisponibles = new int[]{ 4,2,2,1};
         nombrePlayer = 2;
+        strategie = new IARandom();
+        labelStrategie = "aléatoire";
+        update();
     }
 
     public boolean getDisplayOption(){
@@ -75,5 +88,26 @@ public class Option extends Observable {
         sb.append("size : ").append(size).append("\n");
         sb.append("Nombre de joueur : ").append(nombrePlayer).append("\n");
         return sb.toString();
+    }
+
+    public Strategie getStrategie() {
+        return strategie;
+    }
+
+    public void setStrategie(String strategie) {
+        switch (strategie){
+            case "croix":
+                this.strategie = croix;
+                break;
+            case "aléatoire":
+                this.strategie = aleatoire;
+                break;
+        }
+        labelStrategie = strategie;
+        update();
+    }
+
+    public String getLabelStrategie() {
+        return labelStrategie;
     }
 }
