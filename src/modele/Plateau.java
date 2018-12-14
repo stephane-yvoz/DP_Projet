@@ -45,8 +45,6 @@ public class Plateau {
 	 * @param x coordonne x de l'origine du bateau
 	 * @param y coordonne y de l'origine du bateau
 	 * @param longueur longueur du bateau
-	 * @param xdir coordonne x de la case vers laquelle on oriente le bateau
-	 * @param ydir coordonne y de la case vers laquelle on oriente le bateau
 	 * @return
 	 */
 	public boolean canAddShip(int x, int y, int longueur, Orientation o){
@@ -94,9 +92,7 @@ public class Plateau {
 	 * @param x
 	 * @param y
 	 * @param longueur
-	 * @param xdir
-	 * @param ydir
-	 * @param bateau 
+	 * @param o
 	 */
 	public void addShip(int x, int y,int longueur,Orientation o) {
 		if(o !=null) {
@@ -133,7 +129,7 @@ public class Plateau {
 	}
 
 	public boolean isTouched(int x, int y){
-		return grilleEnnemie[x][y] == Square.HIT;
+		return grilleJoueur[x][y] == Square.SHIP;
 	}
 
 	public void hit(int x, int y) {

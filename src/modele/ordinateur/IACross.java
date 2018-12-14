@@ -6,7 +6,7 @@ import modele.Orientation;
 import modele.Square;
 import modele.joueurs.Joueur;
 
-public class IACross implements Strategie {
+public class IACross extends Strategie {
 	
 	private enum Phase  {SearchCross,SearchOrientation,SearchLongueur};
 	
@@ -16,6 +16,10 @@ public class IACross implements Strategie {
 	
 	private Orientation[] ordreCherche = {Orientation.EAST,Orientation.SOUTH,Orientation.NORTH,Orientation.WEST};
 	private int orient = 0;
+
+	public IACross(){
+		super();
+	}
 
 	@Override
 	public Point jouer(Joueur player) {
@@ -34,11 +38,6 @@ public class IACross implements Strategie {
 			break;
 		}
 		return choix;
-	}
-
-	@Override
-	public void placerBateau(Square[][] grilleJoueur) {
-		;
 	}
 
 	private void detectionPhase(Square[][] etatTirs) {
