@@ -11,6 +11,7 @@ public abstract class Joueur {
 	private boolean isPlayerTurn;
 	protected boolean human;
 	int[] bateauxDisponibles;
+	int tailleBateauActuel =2;
 	
 	public Joueur(Option o){
 		plateau = new Plateau(o.getSize(),o.getEpoque());
@@ -55,7 +56,15 @@ public abstract class Joueur {
 		return plateau.hasShip(xCaseClic, yCaseClic);
 	}
 
-	public void setSelectedShip(int xCaseClic, int yCaseClic) {
-		
+	public void setSelectedShip(int x, int y) {
+		plateau.setSelectedShip(x, y);
+	}
+	
+	public void setTailleBateauActuel(int t){
+		tailleBateauActuel = t;
+	}
+	
+	public int getTailleBateauActuel(){
+		return tailleBateauActuel ;
 	}
 }
