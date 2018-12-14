@@ -55,8 +55,6 @@ public class Modele extends Observable {
      * @param x coordonne x de l'origine du bateau
      * @param y coordonne y de l'origine du bateau
      * @param longueur longueur du bateau
-     * @param xdir coordonne x de la case vers laquelle on oriente le bateau
-     * @param ydir coordonne y de la case vers laquelle on oriente le bateau
      * @return
      */
 	public boolean canAddShip(int x, int y, int longueur, Orientation o){
@@ -70,9 +68,9 @@ public class Modele extends Observable {
 	}
 
 	public void shoot(Joueur cible, int x, int y){
+		if (getCurrentPlayer().hasFired(x, y))
+			return;
 		boolean touched = cible.gotTouched(x, y);
-		System.out.println(cible.getPlateau().getGrilleJoueur()[x][y]);
-		System.out.println(touched);
 		Square value = Square.MISSED;
 		if (touched) {
 			cible.hit(x, y);
@@ -99,6 +97,7 @@ public class Modele extends Observable {
 	}
 
 	public void nextPlayer(){
+		setEtat(EtatPartie.ShipSelection);
 		getCurrentPlayer().setPlayerTurn(false);
 		currentPlayer += 1;
 		

@@ -28,6 +28,12 @@ public abstract class Joueur {
 	public boolean gotTouched(int x, int y){
 		return (plateau.isTouched(x, y));
 	}
+
+	public boolean hasFired(int x, int y) {
+		if (plateau.getGrilleEnnemie()[x][y] != Square.SEA)
+			return true;
+		return false;
+	}
 	
 	public int[] getBateauxDisponibles(){
 		return bateauxDisponibles;
