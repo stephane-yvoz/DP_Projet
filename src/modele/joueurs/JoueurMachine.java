@@ -12,14 +12,14 @@ public class JoueurMachine extends Joueur{
 		super(o);
 		human = false;
 		strategie = o.getStrategie();
+		strategie.placerBateau(this, o.getBateauxDisponibles());
 	}
 	
 	@Override
 	public void play(Modele m) {
 		// TODO Auto-generated method stub
-		//System.out.println(m.getJoueurs(0).getPlateau());
+		//strategie.jouer(this);
 		m.nextPlayer();
-		return ;
 	}
 	
 	public void setStrategie(Strategie s){

@@ -3,10 +3,17 @@ package modele.ordinateur;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.*;
+
+import modele.Bateau;
+import modele.Orientation;
 import modele.Square;
 import modele.joueurs.Joueur;
 
-public class IARandom implements Strategie {
+public class IARandom extends Strategie {
+
+	public IARandom(){
+		super();
+	}
 
 	@Override
 	public Point jouer(Joueur player) {
@@ -21,14 +28,6 @@ public class IARandom implements Strategie {
 				}
 			}		
 		}
-
-		
 		return casesLibres.get((int)Math.random()*casesLibres.size());
 	}
-
-	@Override
-	public void placerBateau(Square[][] grilleJoueur) {
-		;
-	}
-
 }

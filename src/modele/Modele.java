@@ -25,9 +25,12 @@ public class Modele extends Observable {
 		joueurs = new Joueur[2];
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
+		System.out.println(joueurs[1].getPlateau());
 		joueurs[0].setPlayerTurn(true);
+
 		//bateauFactory = BateauFactory.getInstance(option.getEpoque());
-		etatPartie = EtatPartie.Positioning;
+
+		etatPartie = EtatPartie.ShipShoot;
 		nombrePlayer = option.getNombrePlayer();
 		
 	}
@@ -71,6 +74,8 @@ public class Modele extends Observable {
 
 	public void shoot(Joueur cible, int x, int y){
 		boolean touched = cible.gotTouched(x, y);
+		System.out.println(cible.getPlateau().getGrilleJoueur()[x][y]);
+		System.out.println(touched);
 		Square value = Square.MISSED;
 		if (touched) {
 			cible.hit(x, y);
