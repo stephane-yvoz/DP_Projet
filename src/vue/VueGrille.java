@@ -7,8 +7,9 @@ import modele.Plateau;
 import javax.swing.*;
 
 import bateauFactories.TextureFactory;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -120,11 +121,11 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param g
      */
     public void drawGrid(Graphics g) {
-    	g.drawImage(TextureFactory.getInstance().getGridTexture(), 
+    	g.drawImage(TextureFactory.getInstance().getGridTexture(),
     			    0, 
     			    0, 
-    			    virtualToRealX(TextureFactory.getInstance().getGridWidth()), 
-    			    virtualToRealY(TextureFactory.getInstance().getGridHeight()), 
+    			    virtualToRealX(TextureFactory.getInstance().getGridWidth()),
+    			    virtualToRealY(TextureFactory.getInstance().getGridHeight()),
     			    0, 
     			    0, 
     			    TextureFactory.getInstance().getGridWidth(), 
@@ -146,16 +147,17 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param x
      * @param y
      */
-    protected void drawSquare(Graphics g, BufferedImage squareTexture, int x, int y) {
-        g.drawImage(squareTexture,
-			        modelToRealX(x),
-			        modelToRealY(y),
-			        modelToRealX(x + 1),
-			        modelToRealY(y + 1), 
-		            0, 
-		            0, 
-		            TextureFactory.getInstance().getAreaSide(), 
-		            TextureFactory.getInstance().getAreaSide(),
+    protected void drawSquare(Graphics g, BufferedImage squareTexture, int y, int x) {
+        int dimX = this.getWidth();
+        int dimY = this.getHeight();
+        int sizeX = dimX / 11;
+        int sizeY = dimY / 11;
+        x = (1 + x) * sizeX;
+        y = (1 + y) * sizeY + sizeY / 8;
+        Image sprite = squareTexture.getScaledInstance(sizeX, sizeY, Image.SCALE_DEFAULT);
+        g.drawImage(sprite,
+			        x,
+			        y,
 		            null
         );
     }

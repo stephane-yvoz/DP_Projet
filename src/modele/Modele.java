@@ -76,7 +76,6 @@ public class Modele extends Observable {
 			cible.hit(x, y);
 			value = Square.HIT;
 		}
-		
 		getCurrentPlayer().shotEnemie(x, y, value);
 		nextPlayer();
 		update();

@@ -85,10 +85,7 @@ public class TextureFactory {
 	}
 	
 	public BufferedImage getShotTexture() {
-		return new BufferedImage(getAreaSide(), 
-				                 getAreaSide(), 
-                                 BufferedImage.TYPE_INT_ARGB
-        ); 
+		return explosion;
 	}
 	
 	public BufferedImage getExplosionTexture() {
