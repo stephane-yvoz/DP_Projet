@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8ee89941-787a-432b-ae62-dcdeda61e080" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modele/Modele.java" afterPath="$PROJECT_DIR$/src/modele/Modele.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modele/Plateau.java" afterPath="$PROJECT_DIR$/src/modele/Plateau.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modele/joueurs/Joueur.java" afterPath="$PROJECT_DIR$/src/modele/joueurs/Joueur.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modele/joueurs/JoueurMachine.java" afterPath="$PROJECT_DIR$/src/modele/joueurs/JoueurMachine.java" />
@@ -24,9 +23,21 @@
       <file leaf-file-name="Modele.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modele/Modele.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="35">
+              <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#914#915#0" expanded="true" />
+                <element signature="e#938#939#0" expanded="true" />
+                <element signature="e#976#977#0" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1046#1047#0" expanded="true" />
+                <element signature="e#1078#1079#0" expanded="true" />
+                <element signature="e#1139#1140#0" expanded="true" />
+                <element signature="e#1177#1178#0" expanded="true" />
+                <marker date="1544806302868" expanded="false" signature="2066:2070" ph=" { " />
+                <marker date="1544806302868" expanded="false" signature="2100:2103" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1018,9 +1029,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modele/Modele.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="35">
+          <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1046#1047#0" expanded="true" />
+            <element signature="e#1078#1079#0" expanded="true" />
+            <element signature="e#1139#1140#0" expanded="true" />
+            <element signature="e#1177#1178#0" expanded="true" />
+            <marker date="1544806302868" expanded="false" signature="2066:2070" ph=" { " />
+            <marker date="1544806302868" expanded="false" signature="2100:2103" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
