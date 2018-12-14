@@ -16,18 +16,20 @@ public class Modele extends Observable {
 	private int currentPlayer;
 	private final int nombrePlayer;
 	private Joueur[] joueurs;
-	private BateauFactory bateauFactory;
 	private EtatPartie etatPartie;
+	private Option option;
 
 	public Modele(Option option) {
+		this.option = option;
 		currentPlayer = 0;
 		joueurs = new Joueur[2];
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
 		joueurs[0].setPlayerTurn(true);
-		bateauFactory = BateauFactory.getInstance(option.getEpoque());
+		//bateauFactory = BateauFactory.getInstance(option.getEpoque());
 		etatPartie = EtatPartie.ShipShoot;
 		nombrePlayer = option.getNombrePlayer();
+		
 	}
 	
 	public EtatPartie getEtat() {
@@ -46,13 +48,7 @@ public class Modele extends Observable {
 		return plateau.shipCollection();
 	}
 	
-	/**
-	 * Récupère la texture du bateau associée à l'époque choisie.
-	 * @return texture
-	 */
-	public BufferedImage getShipTexture() {
-		return bateauFactory.getShipTexture();
-	}
+	
 	
     /**
      * 
@@ -63,12 +59,12 @@ public class Modele extends Observable {
      * @param ydir coordonne y de la case vers laquelle on oriente le bateau
      * @return
      */
-	public boolean canAddShip(int x, int y, int longueur, int xdir, int ydir){
-		return getCurrentPlayer().getPlateau().canAddShip(x, y, longueur, xdir, ydir);
+	public boolean canAddShip(int x, int y, int longueur, Orientation o){
+		return getCurrentPlayer().getPlateau().canAddShip(x, y, longueur, o);
 	}
 	
-	public void addShip(int y, int x, int longueur, int ydir, int xdir){
-		getCurrentPlayer().getPlateau().AddShip(x, y, longueur, xdir, ydir,bateauFactory.creerBateau(longueur));
+	public void addShip(int y, int x, int longueur, Orientation o){
+		getCurrentPlayer().getPlateau().addShip(x, y,longueur,o);
 	 	update();
 	 	System.out.println(getCurrentPlayer().getPlateau());
 	}
@@ -112,6 +108,10 @@ public class Modele extends Observable {
 		if (!p.isHuman()) {
 			p.play(this);
 		}
+	}
+	
+	public String getEpoque(){
+		return option.getEpoque();
 	}
 	
 }

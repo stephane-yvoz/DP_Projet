@@ -4,19 +4,21 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import bateauFactories.BateauFactory;
+
 public class Plateau {
 	
 	private Square[][] grilleJoueur; 
 	private Square[][] grilleEnnemie; 
-	
 	private ArrayList<Bateau> bateaux;
 	private Bateau selected;
+	private String epoque;
 	
 	/**
 	 * On considère qu'un plateau est carré
 	 * @param taille
 	 */
-	public Plateau(int taille) {  
+	public Plateau(int taille, String e) {  
 		grilleJoueur = new Square[taille][taille];
 		grilleEnnemie = new Square[taille][taille];
 		for(int i =0;i <taille;i++){
@@ -27,6 +29,7 @@ public class Plateau {
 		}
 		bateaux = new ArrayList<Bateau>();
 		selected = null;
+		epoque =e;
 	}
  
 	public Square[][] getShots() {
@@ -46,23 +49,30 @@ public class Plateau {
 	 * @param ydir coordonne y de la case vers laquelle on oriente le bateau
 	 * @return
 	 */
-	public boolean canAddShip(int x, int y, int longueur, int xdir, int ydir){
+	public boolean canAddShip(int x, int y, int longueur, Orientation o){
 		boolean accept = true;
-		int directionX = -1; 
-		int directionY = -1; 
+		int directionX = 0; 
+		int directionY = 0; 
 		
-		if(xdir!=x && ydir==y){ // bateau en position horizontale
-			directionX = (xdir-x)/Math.abs(xdir-x);  // 
-			int i=0;
-			while(Math.abs(i)<longueur && accept){
-				if( x+i>=grilleJoueur.length ||x+i<0 ){ //on sort du terrain
-					accept=false;
-				}else if(grilleJoueur[x+i][y]!= Square.SEA){ // si la case n'est pas libre
-					accept=false;
-				}
-				i+=directionX;
+		if(o == Orientation.EAST ){ 
+			directionX = 1;
+		}else if(o == Orientation.WEST){
+			directionX = -1;
+		}else if(o == Orientation.SOUTH){
+			directionY = 1;
+		}else if(o == Orientation.NORTH){
+			directionY = -1;
+		}
+		int i=0;
+		while(Math.abs(i)<longueur && accept){
+			if( x+(i*directionX)>=grilleJoueur.length ||x+(i*directionX)<0 ||y+(i*directionY)>=grilleJoueur.length ||y+(i*directionY)<0 ){ //on sort du terrain
+				accept=false;
+			}else if(grilleJoueur[x+(i*directionX)][y+(i*directionY)]!= Square.SEA){ // si la case n'est pas libre
+				accept=false;
 			}
-		}else if (ydir!=y && xdir==x){// bateau en position verticale
+			i++;
+		}
+		/*}else if (ydir!=y && xdir==x){// bateau en position verticale
 			directionY = (ydir-y)/Math.abs(ydir-y);
 			int i=0;
 			while(Math.abs(i)<longueur  && accept){
@@ -75,7 +85,7 @@ public class Plateau {
 			}
 		}else{
 			accept=false;
-		}
+		}*/
 		return accept;	
 	}
 	
@@ -88,21 +98,12 @@ public class Plateau {
 	 * @param ydir
 	 * @param bateau 
 	 */
-	public void AddShip(int x, int y, int longueur, int xdir, int ydir, Bateau bateau) {
-		Orientation o =null;
-		if(x<xdir && y==ydir){
-			o=Orientation.EAST;
-		}else if(x>xdir && y==ydir){
-			o=Orientation.WEST;
-		}else if(x==xdir && y<ydir){
-			o=Orientation.SOUTH;
-		}else if(x==xdir && y>ydir){
-			o=Orientation.NORTH;
-		}
+	public void addShip(int x, int y,int longueur,Orientation o) {
 		if(o !=null) {
-			bateau.setPosition(x, y, o);
-			bateaux.add(bateau);
-			for(Point p : bateau.getOccupiedPositions()){
+			Bateau b = BateauFactory.getInstance(epoque).creerBateau(longueur);
+			b.setPosition(x, y, o);
+			bateaux.add(b);
+			for(Point p : b.getOccupiedPositions()){
 				grilleJoueur[p.x][p.y]=Square.SHIP;
 			}
 			
@@ -188,4 +189,6 @@ public class Plateau {
 	public Bateau getSelectedShip(){
 		return selected;
 	}
+	
+	
 }

@@ -13,7 +13,7 @@ public abstract class Joueur {
 	int[] bateauxDisponibles;
 	
 	public Joueur(Option o){
-		plateau = new Plateau(o.getSize());
+		plateau = new Plateau(o.getSize(),o.getEpoque());
 		bateauxDisponibles = o.getBateauxDisponibles();
 		isPlayerTurn = false;
 		human = true;

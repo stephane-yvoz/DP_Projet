@@ -8,12 +8,14 @@ public abstract class BateauFactory {
 	
 	protected BufferedImage ship;
 	
+	
+	
 	public static BateauFactory getInstance(String epoque) {
 		switch (epoque) {
 		    case "III":
-			    return new IIIFactory();
+			    return IIIFactory.getInstance();
 		    case "XX":
-			    return new XXFactory();
+			    return XXFactory.getInstance();
 		    default:
 			    throw new IllegalArgumentException("'" + epoque + "' n'existe pas.");
 		}
@@ -24,5 +26,6 @@ public abstract class BateauFactory {
 	public BufferedImage getShipTexture() {
 		return ship;
 	}
+	
 	
 }

@@ -83,6 +83,9 @@ public class TextureFactory {
 	public BufferedImage getShipTexture() {
 		return ship;
 	}
+	public void setShipTexture(BufferedImage b) {
+		ship = b;
+	}
 	
 	public BufferedImage getShotTexture() {
 		return explosion;

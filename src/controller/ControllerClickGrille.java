@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import modele.EtatPartie;
 import modele.Modele;
+import modele.Orientation;
 import modele.joueurs.Joueur;
 import vue.VueGrille;
 
@@ -112,9 +113,19 @@ public class ControllerClickGrille implements MouseListener{
 					yCaseClic2 = getNumCase(y);
 					System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
-						if(modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, xCaseClic2, yCaseClic2) ){
+						Orientation o =null;
+						if(xCaseClic<xCaseClic2 && yCaseClic==yCaseClic2){
+							o=Orientation.EAST;
+						}else if(xCaseClic>xCaseClic2 && yCaseClic==yCaseClic2){
+							o=Orientation.WEST;
+						}else if(xCaseClic==xCaseClic2 && yCaseClic<yCaseClic2){
+							o=Orientation.SOUTH;
+						}else if(xCaseClic==xCaseClic2 && yCaseClic>yCaseClic2){
+							o=Orientation.NORTH;
+						}
+						if(modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
 							System.out.println("ajout");
-							modele.addShip(xCaseClic, yCaseClic, longueur, xCaseClic2, yCaseClic2);
+							modele.addShip(xCaseClic, yCaseClic, longueur, o);
 							xCaseClic = -1;
 							yCaseClic = -1;
 							modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]--;

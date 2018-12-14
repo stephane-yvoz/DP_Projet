@@ -28,10 +28,10 @@ public class VueGrilleJoueur extends VueGrille {
 			for (int y = 0; y < SUP; y ++) {				
 				switch (squares[x][y]) {
 				    case SHIP:
-				    	drawSquare(g, modele.getShipTexture(), x, y);
+				    	//drawSquare(g, modele.getShipTexture(), x, y);
 				    	break;
 				    case HIT: 
-				    	drawSquare(g, modele.getShipTexture(), x, y);
+				    	//drawSquare(g, modele.getShipTexture(), x, y);
 				    	drawSquare(g, TextureFactory.getInstance().getShotTexture(), x, y);
 				    	break;
 				    case SUNK:

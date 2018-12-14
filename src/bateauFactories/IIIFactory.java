@@ -4,8 +4,14 @@ import modele.Bateau;
 
 public class IIIFactory extends BateauFactory {
 	
-	public IIIFactory() {
+	private static IIIFactory fact= new IIIFactory();
+	
+	private IIIFactory() {
 		ship = TextureFactory.getInstance().getShipTexture();
+	}
+	
+	public static IIIFactory getInstance(){
+		return fact;
 	}
 	
 	@Override
