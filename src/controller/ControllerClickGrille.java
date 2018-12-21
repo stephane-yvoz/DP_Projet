@@ -9,23 +9,27 @@ import modele.Orientation;
 import modele.joueurs.Joueur;
 import vue.VueGrille;
 
-public class ControllerClickGrille implements MouseListener{
+public class ControllerClickGrille implements MouseListener {
+	
 	private Modele modele;
 	private VueGrille vue;
-	int tailleFenetreX = 400;
-    int tailleFenetreY = 400;
+	int tailleFenetreX;
+    int tailleFenetreY;
 	//private int longueur = 3;
 	private int xCaseClic = -1;
 	private int yCaseClic = -1;
 	int xCaseClic2;
 	int yCaseClic2;
-	private String typeVue ="";
+	private String typeVue = "";
 	
-	public ControllerClickGrille(Modele m,VueGrille v, String type) {
+	public ControllerClickGrille(Modele m, VueGrille v, String type) {
 		modele = m;
 		vue = v;
-		typeVue=type;
+		typeVue = type;
+		tailleFenetreX = vue.getWidth();
+		tailleFenetreY = vue.getHeight();
 	}
+	
 	public int getXCaseClic() {
 		return xCaseClic;
 	}
@@ -37,17 +41,14 @@ public class ControllerClickGrille implements MouseListener{
 	}
 	/*public void setLongueur(int l){
 		longueur = l;
-	}*/
-	
+	}*/	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		tailleFenetreX = vue.getWidth();
 	    tailleFenetreY = vue.getHeight();
 	    
-	    System.out.println(typeVue);
-	    
-	    if(modele.getCurrentPlayer().isHuman()){
+	    if (modele.getCurrentPlayer().isHuman()) {    	
 			switch(modele.getEtat()) {
 			case Positioning :
 				if(typeVue == "Main"){
@@ -68,12 +69,13 @@ public class ControllerClickGrille implements MouseListener{
 	    }
 		
 	}
+	
 	private void selection(MouseEvent e) {
 		Joueur j = modele.getCurrentPlayer();
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();
-			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
+			if(onSquares(x, y)){ // on ignore les clics sur bordure grille
 				xCaseClic = getNumCase(x);  
 				yCaseClic = getNumCase(y);
 				if(modele.getCurrentPlayer().hasShip(xCaseClic,yCaseClic)){
@@ -86,7 +88,6 @@ public class ControllerClickGrille implements MouseListener{
 		}
 	}
 	
-	
 	private void tirer(MouseEvent e){
 		Joueur j = modele.getJoueurs(0);
 		if (j == null || !j.isPlayerTurn())
@@ -94,7 +95,7 @@ public class ControllerClickGrille implements MouseListener{
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();
-			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
+			if(onSquares(x, y)){ // on ignore les clics sur bordure grille
 				xCaseClic = getNumCase(x);  
 				yCaseClic = getNumCase(y);
 				modele.shoot(modele.getJoueurs(1), xCaseClic, yCaseClic);
@@ -109,7 +110,7 @@ public class ControllerClickGrille implements MouseListener{
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();
-			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
+			if (onSquares(x, y)){ // on ignore les clics sur bordure grille
 				if(!isCaseSet()){ // si on a pas encore cliqué
 					xCaseClic = getNumCase(x);  
 					yCaseClic = getNumCase(y);
@@ -151,12 +152,20 @@ public class ControllerClickGrille implements MouseListener{
 		return null;
 	}
 	
-	private int getNumCase(int x){
-		int temp = Math.min(x/(tailleFenetreX/11)-1,9);
-		System.out.println(temp);
+	private boolean onSquares(int x, int y) {
+		return x > (tailleFenetreX / 11) && 
+			   x < tailleFenetreX && 
+			   y > (tailleFenetreY / 11) && 
+			   y < tailleFenetreY;
+	}
+	
+	private int getNumCase(int x) {
+		System.out.println(x);
+		int temp = Math.min(x / (tailleFenetreX / 11) - 1, 9);
+		System.out.println(x / (tailleFenetreX / 11) - 1);
 		return temp;
 	}
-
+	
 	@Override
 	public void mousePressed(MouseEvent e) {}
 
