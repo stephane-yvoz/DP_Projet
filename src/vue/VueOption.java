@@ -11,7 +11,9 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+@SuppressWarnings("serial")
 public class VueOption extends JPanel implements Observer {
+	
     private Option option;
     private JPanel epoque;
     private JButton valider;

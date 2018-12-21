@@ -10,7 +10,7 @@ public class IIIFactory extends BateauFactory {
 		ship = TextureFactory.getInstance().getShipTexture();
 	}
 	
-	public static IIIFactory getInstance(){
+	public static IIIFactory getInstance() {
 		return fact;
 	}
 	

@@ -11,6 +11,7 @@ import controller.ListenerTailleBateau;
 import modele.EtatPartie;
 import modele.Modele;
 
+@SuppressWarnings("serial")
 public class VueTailleBateau extends JPanel implements Observer{
 	
 	private Modele modele;
@@ -35,6 +36,5 @@ public class VueTailleBateau extends JPanel implements Observer{
 		}
 		
 	}
-	
 
 }

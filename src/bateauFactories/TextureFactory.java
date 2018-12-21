@@ -3,11 +3,9 @@ package bateauFactories;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
 
 public class TextureFactory {
 	
@@ -83,6 +81,7 @@ public class TextureFactory {
 	public BufferedImage getShipTexture() {
 		return ship;
 	}
+	
 	public void setShipTexture(BufferedImage b) {
 		ship = b;
 	}

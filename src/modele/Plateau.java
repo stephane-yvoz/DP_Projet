@@ -21,15 +21,17 @@ public class Plateau {
 	public Plateau(int taille, String e) {  
 		grilleJoueur = new Square[taille][taille];
 		grilleEnnemie = new Square[taille][taille];
-		for(int i =0;i <taille;i++){
-			for(int j =0;j <taille;j++){
+		
+		for(int i = 0; i < taille; i ++){
+			for(int j = 0; j < taille; j ++){
 				grilleJoueur[i][j] = Square.SEA;
 				grilleEnnemie[i][j] = Square.SEA;
 			}
 		}
+		
 		bateaux = new ArrayList<Bateau>();
 		selected = null;
-		epoque =e;
+		epoque = e;
 	}
  
 	public Square[][] getShots() {

@@ -7,12 +7,10 @@ import modele.Plateau;
 import javax.swing.*;
 
 import bateauFactories.TextureFactory;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,6 +20,7 @@ import java.util.Observer;
  * Un repère 'virtuel' pour les coordonnées qui s'appuient sur la taille des textures.
  * Un repère 'écran' pour les coordonnées réelles (affichées) des objets.
  */
+@SuppressWarnings("serial")
 public abstract class VueGrille extends JPanel implements Observer {
 	
 	/**
@@ -48,7 +47,7 @@ public abstract class VueGrille extends JPanel implements Observer {
     protected int modelToRealX(int modelX) {
     	assert modelX >= 0;
     	assert modelX < SUP;
-    	return (modelX + 1) * virtualToRealX(TextureFactory.getInstance().getAreaSide());
+    	return (modelX + 1) * getWidth() / (SUP + 1);
     }
     
     /**
@@ -60,7 +59,7 @@ public abstract class VueGrille extends JPanel implements Observer {
     protected int modelToRealY(int modelY) {
     	assert modelY >= 0;
     	assert modelY < SUP;
-    	return (modelY + 1) * virtualToRealY(TextureFactory.getInstance().getAreaSide());
+    	return (modelY + 1) * getHeight() / (SUP + 1);
     }
     
     /**
@@ -147,31 +146,33 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param x
      * @param y
      */
-    protected void drawSquare(Graphics g, BufferedImage squareTexture, int y, int x) {
-        int dimX = this.getWidth();
-        int dimY = this.getHeight();
-        int sizeX = dimX / 11;
-        int sizeY = dimY / 11;
-        x = (1 + x) * sizeX;
-        y = (1 + y) * sizeY + sizeY / 8;
-        Image sprite = squareTexture.getScaledInstance(sizeX, sizeY, Image.SCALE_DEFAULT);
-        g.drawImage(sprite,
-			        x,
-			        y,
-		            null
-        );
+    protected void drawSquare(Graphics g, BufferedImage squareTexture, int x, int y) {
+    	g.drawImage(squareTexture,
+		            modelToRealX(x),
+		            modelToRealY(y),
+		            modelToRealX(x + 1),
+		            modelToRealY(y + 1), 
+	                0, 
+	                0, 
+	                TextureFactory.getInstance().getAreaSide(), 
+	                TextureFactory.getInstance().getAreaSide(),
+	                null
+	    );
     }
     
     /**
-     * Dessin du fond.
+     * Dessin de la grille de jeu.
      * @param g
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);   
         drawGrid(g);
+        drawSquares(g);
     }
     
     @Override
-    public abstract void update(Observable observable, Object o);
+    public void update(Observable observable, Object o) {
+    	repaint();
+    }
     
 }

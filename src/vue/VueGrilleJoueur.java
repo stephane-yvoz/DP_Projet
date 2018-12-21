@@ -1,37 +1,39 @@
 package vue;
 
 import java.awt.Graphics;
-import java.util.Observable;
 
+import bateauFactories.BateauFactory;
 import bateauFactories.TextureFactory;
 
 import controller.ControllerClickGrille;
 
 import modele.Modele;
-import modele.Plateau;
 import modele.Square;
 
+@SuppressWarnings("serial")
 public class VueGrilleJoueur extends VueGrille {
 
 	private ControllerClickGrille listener;
 	
     public VueGrilleJoueur(Modele modele) {
         super(modele);
-        listener = new ControllerClickGrille(modele,this,"Main");
+        listener = new ControllerClickGrille(modele, this, "Main");
 		this.addMouseListener(listener);
     }
     
     @Override
 	public void drawSquares(Graphics g) {
 		Square[][] squares = plateau.getGrilleJoueur();
+		String epoch = modele.getEpoque();
+		
 		for (int x = 0; x < SUP; x ++) {
 			for (int y = 0; y < SUP; y ++) {				
 				switch (squares[x][y]) {
 				    case SHIP:
-				    	//drawSquare(g, modele.getShipTexture(), x, y);
+				    	drawSquare(g, BateauFactory.getInstance(epoch).getShipTexture(), x, y);
 				    	break;
 				    case HIT: 
-				    	//drawSquare(g, modele.getShipTexture(), x, y);
+				    	drawSquare(g, BateauFactory.getInstance(epoch).getShipTexture(), x, y);
 				    	drawSquare(g, TextureFactory.getInstance().getShotTexture(), x, y);
 				    	break;
 				    case SUNK:
@@ -45,18 +47,6 @@ public class VueGrilleJoueur extends VueGrille {
 				}
 			}
 		}
-	}
-
-    
-    @Override 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-		drawSquares(g);
-    }
-
-	@Override
-	public void update(Observable observable, Object o) {
-    	repaint();
 	}
 
 }
