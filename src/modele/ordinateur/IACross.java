@@ -12,7 +12,7 @@ public class IACross extends Strategie {
 	
 	private Phase enCours = Phase.SearchCross;
 	private Point lastHitCross = null;
-	private Point LastHitLongueur =null;
+	private Point lastHitLongueur =null;
 	
 	private Orientation[] ordreCherche = {Orientation.EAST,Orientation.SOUTH,Orientation.NORTH,Orientation.WEST};
 	private int orient = 0;
@@ -48,7 +48,7 @@ public class IACross extends Strategie {
 			// si on vient de finir les recherches autour d'un point
 			orient =0;
 			enCours =Phase.SearchCross;
-		}else if(enCours == Phase.SearchLongueur && etatTirs[LastHitLongueur.x][LastHitLongueur.y] == Square.MISSED){
+		}else if(enCours == Phase.SearchLongueur && etatTirs[lastHitLongueur.x][lastHitLongueur.y] == Square.MISSED){
 			//si on a fini de frapper sur la longueur
 			orient++;
 			enCours =Phase.SearchOrientation;
@@ -57,18 +57,76 @@ public class IACross extends Strategie {
 	}
 	private Point searchCross(Square[][] etatTirs) {
 		if (lastHitCross ==null){
+			lastHitCross.setLocation(0, 0);
 			return new Point(0,0);
 		}
-		return null;
+		int taille = etatTirs.length;
+		int newX = lastHitCross.x+2;
+		int newY = lastHitCross.y;
+		if(newX>=taille) {
+			newX = newX-(taille-1)-(2*(newX/(taille+1)));
+			newY++;
+		}
+		if(newY>=taille) {
+			newY= 0;
+			newX=1;
+		}
+		lastHitCross.setLocation(newX, newY);
+		if(etatTirs[lastHitCross.x][lastHitCross.y] != Square.SEA) {// si on a déja tiré sur la case cible, on réitére
+			return searchCross(etatTirs);
+		}
+		return new Point(newX,newY);
 	}
 	private Point searchLongueur(Square[][] etatTirs) {
-		// TODO Auto-generated method stub
-		return null;
+		Point p = getPointOrient(lastHitLongueur);
+		if(checkPointOutside(p,etatTirs.length) ) {
+			enCours =Phase.SearchOrientation;
+			return searchOrientation(etatTirs);
+		}else if (etatTirs[p.x][p.y] != Square.SEA) {
+			lastHitLongueur.setLocation(p);
+			return searchLongueur(etatTirs);
+		}else {
+			return p;
+		}
+
 	}
 
 	private Point searchOrientation(Square[][] etatTirs) {
-		// TODO Auto-generated method stub
-		return null;
+		Point p = getPointOrient();
+		if(!checkPointOutside(p,etatTirs.length) && etatTirs[p.x][p.y] == Square.SEA) {
+			lastHitLongueur.setLocation(p);
+			enCours =Phase.SearchLongueur;
+			return p;
+		}else if(orient == 3) { //toutes les orientations testées
+			orient = 0;
+			enCours =Phase.SearchCross;
+			return searchCross(etatTirs);
+		}else {
+			orient ++;
+			return searchOrientation(etatTirs);
+		}
+	}
+	
+	private Point getPointOrient() {
+		return getPointOrient(lastHitCross);
+	}
+	private Point getPointOrient(Point p) {
+		switch(ordreCherche[orient]) {
+		case EAST:
+			return new Point(p.x+1,p.y);
+		case WEST:
+			return new Point(p.x-1,p.y);
+		case NORTH:
+			return new Point(p.x,p.y-1);
+		case SOUTH:
+			return new Point(p.x,p.y+1);
+		default:
+			return new Point(-1,-1);
+		}
+	}
+	
+	private boolean checkPointOutside(Point p,int taille){
+		return p.x<0 || p.y<0 || p.x >=taille || p.y>=taille;
 	}
 
 
