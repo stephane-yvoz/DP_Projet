@@ -1,11 +1,7 @@
 package modele;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Observable;
-
-import bateauFactories.BateauFactory;
 
 import modele.joueurs.Joueur;
 import modele.joueurs.JoueurHumain;
@@ -31,15 +27,14 @@ public class Modele extends Observable {
 		//bateauFactory = BateauFactory.getInstance(option.getEpoque());
 
 		etatPartie = EtatPartie.ShipShoot;
-		nombrePlayer = option.getNombrePlayer();
-		
+		nombrePlayer = option.getNombrePlayer();		
 	}
 	
 	public EtatPartie getEtat() {
 		return etatPartie;
 	}
 	
-	public void setEtat(EtatPartie e){
+	public void setEtat(EtatPartie e) {
 		etatPartie = e;
 	}
 	
@@ -51,10 +46,7 @@ public class Modele extends Observable {
 		return plateau.shipCollection();
 	}
 	
-	
-	
     /**
-     * 
      * @param x coordonne x de l'origine du bateau
      * @param y coordonne y de l'origine du bateau
      * @param longueur longueur du bateau
@@ -70,7 +62,7 @@ public class Modele extends Observable {
 	 	System.out.println(getCurrentPlayer().getPlateau());
 	}
 
-	public void shoot(Joueur cible, int x, int y){
+	public void shoot(Joueur cible, int x, int y) {
 		if (getCurrentPlayer().hasFired(x, y))
 			return;
 		boolean touched = cible.gotTouched(x, y);
@@ -114,7 +106,7 @@ public class Modele extends Observable {
 		}
 	}
 	
-	public String getEpoque(){
+	public String getEpoque() {
 		return option.getEpoque();
 	}
 	

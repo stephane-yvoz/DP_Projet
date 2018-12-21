@@ -44,8 +44,11 @@ public class ControllerClickGrille implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		tailleFenetreX = vue.getWidth();
 	    tailleFenetreY = vue.getHeight();
+	    
+	    System.out.println(typeVue);
+	    
 	    if(modele.getCurrentPlayer().isHuman()){
-			switch(modele.getEtat()){
+			switch(modele.getEtat()) {
 			case Positioning :
 				if(typeVue == "Main"){
 					placerBateau(e);
@@ -94,7 +97,7 @@ public class ControllerClickGrille implements MouseListener{
 			if(x>(tailleFenetreX/11) &&x<tailleFenetreX && y>(tailleFenetreY/11) && y<tailleFenetreY){ // on ignore les clics sur bordure grille
 				xCaseClic = getNumCase(x);  
 				yCaseClic = getNumCase(y);
-				modele.shoot(modele.getJoueurs(1), yCaseClic, xCaseClic);
+				modele.shoot(modele.getJoueurs(1), xCaseClic, yCaseClic);
 				xCaseClic = -1;
 				yCaseClic = -1;
 			}
@@ -150,6 +153,7 @@ public class ControllerClickGrille implements MouseListener{
 	
 	private int getNumCase(int x){
 		int temp = Math.min(x/(tailleFenetreX/11)-1,9);
+		System.out.println(temp);
 		return temp;
 	}
 
