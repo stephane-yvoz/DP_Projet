@@ -120,4 +120,5 @@ public class Modele extends Observable {
 	public String getEpoque() {
 		return option.getEpoque();
 	}
+	
 }

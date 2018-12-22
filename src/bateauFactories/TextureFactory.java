@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 public class TextureFactory {
 	
 	public final static String LOADING_ERROR = "Impossible de charger la texture: ";
+	public final static String WRONG_SHIP_SIZE = "Impossible de récupérer un bateau de cette taille.";
 	
 	public final static String GRID_PATH = "grid.png";
 	public final static String EXPLOSION_PATH = "explosion.png";
@@ -22,6 +23,10 @@ public class TextureFactory {
 	private static BufferedImage fuel;
 	private static BufferedImage splash;	
 	
+	private static BufferedImage ships[];
+	
+	private static int MAX_SHIP_SIZE = 5;
+	
 	private static TextureFactory instance = null;
 	 
 	
@@ -32,6 +37,7 @@ public class TextureFactory {
 		splash = loadTexture(SPLASH_PATH);
 		
 		buildShipTexture();
+		loadShips();
 		
 		assert grid != null;
 		assert explosion != null;
@@ -41,6 +47,14 @@ public class TextureFactory {
 	
 	private void buildShipTexture() {
 		buildShipTexture(new Color(255, 255, 255, 128));
+	}
+	
+	private void loadShips() {
+		ships = new BufferedImage[MAX_SHIP_SIZE];
+		
+		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
+			ships[i] = loadTexture("ship" + i + ".png");
+		}
 	}
 	
 	public void buildShipTexture(Color shipColor) {
@@ -84,6 +98,19 @@ public class TextureFactory {
 	
 	public void setShipTexture(BufferedImage b) {
 		ship = b;
+	}
+	
+	/**
+	 * Récupérer la texture pour un bateau de certaine taille.
+	 * @param size
+	 * @return
+	 */
+	public BufferedImage getShipTexture(int size) {
+		if (size < 1 && size > MAX_SHIP_SIZE) {
+			throw new IllegalArgumentException(WRONG_SHIP_SIZE);
+		}
+		
+		return ships[size - 1];
 	}
 	
 	public BufferedImage getShotTexture() {
