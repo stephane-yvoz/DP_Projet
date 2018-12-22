@@ -3,11 +3,13 @@ package bateauFactories;
 import modele.Bateau;
 
 public class XXFactory extends BateauFactory {
-
+	
 	private static XXFactory fact = new XXFactory();
 	
 	private XXFactory() {
-		ship = TextureFactory.getInstance().getShipTexture();
+		horizontal_path = "ship/XX/horizontal/";
+		vertical_path = "ship/XX/vertical/";
+		loadShips();
 	}
 	
 	public static XXFactory getInstance() {

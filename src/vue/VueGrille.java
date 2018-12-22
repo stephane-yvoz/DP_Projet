@@ -4,6 +4,7 @@ import modele.*;
 
 import javax.swing.*;
 
+import bateauFactories.BateauFactory;
 import bateauFactories.TextureFactory;
 
 import java.awt.*;
@@ -189,16 +190,17 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param bateau
      */
     public void drawShip(Graphics graphicContext, Bateau bateau) {
+    	String epoch = modele.getEpoque();
     	BufferedImage shipTexture = null;
     	int minX = bateau.getMinX();
     	int minY = bateau.getMinY();
     	int size = bateau.getLongueur();
      	
     	if (bateau.isVertical()) {
-    		shipTexture = TextureFactory.getInstance().getVerticalShipTexture(size);
+    		shipTexture = BateauFactory.getInstance(epoch).getVerticalShipTexture(size);
     	}
     	else if (bateau.isHorizontal()) {
-    		shipTexture = TextureFactory.getInstance().getHorizontalShipTexture(size);
+    		shipTexture = BateauFactory.getInstance(epoch).getHorizontalShipTexture(size);
     	}
     	
     	for (int shift = 0; shift < bateau.getLongueur(); shift ++) {

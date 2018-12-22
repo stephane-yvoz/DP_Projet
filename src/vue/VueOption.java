@@ -34,7 +34,7 @@ public class VueOption extends JPanel implements Observer {
             this.epoque.add(epoques[i]);
         }
         epoques[0].setText("III");
-        epoques[1].setText("autre");
+        epoques[1].setText("XX");
     }
 
     public VueOption(Option opt){

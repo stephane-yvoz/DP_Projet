@@ -7,7 +7,9 @@ public class IIIFactory extends BateauFactory {
 	private static IIIFactory fact = new IIIFactory();
 	
 	private IIIFactory() {
-		ship = TextureFactory.getInstance().getShipTexture();
+		horizontal_path = "ship/III/horizontal/";
+		vertical_path = "ship/III/vertical/";
+		loadShips();
 	}
 	
 	public static IIIFactory getInstance() {
