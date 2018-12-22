@@ -147,6 +147,9 @@ public class Plateau {
 	public void changeGrilleEnnemie(int x, int y, Square value) {
 		grilleEnnemie[x][y] = value;
 	}
+	public void changeGrilleJoueur(int x, int y, Square value) {
+		grilleJoueur[x][y] = value;
+	}
 
 	public Square[][] getGrilleEnnemie() {
 		return grilleEnnemie;
@@ -167,6 +170,7 @@ public class Plateau {
 		}
 		touched.takeHit(puissance);
 		tireur.getPlateau().changeGrilleEnnemie(x, y, Square.HIT);
+		tireur.getPlateau().changeGrilleJoueur(x, y, Square.HIT);
 		if(touched.isDestroyed()){
 			for(Point p : touched.getOccupiedPositions()){
 				grilleJoueur[p.x][p.y]=Square.SUNK;
