@@ -17,13 +17,17 @@ public class TextureFactory {
 	public final static String FUEL_PATH = "fuel.png";
 	public final static String SPLASH_PATH = "splash.png";
 	
+	public final static String HORIZONTAL_SHIP = "horizontal_ship";
+	public final static String VERTICAL_SHIP = "vertical_ship";
+	
 	private static BufferedImage grid;
 	private static BufferedImage ship;
 	private static BufferedImage explosion;
 	private static BufferedImage fuel;
 	private static BufferedImage splash;	
 	
-	private static BufferedImage ships[];
+	private static BufferedImage horizontalShips[];
+	private static BufferedImage verticalShips[];
 	
 	private static int MAX_SHIP_SIZE = 5;
 	
@@ -50,10 +54,12 @@ public class TextureFactory {
 	}
 	
 	private void loadShips() {
-		ships = new BufferedImage[MAX_SHIP_SIZE];
+		horizontalShips = new BufferedImage[MAX_SHIP_SIZE];
+		verticalShips = new BufferedImage[MAX_SHIP_SIZE];
 		
 		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
-			ships[i - 1] = loadTexture("ship" + i + ".png");
+			horizontalShips[i - 1] = loadTexture(HORIZONTAL_SHIP + i + ".png");
+			verticalShips[i - 1] = loadTexture(VERTICAL_SHIP + i + ".png");
 		}
 	}
 	
@@ -101,16 +107,29 @@ public class TextureFactory {
 	}
 	
 	/**
-	 * Récupérer la texture pour un bateau de certaine taille.
+	 * Récupérer la texture d'un bateau horizontal d'une certaine taille.
 	 * @param size
-	 * @return
+	 * @return texture
 	 */
-	public BufferedImage getShipTexture(int size) {
+	public BufferedImage getHorizontalShipTexture(int size) {
 		if (size < 1 && size > MAX_SHIP_SIZE) {
 			throw new IllegalArgumentException(WRONG_SHIP_SIZE);
 		}
 		
-		return ships[size - 1];
+		return horizontalShips[size - 1];
+	}
+	
+	/**
+	 * Récupérer la texture d'un bateau vertical d'une certaine taille.
+	 * @param size
+	 * @return texture
+	 */
+	public BufferedImage getVerticalShipTexture(int size) {
+		if (size < 1 && size > MAX_SHIP_SIZE) {
+			throw new IllegalArgumentException(WRONG_SHIP_SIZE);
+		}
+		
+		return verticalShips[size - 1];
 	}
 	
 	public BufferedImage getShotTexture() {

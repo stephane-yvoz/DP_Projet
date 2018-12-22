@@ -191,9 +191,10 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param g
      * @param bateau
      */
-    public void drawShip(Graphics g, Bateau bateau) {
+    public void drawShip(Graphics graphicContext, Bateau bateau) {
     	int minX = bateau.getMinX();
     	int minY = bateau.getMinY();
+    	int longueur = bateau.getLongueur();
     	
     	for (int i = 0; i < bateau.getLongueur(); i ++) {
     		if (bateau.isVertical()) {
