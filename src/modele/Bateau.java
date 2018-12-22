@@ -184,5 +184,8 @@ public class Bateau {
 		}
 		return positions;
 	}
-	
+
+	public int getPv(){
+		return PV;
+	}
 }

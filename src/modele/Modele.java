@@ -22,7 +22,7 @@ public class Modele extends Observable {
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
 		joueurs[0].setPlayerTurn(true);
-		etatPartie = EtatPartie.Positioning;
+		etatPartie = EtatPartie.Selectionning;
 		nombrePlayer = option.getNombrePlayer();		
 	}
 	

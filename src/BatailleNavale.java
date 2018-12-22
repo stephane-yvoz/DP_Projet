@@ -6,6 +6,7 @@ import modele.Option;
 import runnable.RunnableOption;
 import vue.VueGrilleJoueur;
 import vue.VueGrilleEnemie;
+import vue.VueInstructionGrilleEnemie;
 import vue.VueTailleBateau;
 
 import javax.swing.*;
@@ -44,9 +45,9 @@ public class BatailleNavale {
         /* Boutons pour fixer la taille des bateaux à construire 
            au début du jeu */
         windows[0].add(new VueTailleBateau(modele), BorderLayout.SOUTH);
-        
-        windows[0].add(vj1, BorderLayout.CENTER); 
-        windows[1].add(vj2);
+        windows[0].add(vj1, BorderLayout.CENTER);
+        windows[1].add(new VueInstructionGrilleEnemie(modele), BorderLayout.SOUTH);
+        windows[1].add(vj2, BorderLayout.CENTER);
         
         for (int i = 0; i < NUMBER; i ++) {
         	windows[i].pack();
