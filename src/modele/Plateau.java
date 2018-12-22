@@ -166,7 +166,8 @@ public class Plateau {
 			}
 		}
 		touched.takeHit(puissance);
-		if(touched != null && touched.isDestroyed()){
+		tireur.getPlateau().changeGrilleEnnemie(x, y, Square.HIT);
+		if(touched.isDestroyed()){
 			for(Point p : touched.getOccupiedPositions()){
 				grilleJoueur[p.x][p.y]=Square.SUNK;
 				tireur.getPlateau().changeGrilleEnnemie(p.x, p.y, Square.SUNK);
