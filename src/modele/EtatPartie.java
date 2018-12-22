@@ -1,6 +1,5 @@
 package modele;
 
 public enum EtatPartie {
-	Positioning,ShipSelection,ShipShoot,End;
-
+	Positioning,ShipSelection,ShipShoot,Winner, GameOver;
 }

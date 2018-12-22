@@ -149,18 +149,21 @@ public class Plateau {
 	}
 
 	public void receiveShot(Joueur tireur, int x, int y, int puissance){
+		Bateau touched = null;
 		for(Bateau b : bateaux){
 			for(Point p : b.getOccupiedPositions()){
 				if(p.x==x && p.y==y){
-					b.takeHit(puissance);
+					touched = b;
 				}
 			}
-			if(b.isDestroyed()){
-				for(Point p : b.getOccupiedPositions()){
-					grilleJoueur[p.x][p.y]=Square.SUNK;
-					tireur.getPlateau().changeGrilleEnnemie(p.x, p.y, Square.SUNK);
-				}
+		}
+		touched.takeHit(puissance);
+		if(touched != null && touched.isDestroyed()){
+			for(Point p : touched.getOccupiedPositions()){
+				grilleJoueur[p.x][p.y]=Square.SUNK;
+				tireur.getPlateau().changeGrilleEnnemie(p.x, p.y, Square.SUNK);
 			}
+			removeBateau(touched);
 		}
 	}
 	
@@ -202,5 +205,26 @@ public class Plateau {
 	 */
 	public Bateau getSelectedShip(){
 		return selected;
+	}
+
+	public Bateau getStrongerShip() {
+		Bateau ret = bateaux.get(0);
+		for (Bateau b : bateaux){
+			if (b.getPuissance() > ret.getPuissance())
+				ret = b;
+		}
+		return ret;
+	}
+
+	public void setSelectedShip(Bateau b) {
+		selected = b;
+	}
+
+	public void removeBateau(Bateau b){
+		bateaux.remove(b);
+	}
+
+	public int getNbBateau(){
+		return bateaux.size();
 	}
 }

@@ -1,8 +1,10 @@
 package modele.ordinateur;
 
+import modele.Bateau;
 import modele.Orientation;
 import modele.Square;
 import modele.joueurs.Joueur;
+import modele.joueurs.JoueurMachine;
 
 import java.awt.*;
 import java.util.Random;
@@ -38,4 +40,9 @@ public abstract class Strategie {
     }
 
     public abstract Point jouer(Joueur player);
+
+    public Bateau getBateau(Joueur player){
+        Bateau ret = null;
+        return player.getPlateau().getStrongerShip();
+    }
 }

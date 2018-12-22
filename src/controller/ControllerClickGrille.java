@@ -15,7 +15,6 @@ public class ControllerClickGrille implements MouseListener {
 	private VueGrille vue;
 	int tailleFenetreX;
     int tailleFenetreY;
-	//private int longueur = 3;
 	private int xCaseClic = -1;
 	private int yCaseClic = -1;
 	int xCaseClic2;
@@ -39,9 +38,6 @@ public class ControllerClickGrille implements MouseListener {
 	public boolean isCaseSet(){
 		return xCaseClic>=0;
 	}
-	/*public void setLongueur(int l){
-		longueur = l;
-	}*/	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

@@ -103,6 +103,10 @@ public abstract class Joueur {
 		plateau.setSelectedShip(x, y);
 	}
 
+	public void setSelectedShip(Bateau b) {
+		plateau.setSelectedShip(b);
+	}
+
 	public Bateau getSelectedShip(){
 		return plateau.getSelectedShip();
 	}
@@ -113,5 +117,9 @@ public abstract class Joueur {
 	
 	public int getTailleBateauActuel(){
 		return tailleBateauActuel ;
+	}
+
+	public int getNombreBateau(){
+		return plateau.getNbBateau();
 	}
 }

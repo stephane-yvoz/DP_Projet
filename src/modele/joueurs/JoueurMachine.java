@@ -1,5 +1,6 @@
 package modele.joueurs;
 
+import modele.Bateau;
 import modele.Modele;
 import modele.Option;
 import modele.ordinateur.Strategie;
@@ -19,11 +20,13 @@ public class JoueurMachine extends Joueur{
 	
 	@Override
 	public void play(Modele m) {
-		// TODO Auto-generated method stub
 		Point p = strategie.jouer(this);
+		Bateau b = strategie.getBateau(this);
+		setSelectedShip(b);
+		System.out.println(p.x + " "+  p.y);
 		m.shoot(m.getJoueurs(0), p.x, p.y);
 	}
-	
+
 	public void setStrategie(Strategie s){
 		strategie =s;
 	}
