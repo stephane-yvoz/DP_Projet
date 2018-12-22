@@ -76,8 +76,8 @@ public class ControllerClickGrille implements MouseListener {
 			int x = e.getX();
 			int y = e.getY();
 			if(onSquares(x, y)){ // on ignore les clics sur bordure grille
-				xCaseClic = getNumCase(x);  
-				yCaseClic = getNumCase(y);
+				xCaseClic = getNumCaseX(x);  
+				yCaseClic = getNumCaseY(y);
 				if(modele.getCurrentPlayer().hasShip(xCaseClic,yCaseClic)){
 					modele.getCurrentPlayer().setSelectedShip(xCaseClic,yCaseClic);
 					xCaseClic = -1;
@@ -96,8 +96,8 @@ public class ControllerClickGrille implements MouseListener {
 			int x = e.getX();
 			int y = e.getY();
 			if(onSquares(x, y)){ // on ignore les clics sur bordure grille
-				xCaseClic = getNumCase(x);  
-				yCaseClic = getNumCase(y);
+				xCaseClic = getNumCaseX(x);  
+				yCaseClic = getNumCaseY(y);
 				modele.shoot(modele.getJoueurs(1), xCaseClic, yCaseClic);
 				xCaseClic = -1;
 				yCaseClic = -1;
@@ -116,14 +116,13 @@ public class ControllerClickGrille implements MouseListener {
 			int y = e.getY();
 			if (onSquares(x, y)){ // on ignore les clics sur bordure grille
 				if(!isCaseSet()){ // si on a pas encore cliqué
-					xCaseClic = getNumCase(x);  
-					yCaseClic = getNumCase(y);
+					xCaseClic = getNumCaseX(x);
+					yCaseClic = getNumCaseY(y);
 				}else{
-					xCaseClic2= getNumCase(x);
-					yCaseClic2 = getNumCase(y);
+					xCaseClic2 = getNumCaseX(x);
+					yCaseClic2 = getNumCaseY(y);
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
 						Orientation o =getOrientation(xCaseClic,yCaseClic,xCaseClic2,yCaseClic2);
-						System.out.println(o);
 						if(o!=null && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
 							modele.addShip(xCaseClic, yCaseClic, longueur, o);
 							xCaseClic = -1;
@@ -137,12 +136,14 @@ public class ControllerClickGrille implements MouseListener {
 					}
 				}
 			}
-		}else{ // si pas bouton gauche on annule
+		}
+		else{ // si pas bouton gauche on annule
 			modele.getCurrentPlayer().setTailleBateauActuel(0);
 			xCaseClic = -1;
 			yCaseClic = -1;
 		}
 	}
+	
 	private Orientation getOrientation(int x,int y,int x2,int y2){
 		if(x<x2 && y==y2){
 			return Orientation.EAST;
@@ -163,11 +164,12 @@ public class ControllerClickGrille implements MouseListener {
 			   y < tailleFenetreY;
 	}
 	
-	private int getNumCase(int x) {
-		System.out.println(x);
-		int temp = Math.min(x / (tailleFenetreX / 11) - 1, 9);
-		System.out.println(x / (tailleFenetreX / 11) - 1);
-		return temp;
+	private int getNumCaseX(int x) {
+		return Math.min(x / (tailleFenetreX / 11) - 1, 9);
+	}
+	
+	private int getNumCaseY(int y) {
+		return Math.min(y / (tailleFenetreY / 11) - 1, 9);
 	}
 	
 	@Override
@@ -181,6 +183,7 @@ public class ControllerClickGrille implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+	
 }
 
 

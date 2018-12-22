@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import modele.Modele;
 import modele.Option;
@@ -18,7 +19,7 @@ public class BatailleNavale {
     
     public static int NUMBER = 2;
   
-    JFrame[] windows;
+    private JFrame[] windows;
 
     private void makeGame(Modele modele) {
         windows = new JFrame[NUMBER];
@@ -39,9 +40,12 @@ public class BatailleNavale {
         
         vj1.setPreferredSize(DIMENSIONS);
         vj2.setPreferredSize(DIMENSIONS);
-
-        windows[0].add(vj1, BorderLayout.CENTER);
+        
+        /* Boutons pour fixer la taille des bateaux à construire 
+           au début du jeu */
         windows[0].add(new VueTailleBateau(modele), BorderLayout.SOUTH);
+        
+        windows[0].add(vj1, BorderLayout.CENTER); 
         windows[1].add(vj2);
         
         for (int i = 0; i < NUMBER; i ++) {

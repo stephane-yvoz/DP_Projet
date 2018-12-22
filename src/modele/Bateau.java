@@ -140,7 +140,7 @@ public class Bateau {
 		return posOriginX == posTailX;
 	}
 	
-	private int calcPosTailX(int originX,Orientation o){
+	private int calcPosTailX(int originX,Orientation o) {
 		int posT = originX;
 		switch(o){
 		case EAST:
@@ -152,7 +152,8 @@ public class Bateau {
 		}
 		return posT;
 	}
-	private int calcPosTailY(int originY,Orientation o){
+	
+	private int calcPosTailY(int originY,Orientation o) {
 		int posT = originY;
 		switch(o){
 		case SOUTH:
@@ -164,9 +165,10 @@ public class Bateau {
 		}
 		return posT;
 	}
+	
 	/*
 	 * Calcule toutes les positions (entières) des cases sur lesquelles le bateau est positionné
-	 * et les renvoie sous forme d'un tableau de Point
+	 * et les renvoie sous forme d'un tableau de Point.
 	 */
 	public Point[] getOccupiedPositions(){
 		Point[] positions = new Point[longueur];
@@ -182,4 +184,5 @@ public class Bateau {
 		}
 		return positions;
 	}
+	
 }

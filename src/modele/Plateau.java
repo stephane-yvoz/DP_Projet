@@ -23,10 +23,10 @@ public class Plateau {
 		grilleJoueur = new Square[taille][taille];
 		grilleEnnemie = new Square[taille][taille];
 		
-		for(int i = 0; i < taille; i ++){
-			for(int j = 0; j < taille; j ++){
-				grilleJoueur[i][j] = Square.SEA;
-				grilleEnnemie[i][j] = Square.SEA;
+		for(int x = 0; x < taille; x ++){
+			for(int y = 0; y < taille; y ++){
+				grilleJoueur[x][y] = Square.SEA;
+				grilleEnnemie[x][y] = Square.SEA;
 			}
 		}
 		
@@ -98,19 +98,20 @@ public class Plateau {
 	 * @param o
 	 */
 	public void addShip(int x, int y,int longueur,Orientation o) {
-		if(o !=null) {
+		if(o != null) {
 			Bateau b = BateauFactory.getInstance(epoque).creerBateau(longueur);
+			
 			b.setPosition(x, y, o);
 			bateaux.add(b);
-			for(Point p : b.getOccupiedPositions()){
-				grilleJoueur[p.x][p.y]=Square.SHIP;
-			}
 			
+			for(Point p : b.getOccupiedPositions()){
+				grilleJoueur[p.x][p.y] = Square.SHIP;
+			}			
 		}
 	}
 
 	public String toString(){
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder(40);
 		sb.append("Plateau joueur : \n");
 		for (int i = 0; i != grilleJoueur.length; i++){
 			sb.append("[ ");
@@ -146,7 +147,7 @@ public class Plateau {
 	public Square[][] getGrilleJoueur() {
 		return grilleJoueur;
 	}
-	
+
 	public void receiveShot(Joueur tireur, int x, int y, int puissance){
 		for(Bateau b : bateaux){
 			for(Point p : b.getOccupiedPositions()){
@@ -162,7 +163,14 @@ public class Plateau {
 			}
 		}
 	}
-	public boolean hasShip(int x, int y){
+	
+	/**
+	 * Les coordonnées sont-elles celles d'un bateau ?
+	 * @param x
+	 * @param y
+	 * @return vrai si les coordonnées sont sur un bateau
+	 */
+	public boolean hasShip(int x, int y) {
 		boolean has = false;
 		for(Bateau b : bateaux){
 			for(Point p : b.getOccupiedPositions()){
@@ -173,7 +181,13 @@ public class Plateau {
 		}
 		return has;
 	}
-	public void setSelectedShip(int x, int y){
+	
+	/**
+	 * Choisir le bateau avec lequel on va tirer.
+	 * @param x
+	 * @param y
+	 */
+	public void setSelectedShip(int x, int y) {
 		for(Bateau b : bateaux){
 			for(Point p : b.getOccupiedPositions()){
 				if(p.x==x && p.y==y){
@@ -182,9 +196,11 @@ public class Plateau {
 			}
 		}
 	}
+	
+	/**
+	 * @return bateau sélectionné
+	 */
 	public Bateau getSelectedShip(){
 		return selected;
 	}
-	
-	
 }
