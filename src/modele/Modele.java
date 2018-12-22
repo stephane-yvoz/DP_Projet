@@ -24,7 +24,6 @@ public class Modele extends Observable {
 		joueurs[0].setPlayerTurn(true);
 
 		//bateauFactory = BateauFactory.getInstance(option.getEpoque());
-
 		etatPartie = EtatPartie.Positioning;
 		nombrePlayer = option.getNombrePlayer();		
 	}
@@ -60,19 +59,14 @@ public class Modele extends Observable {
 		getCurrentPlayer().diminuerBateauRestants(longueur - 1);
 		getCurrentPlayer().getPlateau().addShip(y, x,longueur,o);
 	 	update();
-	 	System.out.println(getCurrentPlayer().getPlateau());
 	}
 
 	public void shoot(Joueur cible, int x, int y) {
 		if (getCurrentPlayer().hasFired(x, y))
 			return;
-		boolean touched = cible.gotTouched(x, y);
+		Bateau selected = getCurrentPlayer().getSelectedShip();
 		Square value = Square.MISSED;
-		if (touched) {
-			cible.hit(x, y);
-			value = Square.HIT;
-		}
-		getCurrentPlayer().shotEnemie(x, y, value);
+		getCurrentPlayer().shotEnemie(cible, selected, x, y, value);
 		nextPlayer();
 		update();
 	}
@@ -96,7 +90,6 @@ public class Modele extends Observable {
 		setEtat(EtatPartie.ShipSelection);
 		getCurrentPlayer().setPlayerTurn(false);
 		currentPlayer += 1;
-		
 		if (currentPlayer == nombrePlayer) {
 			currentPlayer = 0;
 		}

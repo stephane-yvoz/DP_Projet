@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import bateauFactories.BateauFactory;
+import modele.joueurs.Joueur;
 
 public class Plateau {
 	
@@ -130,15 +131,11 @@ public class Plateau {
 		return sb.toString();
 	}
 
-	public boolean isTouched(int x, int y){
-		return grilleJoueur[x][y] == Square.SHIP;
-	}
-
 	public void hit(int x, int y) {
 		grilleJoueur[x][y] = Square.HIT;
 	}
 
-	public void setShot(int x, int y, Square value) {
+	public void changeGrilleEnnemie(int x, int y, Square value) {
 		grilleEnnemie[x][y] = value;
 	}
 
@@ -150,7 +147,7 @@ public class Plateau {
 		return grilleJoueur;
 	}
 	
-	public void receiveShot(int x, int y, int puissance){
+	public void receiveShot(Joueur tireur, int x, int y, int puissance){
 		for(Bateau b : bateaux){
 			for(Point p : b.getOccupiedPositions()){
 				if(p.x==x && p.y==y){
@@ -160,6 +157,7 @@ public class Plateau {
 			if(b.isDestroyed()){
 				for(Point p : b.getOccupiedPositions()){
 					grilleJoueur[p.x][p.y]=Square.SUNK;
+					tireur.getPlateau().changeGrilleEnnemie(p.x, p.y, Square.SUNK);
 				}
 			}
 		}
