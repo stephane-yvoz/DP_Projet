@@ -37,7 +37,6 @@ public class IARandom extends Strategie {
 		if (ret == null)
 			ret = casesLibres.get(rand.nextInt(casesLibres.size()));
 		else{
-			System.out.println("ici");
 			ret = findAdjacent(etatTirs, ret.x, ret.y, null);
 		}
 		return ret;
