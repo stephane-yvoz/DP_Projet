@@ -57,6 +57,7 @@ public class Modele extends Observable {
 	}
 	
 	public void addShip(int y, int x, int longueur, Orientation o){
+		getCurrentPlayer().diminuerBateauRestants(longueur - 1);
 		getCurrentPlayer().getPlateau().addShip(y, x,longueur,o);
 	 	update();
 	 	System.out.println(getCurrentPlayer().getPlateau());
