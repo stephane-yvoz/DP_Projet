@@ -44,6 +44,10 @@ public abstract class Joueur {
 		return tailleMax;
 	}
 
+	public boolean isDefeated() {
+		return plateau.hasShips();
+	}
+	
 	public void diminuerBateauRestants(int index){
 		if (index < tailleMax && bateauxRestants[index] > 0){
 			bateauxRestants[index] -= 1;
@@ -122,4 +126,5 @@ public abstract class Joueur {
 	public int getNombreBateau(){
 		return plateau.getNbBateau();
 	}
+
 }

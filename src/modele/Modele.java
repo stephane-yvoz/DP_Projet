@@ -84,6 +84,10 @@ public class Modele extends Observable {
 		return joueurs[currentPlayer];
 	}
 
+	public Joueur getNextPlayer() {
+		return joueurs[(currentPlayer + 1) % 2];
+	}
+	
 	private void update() {
 		setChanged();
 		notifyObservers();
@@ -95,17 +99,21 @@ public class Modele extends Observable {
 		return null;
 	}
 
-	public void nextPlayer(){
-		setEtat(EtatPartie.ShipSelection);
-		getCurrentPlayer().setPlayerTurn(false);
+	public void nextPlayer() {
+			toTheNextPlayer();
+			setEtat(EtatPartie.ShipSelection);
+			Joueur p = getCurrentPlayer();
+			p.setPlayerTurn(true);
+			if (!p.isHuman()) {
+				p.play(this);
+			}
+	}
+	
+	private void toTheNextPlayer() {
+		getCurrentPlayer().setPlayerTurn(false);			
 		currentPlayer += 1;
 		if (currentPlayer == nombrePlayer) {
 			currentPlayer = 0;
-		}
-		Joueur p = getCurrentPlayer();
-		p.setPlayerTurn(true);
-		if (!p.isHuman()) {
-			p.play(this);
 		}
 	}
 	
