@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import controller.ListenerTailleBateau;
 
+import modele.Bateau;
 import modele.EtatPartie;
 import modele.Modele;
 
@@ -41,21 +42,36 @@ public class VueTailleBateau extends JToolBar implements Observer{
 	public void update(Observable o, Object arg) {
 		Modele modele = (Modele) o;
 		EtatPartie e = modele.getEtat();
+		if (e == EtatPartie.Selectionning)
+			affichageSelection(modele);
 		if (e == EtatPartie.Positioning)
 			affichagePos(modele);
 		if (e == EtatPartie.ShipSelection)
-			text.setText("Selectionner un bateau");
-		if (e == EtatPartie.ShipShoot)
-			text.setText("Selectionner où tirer");
+			text.setText("Selectionnez un bateau, sur votre plateau, avec lequel tirer.");
+		if (e == EtatPartie.ShipShoot) {
+			Bateau b = modele.getCurrentPlayer().getSelectedShip();
+			text.setText("vie du bateau : "+ b.getPv() + ", puissance = " + b.getPuissance());
+		}
 	}
 
 	private void affichagePos(Modele modele) {
+		text.setText("Cliquez sur deux cases (de même ligne ou même colonne) pour poser le bateau.");
+		for (int i = 0; i != tailleMax; i++){
+			boutonsTaille[i].setVisible(false);
+		}
+
+	}
+
+	private void affichageSelection(Modele modele) {
+		text.setText("Selectionner un bateau à placer : ");
 		bateauxRestants = modele.getCurrentPlayer().getBateauxRestants();
 		for (int i = 0; i != tailleMax; i++){
 			String s = "Bateau taille "+ (i+1) + " : "+bateauxRestants[i];
 			boutonsTaille[i].setText(s);
 			if (bateauxRestants[i] == 0)
 				boutonsTaille[i].setVisible(false);
+			else
+				boutonsTaille[i].setVisible(true);
 		}
 	}
 

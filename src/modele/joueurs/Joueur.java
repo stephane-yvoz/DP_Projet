@@ -83,8 +83,10 @@ public abstract class Joueur {
 		if (b){
 			cible.getPlateau().receiveShot(this, x, y, selected.getPuissance());
 		}
-		else
+		else {
+			cible.getPlateau().changeGrilleJoueur(x, y, Square.MISSED);
 			plateau.changeGrilleEnnemie(x, y, Square.MISSED);
+		}
 	}
 
 	public void setPlayerTurn(boolean b){
