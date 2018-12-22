@@ -16,10 +16,10 @@ public class ListenerTailleBateau implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(modele.getCurrentPlayer().getBateauxDisponibles()[taille-1]>0){
+		if(modele.getCurrentPlayer().getBateauxDisponibles()[taille - 1]>0){
 			modele.getCurrentPlayer().setTailleBateauActuel(taille);
 		}else{
-			
+
 		}
 	}
 

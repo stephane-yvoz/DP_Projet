@@ -1,10 +1,11 @@
-import java.awt.Dimension;
+import java.awt.*;
 
 import modele.Modele;
 import modele.Option;
 import runnable.RunnableOption;
 import vue.VueGrilleJoueur;
 import vue.VueGrilleEnemie;
+import vue.VueTailleBateau;
 
 import javax.swing.*;
 
@@ -39,8 +40,8 @@ public class BatailleNavale {
         vj1.setPreferredSize(DIMENSIONS);
         vj2.setPreferredSize(DIMENSIONS);
         
-        // windows[0].add(new VueTailleBateau(modele), BorderLayout.NORTH);
-        windows[0].add(vj1);
+        windows[0].add(new VueTailleBateau(modele), BorderLayout.NORTH);
+        windows[0].add(vj1, BorderLayout.CENTER);
         windows[1].add(vj2);
         
         for (int i = 0; i < NUMBER; i ++) {
