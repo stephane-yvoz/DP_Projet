@@ -1,9 +1,6 @@
 package vue;
 
-import modele.Bateau;
-import modele.Modele;
-import modele.Plateau;
-import modele.Square;
+import modele.*;
 
 import javax.swing.*;
 
@@ -192,11 +189,25 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param g
      */
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);   
+        super.paintComponent(g);
         drawGrid(g);
         drawSquares(g);
+        if (modele.getEtat() == EtatPartie.Winner)
+            writeText(g, "Vous avez gagné");
+        else if (modele.getEtat() == EtatPartie.GameOver)
+            writeText(g, "Vous avez perdu");
     }
-    
+
+    private void writeText(Graphics crayon, String text){
+        Font font = new Font("Serif", Font.PLAIN, 60);
+        crayon.setFont(font);
+        FontMetrics metrics = crayon.getFontMetrics(font);
+        crayon.setColor(Color.RED);
+        int y = HEIGHT / 2;
+        int x = (WIDTH - metrics.stringWidth(text)) / 2;
+        crayon.drawString(text, x, y);
+    }
+
     @Override
     public void update(Observable observable, Object o) {
     	repaint();
