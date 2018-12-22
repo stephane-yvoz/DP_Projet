@@ -23,7 +23,6 @@ public class JoueurMachine extends Joueur{
 		Point p = strategie.jouer(this);
 		Bateau b = strategie.getBateau(this);
 		setSelectedShip(b);
-		System.out.println(p.x + " "+  p.y);
 		m.shoot(m.getJoueurs(0), p.x, p.y);
 	}
 
