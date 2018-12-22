@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import modele.EtatPartie;
 import modele.Modele;
 
 public class ListenerTailleBateau implements ActionListener {
@@ -16,11 +17,9 @@ public class ListenerTailleBateau implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(modele.getCurrentPlayer().getBateauxDisponibles()[taille - 1]>0){
 			modele.getCurrentPlayer().setTailleBateauActuel(taille);
-		}else{
-
-		}
+			boolean ret = modele.getCurrentPlayer().diminuerBateauRestants(taille - 1);
+			if (ret)
+				modele.setEtat(EtatPartie.Positioning);
 	}
-
 }

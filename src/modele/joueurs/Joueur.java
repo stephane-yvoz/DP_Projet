@@ -10,25 +10,25 @@ public abstract class Joueur {
 	Plateau plateau;
 	private boolean isPlayerTurn;
 	protected boolean human;
-	int[] bateauxDisponibles;
-	int tailleBateauActuel =2;
+	int tailleBateauActuel = 0;
 	protected int tailleMax;
 	protected int[] bateauxRestants; // les bateaux à placer
 	
 	public Joueur(Option o){
 		plateau = new Plateau(o.getSize(),o.getEpoque());
-		bateauxDisponibles = o.getBateauxDisponibles();
 		tailleMax = 0;
+		int[] bateauxDisponibles = o.getBateauxDisponibles();
 		for (int i = 0; i != bateauxDisponibles.length; i++){
 			if (bateauxDisponibles[i] > tailleMax)
 				tailleMax = bateauxDisponibles[i];
 		}
-		makeBateauRestants();
+		makeBateauRestants(bateauxDisponibles);
 		isPlayerTurn = false;
 		human = true;
 	}
 
-	private void makeBateauRestants() {
+	private void makeBateauRestants(int[] bateauxDisponibles) {
+
 		bateauxRestants = new int[tailleMax];
 		for (int i = 0; i != tailleMax; i++){
 			bateauxRestants[i] = 0;
@@ -47,10 +47,16 @@ public abstract class Joueur {
 		return tailleMax;
 	}
 
-	public void diminuerBateauRestants(int index){
+	public boolean diminuerBateauRestants(int index){
 		if (index < tailleMax && bateauxRestants[index] > 0){
 			bateauxRestants[index] -= 1;
 		}
+		boolean tmp = true;
+		for (int i = 0; i != tailleMax; i++){
+			if (bateauxRestants[i] != 0)
+				tmp = false;
+		}
+		return tmp;
 	}
 
 	public abstract void play(Modele m);
@@ -67,10 +73,6 @@ public abstract class Joueur {
 		if (plateau.getGrilleEnnemie()[x][y] != Square.SEA)
 			return true;
 		return false;
-	}
-	
-	public int[] getBateauxDisponibles(){
-		return bateauxDisponibles;
 	}
 
 	public void hit(int x, int y){ plateau.hit(x, y); };
@@ -101,7 +103,6 @@ public abstract class Joueur {
 	
 	public void setTailleBateauActuel(int t){
 		tailleBateauActuel = t;
-		diminuerBateauRestants(t - 1);
 	}
 	
 	public int getTailleBateauActuel(){

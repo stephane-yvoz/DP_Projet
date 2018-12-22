@@ -107,6 +107,8 @@ public class ControllerClickGrille implements MouseListener {
 	
 	public void placerBateau(MouseEvent e){
 		int longueur = modele.getCurrentPlayer().getTailleBateauActuel();
+		if (longueur == 0)
+			return ;
 		if(e.getButton()== MouseEvent.BUTTON1){ //clic gauche
 			int x = e.getX();
 			int y = e.getY();
@@ -122,12 +124,12 @@ public class ControllerClickGrille implements MouseListener {
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
 						Orientation o =getOrientation(xCaseClic,yCaseClic,xCaseClic2,yCaseClic2);
 						System.out.println(o);
-						if(o!=null && modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]>=0 && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
+						if(o!=null && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
 							System.out.println("ajout");
 							modele.addShip(xCaseClic, yCaseClic, longueur, o);
 							xCaseClic = -1;
 							yCaseClic = -1;
-							modele.getCurrentPlayer().getBateauxDisponibles()[longueur-1]--;
+							modele.getCurrentPlayer().setTailleBateauActuel(0);
 						}
 						xCaseClic = -1;
 						yCaseClic = -1;
