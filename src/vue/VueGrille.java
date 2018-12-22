@@ -12,6 +12,7 @@ import bateauFactories.TextureFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -169,7 +170,7 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param x
      * @param y
      */
-    public void drawRightSquare(Graphics g, Square[][] squares, int x, int y) {
+    protected void drawRightSquare(Graphics g, Square[][] squares, int x, int y) {
     	switch (squares[x][y]) {
             case HIT: 
     	        drawSquare(g, TextureFactory.getInstance().getShotTexture(), x, y);
@@ -185,7 +186,44 @@ public abstract class VueGrille extends JPanel implements Observer {
         }
     }
     
-    protected void drawShips(Graphics g) {}
+    /**
+     * Dessin d'un bateau.
+     * @param g
+     * @param bateau
+     */
+    public void drawShip(Graphics g, Bateau bateau) {
+    	int minX = bateau.getMinX();
+    	int minY = bateau.getMinY();
+    	
+    	for (int i = 0; i < bateau.getLongueur(); i ++) {
+    		if (bateau.isVertical()) {
+    			// drawShipSection(g, texture, minX, minY + i);
+    		}
+    		else if (bateau.isHorizontal()) {
+    			// drawShipSection(g, texture, minX + i, minY);
+    		}
+    	}  	
+    }
+    
+    /**
+     * Dessin des bateaux.
+     * @param g
+     */
+    public void drawShips(Graphics g) {
+    	Iterator<Bateau> shipCollection = shipCollection();
+    	Bateau currentShip;
+    	
+    	while (shipCollection.hasNext()) {
+    		try {
+    			currentShip = shipCollection.next();
+    			
+    			if (!currentShip.isDestroyed()) {
+    				drawShip(g, currentShip);
+    			}    			
+    		}
+    		catch (NoSuchElementException noMoreElements) {}
+    	}
+    }
     
     /**
      * Dessin de la grille de jeu.

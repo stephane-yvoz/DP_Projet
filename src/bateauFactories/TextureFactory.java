@@ -53,7 +53,7 @@ public class TextureFactory {
 		ships = new BufferedImage[MAX_SHIP_SIZE];
 		
 		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
-			ships[i] = loadTexture("ship" + i + ".png");
+			ships[i - 1] = loadTexture("ship" + i + ".png");
 		}
 	}
 	
