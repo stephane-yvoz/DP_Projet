@@ -201,33 +201,68 @@ public abstract class VueGrille extends JPanel implements Observer {
     		shipTexture = TextureFactory.getInstance().getHorizontalShipTexture(size);
     	}
     	
-    	for (int i = 0; i < bateau.getLongueur(); i ++) {
+    	for (int shift = 0; shift < bateau.getLongueur(); shift ++) {
     		if (bateau.isVertical()) {
-        		drawShipSection(graphicContext, shipTexture, minX, minY + i);
+    			drawVerticalShipSection(graphicContext, 
+    					                shipTexture, 
+    					                minX, 
+    					                minY, 
+    					                shift
+                );
         	}
         	else if (bateau.isHorizontal()) {
-        		drawShipSection(graphicContext, shipTexture, minX + i, minY);
+        		drawHorizontalShipSection(graphicContext,
+        				                  shipTexture,
+        				                  minX,
+        				                  minY,
+        				                  shift
+                );
         	}
     	}  	
     }
     
     /**
-     * Dessiner une section de bateau.
+     * Dessiner une section d'un bateau horizontal.
      * @param g
      * @param texture
      * @param x
      * @param y
      */
-    private void drawShipSection(Graphics g, BufferedImage shipTexture, int x, int y) {
+    private void drawHorizontalShipSection(Graphics g, BufferedImage shipTexture, int x, int y, int shift) {
+    	int sectionSide = TextureFactory.getInstance().getAreaSide();
+    	
     	g.drawImage(shipTexture,
+    			    modelToRealX(x + shift),
+	                modelToRealY(y),
+	                modelToRealX(x + shift + 1),
+	                modelToRealY(y + 1), 
+    			    shift * sectionSide,
     			    0,
+    			    (shift + 1) * sectionSide,
+    			    sectionSide,
+    			    null
+    	);
+    }
+    
+    /**
+     * Dessiner une section d'un bateau vertical.
+     * @param g
+     * @param texture
+     * @param x
+     * @param y
+     */
+    private void drawVerticalShipSection(Graphics g, BufferedImage shipTexture, int x, int y, int shift) {
+    	int sectionSide = TextureFactory.getInstance().getAreaSide();
+    	
+    	g.drawImage(shipTexture,
+    			    modelToRealX(x),
+                    modelToRealY(y + shift),
+                    modelToRealX(x + 1),
+                    modelToRealY(y + shift + 1), 
     			    0,
-    			    0,
-    			    0,
-    			    0,
-    			    0,
-    			    0,
-    			    0,
+    			    shift * sectionSide,
+    			    sectionSide,
+    			    (shift + 1) * sectionSide,
     			    null
     	);
     }
