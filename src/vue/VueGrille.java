@@ -302,12 +302,14 @@ public abstract class VueGrille extends JPanel implements Observer {
     }
 
     private void writeText(Graphics crayon, String text){
-        Font font = new Font("Serif", Font.PLAIN, 60);
+        int height = this.getHeight();
+        int width = this.getWidth();
+    	Font font = new Font("Serif", Font.PLAIN, 60);
         crayon.setFont(font);
         FontMetrics metrics = crayon.getFontMetrics(font);
         crayon.setColor(Color.RED);
-        int y = HEIGHT / 2;
-        int x = (WIDTH - metrics.stringWidth(text)) / 2;
+        int y = height / 2;
+        int x = (width - metrics.stringWidth(text)) / 2;
         crayon.drawString(text, x, y);
     }
 

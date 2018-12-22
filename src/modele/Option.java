@@ -19,14 +19,14 @@ public class Option extends Observable {
     private Strategie aleatoire;
 
     public Option(){
+        croix = new IACross();
+        aleatoire = new IARandom();
         setDefault();
         displayOption = true;
     }
 
     public void setEpoque(String epoque) {
         this.epoque = epoque;
-        croix = new IACross();
-        aleatoire = new IARandom();
         setChanged();
         notifyObservers();
     }
@@ -67,7 +67,7 @@ public class Option extends Observable {
         epoque = "III";
         bateauxDisponibles = new int[]{ 2,3,3,4};
         nombrePlayer = 2;
-        strategie = new IARandom();
+        strategie = aleatoire;
         labelStrategie = "aléatoire";
         update();
     }

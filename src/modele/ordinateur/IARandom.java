@@ -86,4 +86,8 @@ public class IARandom extends Strategie {
 		}
 		return null;
 	}
+
+	public String toString(){
+		return ("IARandom");
+	}
 }
