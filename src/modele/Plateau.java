@@ -43,6 +43,14 @@ public class Plateau {
 	}
 	
 	/**
+	 * Le plateau a-t-il encore des bateaux?
+	 * @return
+	 */
+	public boolean hasShips() {
+		return bateaux.isEmpty();
+	}
+	
+	/**
 	 * 
 	 * @param x coordonne x de l'origine du bateau
 	 * @param y coordonne y de l'origine du bateau
