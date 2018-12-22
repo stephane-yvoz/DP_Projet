@@ -33,8 +33,6 @@ public abstract class Joueur {
 		for (int i = 0; i != tailleMax; i++){
 			bateauxRestants[i] = 0;
 		}
-		for (int i = 0; i != bateauxDisponibles.length; i++)
-			System.out.println(bateauxDisponibles[i] + " ");
 		for (int i = 0; i != bateauxDisponibles.length; i++){
 			int numero = bateauxDisponibles[i];
 			bateauxRestants[numero - 1] += 1;
