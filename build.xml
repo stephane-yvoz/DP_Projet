@@ -53,7 +53,7 @@
     </javac>
     <copy todir="${class.dir}">
       <fileset dir="${res.dir}">
-        <include name="*.png"/>
+        <include name="**/*.png"/>
       </fileset>
     </copy>
   </target>
