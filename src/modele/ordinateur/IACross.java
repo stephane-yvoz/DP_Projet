@@ -129,6 +129,8 @@ public class IACross extends Strategie {
 		return p.x<0 || p.y<0 || p.x >=taille || p.y>=taille;
 	}
 
-
+	public String toString(){
+		return ("IACross");
+	}
 
 }
