@@ -116,18 +116,14 @@ public class ControllerClickGrille implements MouseListener {
 			int y = e.getY();
 			if (onSquares(x, y)){ // on ignore les clics sur bordure grille
 				if(!isCaseSet()){ // si on a pas encore cliqué
-					xCaseClic = getNumCaseX(x);  
+					xCaseClic = getNumCaseX(x);
 					yCaseClic = getNumCaseY(y);
-					System.out.println("Case1 :"+xCaseClic+"  "+yCaseClic );
 				}else{
 					xCaseClic2 = getNumCaseX(x);
 					yCaseClic2 = getNumCaseY(y);
-					System.out.println("Case2 :"+xCaseClic2+"  "+yCaseClic2 );
 					if(xCaseClic != xCaseClic2 || yCaseClic != yCaseClic2){  //on ne peut pas cliquer 2 fois sur même case
 						Orientation o =getOrientation(xCaseClic,yCaseClic,xCaseClic2,yCaseClic2);
-						System.out.println(o);
 						if(o!=null && modele.canAddShip(xCaseClic, yCaseClic, longueur, o) ){
-							System.out.println("ajout");
 							modele.addShip(xCaseClic, yCaseClic, longueur, o);
 							xCaseClic = -1;
 							yCaseClic = -1;

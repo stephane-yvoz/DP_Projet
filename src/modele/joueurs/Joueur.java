@@ -1,9 +1,6 @@
 package modele.joueurs;
 
-import modele.Modele;
-import modele.Option;
-import modele.Plateau;
-import modele.Square;
+import modele.*;
 
 public abstract class Joueur {
 
@@ -72,10 +69,6 @@ public abstract class Joueur {
 		return plateau;
 	}
 
-	public boolean gotTouched(int x, int y){
-		return (plateau.isTouched(x, y));
-	}
-
 	public boolean hasFired(int x, int y) {
 		if (plateau.getGrilleEnnemie()[x][y] != Square.SEA)
 			return true;
@@ -84,8 +77,14 @@ public abstract class Joueur {
 
 	public void hit(int x, int y){ plateau.hit(x, y); };
 
-	public void shotEnemie(int x, int y, Square value) {
-		plateau.setShot(x, y, value);
+
+	public void shotEnemie(Joueur cible, Bateau selected, int x, int y, Square value) {
+		boolean b = cible.hasShip(x, y);
+		if (b){
+			cible.getPlateau().receiveShot(this, x, y, selected.getPuissance());
+		}
+		else
+			plateau.changeGrilleEnnemie(x, y, Square.MISSED);
 	}
 
 	public void setPlayerTurn(boolean b){
@@ -106,6 +105,10 @@ public abstract class Joueur {
 
 	public void setSelectedShip(int x, int y) {
 		plateau.setSelectedShip(x, y);
+	}
+
+	public Bateau getSelectedShip(){
+		return plateau.getSelectedShip();
 	}
 	
 	public void setTailleBateauActuel(int t){

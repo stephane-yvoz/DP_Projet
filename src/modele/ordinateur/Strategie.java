@@ -37,5 +37,5 @@ public abstract class Strategie {
         }
     }
 
-    abstract Point jouer(Joueur player);
+    public abstract Point jouer(Joueur player);
 }
