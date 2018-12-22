@@ -20,9 +20,6 @@ public class TextureFactory {
 	public final static String HORIZONTAL_PATH = "ship/horizontal/";
 	public final static String VERTICAL_PATH = "ship/vertical/";
 	
-	public final static String HORIZONTAL_SHIP = "horizontal_ship";
-	public final static String VERTICAL_SHIP = "vertical_ship";
-	
 	private static BufferedImage grid;
 	private static BufferedImage ship;
 	private static BufferedImage explosion;
@@ -61,8 +58,8 @@ public class TextureFactory {
 		verticalShips = new BufferedImage[MAX_SHIP_SIZE];
 		
 		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
-			horizontalShips[i - 1] = loadTexture(HORIZONTAL_PATH + HORIZONTAL_SHIP + i + ".png");
-			verticalShips[i - 1] = loadTexture(VERTICAL_PATH + VERTICAL_SHIP + i + ".png");
+			horizontalShips[i - 1] = loadTexture(HORIZONTAL_PATH + i + ".png");
+			verticalShips[i - 1] = loadTexture(VERTICAL_PATH + i + ".png");
 		}
 	}
 	
