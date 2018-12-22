@@ -34,6 +34,7 @@ public class VueTailleBateau extends JToolBar implements Observer{
 					boutonsTaille[i].setVisible(false);
 				this.add(boutonsTaille[i]);
 		}
+		setFloatable( false);
 	}
 
 	@Override

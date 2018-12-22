@@ -130,6 +130,8 @@ public class ControllerClickGrille implements MouseListener {
 							xCaseClic = -1;
 							yCaseClic = -1;
 							modele.getCurrentPlayer().setTailleBateauActuel(0);
+							if (modele.getCurrentPlayer().checkBateauRestant())
+								modele.setEtat(EtatPartie.ShipSelection);
 						}
 						xCaseClic = -1;
 						yCaseClic = -1;

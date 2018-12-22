@@ -32,6 +32,7 @@ public class Modele extends Observable {
 	
 	public void setEtat(EtatPartie e) {
 		etatPartie = e;
+		update();
 	}
 	
 	public Square[][] getShots(Plateau plateau) {
