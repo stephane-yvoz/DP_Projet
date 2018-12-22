@@ -52,11 +52,11 @@ public class Bateau {
 	}
 	
 	public int getMinX() {
-		return Math.min(posOriginX, posTailX);
+		return Math.min(posOriginX, posTailX + 1);
 	}
 	
 	public int getMinY() {
-		return Math.min(posOriginY, posTailY);
+		return Math.min(posOriginY, posTailY + 1);
 	}
 	
 	public int getLongueur() {
