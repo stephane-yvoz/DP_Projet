@@ -65,7 +65,7 @@ public class Option extends Observable {
     public void setDefault() {
         size = 10;
         epoque = "III";
-        bateauxDisponibles = new int[]{ 4,2,2,1};
+        bateauxDisponibles = new int[]{ 2,3,3,4};
         nombrePlayer = 2;
         strategie = new IARandom();
         labelStrategie = "aléatoire";

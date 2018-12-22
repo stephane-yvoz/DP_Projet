@@ -65,19 +65,22 @@ public class Modele extends Observable {
 		Bateau selected = getCurrentPlayer().getSelectedShip();
 		Square value = Square.MISSED;
 		getCurrentPlayer().shotEnemie(cible, selected, x, y, value);
-		checkWinner(cible);
-		nextPlayer();
+		if (!checkWinner(cible))
+			nextPlayer();
 		update();
 	}
 
-	private void checkWinner(Joueur cible) {
+	private boolean checkWinner(Joueur cible) {
+		boolean ret = false;
 		if (cible.getNombreBateau() == 0){
 			if (cible.isHuman()){
 				setEtat(EtatPartie.GameOver);
 			}
 			else
 				setEtat(EtatPartie.Winner);
+			ret = true;
 		}
+		return ret;
 	}
 
 	public Joueur getCurrentPlayer(){
