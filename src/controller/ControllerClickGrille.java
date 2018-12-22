@@ -56,7 +56,7 @@ public class ControllerClickGrille implements MouseListener {
 				}
 				break;
 			case ShipSelection :
-				if(typeVue == "ViewShots"){
+				if(typeVue == "Main"){
 					selection(e);
 				}
 				break;
@@ -103,6 +103,8 @@ public class ControllerClickGrille implements MouseListener {
 				yCaseClic = -1;
 			}
 		}
+		else if (e.getButton() == MouseEvent.BUTTON3)
+			modele.setEtat(EtatPartie.ShipSelection);
 	}
 	
 	public void placerBateau(MouseEvent e){
@@ -139,7 +141,8 @@ public class ControllerClickGrille implements MouseListener {
 				}
 			}
 		}
-		else { // si pas bouton gauche on annule
+		else{ // si pas bouton gauche on annule
+			modele.getCurrentPlayer().setTailleBateauActuel(0);
 			xCaseClic = -1;
 			yCaseClic = -1;
 		}

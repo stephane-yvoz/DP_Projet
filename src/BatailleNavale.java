@@ -40,9 +40,14 @@ public class BatailleNavale {
         
         vj1.setPreferredSize(DIMENSIONS);
         vj2.setPreferredSize(DIMENSIONS);
+<<<<<<< HEAD
         
         /* Boutons pour fixer la taille des bateaux à construire 
            au début du jeu */
+=======
+
+        windows[0].add(vj1, BorderLayout.CENTER);
+>>>>>>> 2cb42faf44beb16b938cbbb8a33c4da8bfd95190
         windows[0].add(new VueTailleBateau(modele), BorderLayout.SOUTH);
         
         windows[0].add(vj1, BorderLayout.CENTER);    
