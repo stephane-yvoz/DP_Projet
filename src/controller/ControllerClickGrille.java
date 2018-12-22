@@ -160,10 +160,7 @@ public class ControllerClickGrille implements MouseListener {
 	}
 	
 	private int getNumCase(int x) {
-		System.out.println(x);
-		int temp = Math.min(x / (tailleFenetreX / 11) - 1, 9);
-		System.out.println(x / (tailleFenetreX / 11) - 1);
-		return temp;
+		return Math.min(x / (tailleFenetreX / 11) - 1, 9);
 	}
 	
 	@Override
@@ -177,6 +174,7 @@ public class ControllerClickGrille implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+	
 }
 
 

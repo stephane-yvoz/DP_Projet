@@ -23,10 +23,7 @@ public class Modele extends Observable {
 		joueurs[1] = new JoueurMachine(option);
 		System.out.println(joueurs[1].getPlateau());
 		joueurs[0].setPlayerTurn(true);
-
-		//bateauFactory = BateauFactory.getInstance(option.getEpoque());
-
-		etatPartie = EtatPartie.ShipShoot;
+		etatPartie = EtatPartie.Positioning;
 		nombrePlayer = option.getNombrePlayer();		
 	}
 	

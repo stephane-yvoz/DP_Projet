@@ -6,21 +6,21 @@ import java.awt.event.ActionListener;
 import modele.Modele;
 
 public class ListenerTailleBateau implements ActionListener {
+	
 	private Modele modele;
 	private int taille;
 	
-	public ListenerTailleBateau(Modele m,int t){
+	public ListenerTailleBateau(Modele m, int t) {
 		modele = m;
 		taille = t;
 	}
-	
+	 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(modele.getCurrentPlayer().getBateauxDisponibles()[taille-1]>0){
+		if (modele.getCurrentPlayer().getBateauxDisponibles()[taille-1]>0){
 			modele.getCurrentPlayer().setTailleBateauActuel(taille);
-		}else{
-			
 		}
+		else {}
 	}
 
 }

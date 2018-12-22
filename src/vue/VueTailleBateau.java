@@ -12,29 +12,30 @@ import modele.EtatPartie;
 import modele.Modele;
 
 @SuppressWarnings("serial")
-public class VueTailleBateau extends JPanel implements Observer{
+public class VueTailleBateau extends JPanel implements Observer {
 	
 	private Modele modele;
 	private JButton[] boutonsTaille;
 	
-	public VueTailleBateau(Modele m){
+	public VueTailleBateau(Modele m) {
 		modele = m;
 		modele.addObserver(this);
 		boutonsTaille = new JButton[5];
-		for(int i=1;i<=5;i++){
-			boutonsTaille[i-1] = new JButton(Integer.toString(i));
-			boutonsTaille[i-1].addActionListener(new ListenerTailleBateau(modele,i));
+		
+		for (int size = 1; size <= 5; size ++) {
+			boutonsTaille[size-1] = new JButton(Integer.toString(size));
+			boutonsTaille[size-1].addActionListener(new ListenerTailleBateau(modele, size));
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(modele.getEtat() == EtatPartie.Positioning){
+		if (modele.getEtat() == EtatPartie.Positioning) {
 			this.setVisible(true);
-		}else{
-			this.setVisible(false);
 		}
-		
+		else {
+			this.setVisible(false);
+		}		
 	}
 
 }
