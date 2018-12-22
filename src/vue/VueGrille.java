@@ -189,18 +189,47 @@ public abstract class VueGrille extends JPanel implements Observer {
      * @param bateau
      */
     public void drawShip(Graphics graphicContext, Bateau bateau) {
+    	BufferedImage shipTexture = null;
     	int minX = bateau.getMinX();
     	int minY = bateau.getMinY();
-    	int longueur = bateau.getLongueur();
+    	int size = bateau.getLongueur();
+     	
+    	if (bateau.isVertical()) {
+    		shipTexture = TextureFactory.getInstance().getVerticalShipTexture(size);
+    	}
+    	else if (bateau.isHorizontal()) {
+    		shipTexture = TextureFactory.getInstance().getHorizontalShipTexture(size);
+    	}
     	
     	for (int i = 0; i < bateau.getLongueur(); i ++) {
     		if (bateau.isVertical()) {
-    			// drawShipSection(g, texture, minX, minY + i);
-    		}
-    		else if (bateau.isHorizontal()) {
-    			// drawShipSection(g, texture, minX + i, minY);
-    		}
+        		drawShipSection(graphicContext, shipTexture, minX, minY + i);
+        	}
+        	else if (bateau.isHorizontal()) {
+        		drawShipSection(graphicContext, shipTexture, minX + i, minY);
+        	}
     	}  	
+    }
+    
+    /**
+     * Dessiner une section de bateau.
+     * @param g
+     * @param texture
+     * @param x
+     * @param y
+     */
+    private void drawShipSection(Graphics g, BufferedImage shipTexture, int x, int y) {
+    	g.drawImage(shipTexture,
+    			    0,
+    			    0,
+    			    0,
+    			    0,
+    			    0,
+    			    0,
+    			    0,
+    			    0,
+    			    null
+    	);
     }
     
     /**
