@@ -21,7 +21,6 @@ public class Modele extends Observable {
 		joueurs = new Joueur[2];
 		joueurs[0] = new JoueurHumain(option);
 		joueurs[1] = new JoueurMachine(option);
-		System.out.println(joueurs[1].getPlateau());
 		joueurs[0].setPlayerTurn(true);
 		etatPartie = EtatPartie.Positioning;
 		nombrePlayer = option.getNombrePlayer();		
@@ -106,5 +105,4 @@ public class Modele extends Observable {
 	public String getEpoque() {
 		return option.getEpoque();
 	}
-	
 }

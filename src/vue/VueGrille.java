@@ -30,6 +30,7 @@ public abstract class VueGrille extends JPanel implements Observer {
        		
     protected Modele modele;
     protected Plateau plateau;
+
     
     protected VueGrille(Modele m) {
         super();
@@ -174,5 +175,5 @@ public abstract class VueGrille extends JPanel implements Observer {
     public void update(Observable observable, Object o) {
     	repaint();
     }
-    
+
 }
