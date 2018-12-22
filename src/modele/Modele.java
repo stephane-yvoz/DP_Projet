@@ -74,7 +74,7 @@ public class Modele extends Observable {
 	}
 
 	public Joueur getNextPlayer() {
-		return joueurs[(currentPlayer - 1) % 2];
+		return joueurs[(currentPlayer + 1) % 2];
 	}
 	
 	private void update() {
