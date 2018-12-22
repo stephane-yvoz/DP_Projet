@@ -18,8 +18,6 @@ public class ListenerTailleBateau implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			modele.getCurrentPlayer().setTailleBateauActuel(taille);
-			boolean ret = modele.getCurrentPlayer().diminuerBateauRestants(taille - 1);
-			if (ret)
-				modele.setEtat(EtatPartie.Positioning);
+			modele.getCurrentPlayer().diminuerBateauRestants(taille - 1);
 	}
 }

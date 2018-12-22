@@ -47,13 +47,16 @@ public abstract class Joueur {
 		return tailleMax;
 	}
 
-	public boolean diminuerBateauRestants(int index){
+	public void diminuerBateauRestants(int index){
 		if (index < tailleMax && bateauxRestants[index] > 0){
 			bateauxRestants[index] -= 1;
 		}
+	}
+
+	public boolean checkBateauRestant(){
 		boolean tmp = true;
 		for (int i = 0; i != tailleMax; i++){
-			if (bateauxRestants[i] != 0)
+			if (bateauxRestants[i] > 0)
 				tmp = false;
 		}
 		return tmp;
