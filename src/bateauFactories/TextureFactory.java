@@ -17,6 +17,9 @@ public class TextureFactory {
 	public final static String FUEL_PATH = "fuel.png";
 	public final static String SPLASH_PATH = "splash.png";
 	
+	public final static String HORIZONTAL_PATH = "ship/horizontal/";
+	public final static String VERTICAL_PATH = "ship/vertical/";
+	
 	public final static String HORIZONTAL_SHIP = "horizontal_ship";
 	public final static String VERTICAL_SHIP = "vertical_ship";
 	
@@ -58,8 +61,8 @@ public class TextureFactory {
 		verticalShips = new BufferedImage[MAX_SHIP_SIZE];
 		
 		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
-			horizontalShips[i - 1] = loadTexture(HORIZONTAL_SHIP + i + ".png");
-			verticalShips[i - 1] = loadTexture(VERTICAL_SHIP + i + ".png");
+			horizontalShips[i - 1] = loadTexture(HORIZONTAL_PATH + HORIZONTAL_SHIP + i + ".png");
+			verticalShips[i - 1] = loadTexture(VERTICAL_PATH + VERTICAL_SHIP + i + ".png");
 		}
 	}
 	
