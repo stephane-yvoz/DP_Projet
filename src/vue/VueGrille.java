@@ -3,6 +3,7 @@ package vue;
 import modele.Bateau;
 import modele.Modele;
 import modele.Plateau;
+import modele.Square;
 
 import javax.swing.*;
 
@@ -160,6 +161,31 @@ public abstract class VueGrille extends JPanel implements Observer {
 	                null
 	    );
     }
+    
+    /**
+     * Détermine le bon type de case à dessiner et la dessine.
+     * @param g
+     * @param squares
+     * @param x
+     * @param y
+     */
+    public void drawRightSquare(Graphics g, Square[][] squares, int x, int y) {
+    	switch (squares[x][y]) {
+            case HIT: 
+    	        drawSquare(g, TextureFactory.getInstance().getShotTexture(), x, y);
+    	        break;
+            case SUNK:
+    	        drawSquare(g, TextureFactory.getInstance().getSunkTexture(), x, y);
+    	        break;
+            case MISSED:
+    	        drawSquare(g, TextureFactory.getInstance().getSplashTexture(), x, y);
+    	        break;
+            default: 
+    	        break;
+        }
+    }
+    
+    protected void drawShips(Graphics g) {}
     
     /**
      * Dessin de la grille de jeu.
