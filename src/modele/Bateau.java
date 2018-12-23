@@ -51,11 +51,11 @@ public class Bateau {
 		return posTailY;
 	}
 	
-	public int getMinX() {
+	public int minXToDraw() {
 		return Math.min(posOriginX, posTailX + 1);
 	}
 	
-	public int getMinY() {
+	public int minYToDraw() {
 		return Math.min(posOriginY, posTailY + 1);
 	}
 	
@@ -74,8 +74,8 @@ public class Bateau {
 		orientation = o;
 		posOriginX = posX;
 		posOriginY = posY;
-		posTailX = calcPosTailX(posOriginX,o);
-		posTailY = calcPosTailY(posOriginY,o);
+		posTailX = calcPosTailX(posOriginX, o);
+		posTailY = calcPosTailY(posOriginY, o);
 	}
 	
 	/**
@@ -185,7 +185,8 @@ public class Bateau {
 		return positions;
 	}
 
-	public int getPv(){
+	public int getPv() {
 		return PV;
 	}
+	
 }

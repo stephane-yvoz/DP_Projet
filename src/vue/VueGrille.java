@@ -186,39 +186,29 @@ public abstract class VueGrille extends JPanel implements Observer {
     
     /**
      * Dessin d'un bateau.
-     * @param g
-     * @param bateau
+     * @param graphicContext
+     * @param ship
      */
-    public void drawShip(Graphics graphicContext, Bateau bateau) {
+    public void drawShip(Graphics graphicContext, Bateau ship) {
     	String epoch = modele.getEpoque();
     	BufferedImage shipTexture = null;
-    	int minX = bateau.getMinX();
-    	int minY = bateau.getMinY();
-    	int size = bateau.getLongueur();
+    	int minX = ship.minXToDraw();
+    	int minY = ship.minYToDraw();
+    	int size = ship.getLongueur();
      	
-    	if (bateau.isVertical()) {
+    	if (ship.isVertical()) {
     		shipTexture = BateauFactory.getInstance(epoch).getVerticalShipTexture(size);
     	}
-    	else if (bateau.isHorizontal()) {
+    	else if (ship.isHorizontal()) {
     		shipTexture = BateauFactory.getInstance(epoch).getHorizontalShipTexture(size);
     	}
     	
-    	for (int shift = 0; shift < bateau.getLongueur(); shift ++) {
-    		if (bateau.isVertical()) {
-    			drawVerticalShipSection(graphicContext, 
-    					                shipTexture, 
-    					                minX, 
-    					                minY, 
-    					                shift
-                );
+    	for (int shift = 0; shift < ship.getLongueur(); shift ++) {
+    		if (ship.isVertical()) {
+    			drawVerticalShipSection(graphicContext, shipTexture, minX, minY, shift);
         	}
-        	else if (bateau.isHorizontal()) {
-        		drawHorizontalShipSection(graphicContext,
-        				                  shipTexture,
-        				                  minX,
-        				                  minY,
-        				                  shift
-                );
+        	else if (ship.isHorizontal()) {
+        		drawHorizontalShipSection(graphicContext, shipTexture, minX, minY, shift);
         	}
     	}  	
     }

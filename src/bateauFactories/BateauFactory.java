@@ -14,8 +14,8 @@ public abstract class BateauFactory {
 	
 	protected static int MAX_SHIP_SIZE = 5;
 	
-	protected static String horizontal_path;
-	protected static String vertical_path;
+	protected static String horizontalPath;
+	protected static String verticalPath;
 	
 	protected static BufferedImage horizontalShips[];
 	protected static BufferedImage verticalShips[];
@@ -37,8 +37,8 @@ public abstract class BateauFactory {
 		verticalShips = new BufferedImage[MAX_SHIP_SIZE];
 		
 		for (int i = 1; i <= MAX_SHIP_SIZE; i ++) {
-			horizontalShips[i - 1] = loadTexture(horizontal_path + i + ".png");
-			verticalShips[i - 1] = loadTexture(vertical_path + i + ".png");
+			horizontalShips[i - 1] = loadTexture(horizontalPath + i + ".png");
+			verticalShips[i - 1] = loadTexture(verticalPath + i + ".png");
 		}
 	}
 	

@@ -7,8 +7,8 @@ public class IIIFactory extends BateauFactory {
 	private static IIIFactory fact = new IIIFactory();
 	
 	private IIIFactory() {
-		horizontal_path = "ship/III/horizontal/";
-		vertical_path = "ship/III/vertical/";
+		horizontalPath = "ship/III/horizontal/";
+		verticalPath = "ship/III/vertical/";
 		loadShips();
 	}
 	

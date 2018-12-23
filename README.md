@@ -10,9 +10,11 @@ Pierre Génard, Maxime Nicolas, Stéphane Yvoz
 ### Archive JAR
 ```bash
 ~$ ant jar
+~$ java -jar jar/bataille.jar
 ```
 
 ### Javadoc
 ```bash
 ~$ ant doc
+~$ firefox doc/index.html
 ```
